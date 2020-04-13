@@ -21,7 +21,7 @@ spec:
         - containerPort: 80
         volumeMounts:
         - name: html-volume
-          mountPath: /usr/share/nginx/html
+          mountPath: /usr/share/nginx/html/mysite
       volumes:
       - name: html-volume
         configMap:
@@ -52,4 +52,4 @@ spec:
           - backend:
               serviceName: mysite-nginx-service
               servicePort: 80
-            path: /
+            path: /mysite
