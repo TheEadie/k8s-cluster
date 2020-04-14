@@ -53,6 +53,12 @@ Fix networking:
 sudo apt remove iptables -y && sudo apt install nftables
 ```
 
+Add the following line to `/etc/rc.local` before the return
+
+```
+ip link set wlan0 promisc on
+```
+
 Update:
 ```
 sudo apt-get update && sudo apt-get upgrade -y
@@ -77,22 +83,29 @@ ssh pi@192.168.1.102
 curl -sLS https://get.k3sup.dev | sh
 sudo install k3sup /usr/local/bin/
 
-k3sup install --ip 192.168.1.101 --user pi --k3s-extra-args '--no-deploy traefik' --context pi
+k3sup install --ip 192.168.1.101 --user pi --k3s-extra-args '--no-deploy traefik --no-deploy servicelb' --context pi
 k3sup join --ip 192.168.1.102 --server-ip 192.168.1.101 --user pi
 
 mv kubeconfig ~/.kube/config
 ```
 
-## Install Nginx
-
+## Setup Helm
 ```
 helm repo add stable https://kubernetes-charts.storage.googleapis.com/
-helm install nginx stable/nginx-ingress --namespace kube-system --set rbac.create=true,controller.image.repository="quay.io/kubernetes-ingress-controller/nginx-ingress-controller-arm",defaultBackend.image.repository="k8s.gcr.io/defaultbackend-arm" 
+```
 
+## Install MetalLB
+```
+helm install metallb stable/metallb --namespace kube-system
+kubectl apply -f kube-system/metallb-config.yml
+```
+
+## Install Nginx
+```
+helm install nginx stable/nginx-ingress --namespace kube-system --set rbac.create=true,controller.image.repository="quay.io/kubernetes-ingress-controller/nginx-ingress-controller-arm",defaultBackend.image.repository="k8s.gcr.io/defaultbackend-arm"
 ```
 
 ## Install sample mysite
-
 ```
 kubectl create configmap mysite-html --from-file mysite/index.html
 kubectl apply -f mysite/mysite.yaml
