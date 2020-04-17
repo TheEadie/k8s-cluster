@@ -94,6 +94,14 @@ mv kubeconfig ~/.kube/config
 helm repo add stable https://kubernetes-charts.storage.googleapis.com/
 ```
 
+## Install Flux
+```
+helm repo add fluxcd https://charts.fluxcd.io
+kubectl apply -f flux/namespace.yaml
+helm install flux fluxcd/flux --namespace flux --values flux/flux/flux-values.yaml --version 1.2
+helm install helm-operator fluxcd/helm-operator --namespace flux --values flux/helm-operator/helm-operator-values.yaml --version 0.7
+```
+
 ## Install MetalLB
 ```
 helm install metallb stable/metallb --namespace kube-system
