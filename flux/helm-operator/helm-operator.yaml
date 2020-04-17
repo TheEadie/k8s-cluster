@@ -12,7 +12,7 @@ spec:
   chart:
     repository: https://charts.fluxcd.io/
     name: helm-operator
-    version: 0.7.0
+    version: 1.0.1
   valuesFrom:
   - externalSourceRef:
       url: https://raw.githubusercontent.com/TheEadie/k8s-cluster/master/flux/helm-operator/helm-operator-values.yaml
