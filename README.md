@@ -102,11 +102,6 @@ helm install flux fluxcd/flux --namespace flux --values flux/flux-values.yaml --
 helm install helm-operator fluxcd/helm-operator --namespace flux --values flux/helm-operator-values.yaml
 ```
 
-## Install Nginx
-```
-helm install nginx stable/nginx-ingress --namespace kube-system --set rbac.create=true,controller.image.repository="quay.io/kubernetes-ingress-controller/nginx-ingress-controller-arm",defaultBackend.image.repository="k8s.gcr.io/defaultbackend-arm"
-```
-
 ## Install sample mysite
 ```
 kubectl create configmap mysite-html --from-file mysite/index.html

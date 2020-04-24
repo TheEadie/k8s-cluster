@@ -1,0 +1,23 @@
+---
+apiVersion: helm.fluxcd.io/v1
+kind: HelmRelease
+metadata:
+  name: nginx
+  namespace: kube-system
+  annotations:
+    fluxcd.io/automated: "true"
+spec:
+  releaseName: nginx
+  chart:
+    repository: https://kubernetes-charts.storage.googleapis.com/
+    name: nginx-ingress
+    version: 1.36.3
+  values:
+    rbac:
+      create: true
+    controller:
+      image:
+        repository: "quay.io/kubernetes-ingress-controller/nginx-ingress-controller-arm"
+    defaultBackend:
+      image:
+        repository: "k8s.gcr.io/defaultbackend-arm"
