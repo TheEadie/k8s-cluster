@@ -101,9 +101,3 @@ kubectl apply -f flux/namespace.yaml
 helm install flux fluxcd/flux --namespace flux --values flux/flux-values.yaml --version 1.2
 helm install helm-operator fluxcd/helm-operator --namespace flux --values flux/helm-operator-values.yaml
 ```
-
-## Install sample mysite
-```
-kubectl create configmap mysite-html --from-file mysite/index.html
-kubectl apply -f mysite/mysite.yaml
-```
