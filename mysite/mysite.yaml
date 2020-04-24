@@ -21,7 +21,7 @@ spec:
         - containerPort: 80
         volumeMounts:
         - name: html-volume
-          mountPath: /usr/share/nginx/html/mysite
+          mountPath: /usr/share/nginx/html
       volumes:
       - name: html-volume
         configMap:
@@ -46,10 +46,10 @@ metadata:
   name: mysite-nginx-ingress
 spec:
   rules:
-    - host:
+    - host: test.pi.lan
       http:
         paths:
           - backend:
               serviceName: mysite-nginx-service
               servicePort: 80
-            path: /mysite
+            path: /

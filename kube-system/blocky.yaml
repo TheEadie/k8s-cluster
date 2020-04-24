@@ -13,7 +13,8 @@ spec:
     config:
       customDNS:
         mapping:
-          pi.lan: 192.168.1.240
+          test.pi.lan: 192.168.1.240
+          grafana.pi.lan: 192.168.1.240
     serviceTCP:
       enabled: true
       type: LoadBalancer
