@@ -1,0 +1,32 @@
+apiVersion: helm.fluxcd.io/v1
+kind: HelmRelease
+metadata:
+  name: blocky
+  namespace: kube-system
+spec:
+  releaseName: blocky
+  chart:
+    repository: https://billimek.com/billimek-charts/
+    name: blocky
+    version: 3.0.0
+  values:
+    config:
+      customDNS:
+        mapping:
+          pi.lan: 192.168.1.240
+    serviceTCP:
+      enabled: true
+      type: LoadBalancer
+      externalTrafficPolicy: Local
+      loadBalancerIP: 192.168.1.241
+      annotations:
+        metallb.universe.tf/address-pool: network
+        metallb.universe.tf/allow-shared-ip: blocky-svc
+    serviceUDP:
+      enabled: true
+      type: LoadBalancer
+      externalTrafficPolicy: Local
+      loadBalancerIP: 192.168.1.241
+      annotations:
+        metallb.universe.tf/address-pool: network
+        metallb.universe.tf/allow-shared-ip: blocky-svc
