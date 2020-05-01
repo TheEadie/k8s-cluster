@@ -9,3 +9,9 @@ spec:
     repository: https://kubernetes-charts.storage.googleapis.com/
     name: grafana
     version: 5.0.13
+  values:
+    sidecar:
+      image: ramsrib/k8s-sidecar
+      datasources:
+        enabled: true
+        label: grafana_datasource
