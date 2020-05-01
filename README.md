@@ -101,3 +101,8 @@ kubectl apply -f flux/namespace.yaml
 helm install flux fluxcd/flux --namespace flux --values flux/flux-values.yaml --version 1.2
 helm install helm-operator fluxcd/helm-operator --namespace flux --values flux/helm-operator-values.yaml
 ```
+
+## Get the Grafana admin password
+```
+kubectl -n monitoring get secret grafana -o jsonpath="{.data.admin-password}" | base64 --decode ; echo  
+```
