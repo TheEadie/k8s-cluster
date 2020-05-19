@@ -1,0 +1,41 @@
+{
+    "extends": ["config:base"],
+    "kubernetes": {
+      "fileMatch": ["\\.yaml$"]
+    },
+    "regexManagers": [
+      {
+        "fileMatch": ["\\.yaml$"],
+        "matchStrings": [
+          "chart:\n *repository: .*?\n *name: (?<depName>.*?)\n *version: (?<currentValue>.*)\n"
+        ],
+        "datasourceTemplate": "helm"
+      },
+      {
+        "fileMatch": ["\\.yaml$"],
+        "matchStrings": [
+          "chart:\n *git: git@github.com:(?<depName>.*?).git\n *ref: (?<currentValue>.*?)\n"
+        ],
+        "datasourceTemplate": "github-tags"
+      }
+    ],
+    "packageRules": [
+      {
+        "datasources": ["helm"],
+        "managers": ["regex"],
+        "packageNames": [
+          "metallb",
+          "nginx-ingress"
+        ],
+        "registryUrls": ["https://kubernetes-charts.storage.googleapis.com/"]
+      },
+      {
+        "datasources": ["helm"],
+        "managers": ["regex"],
+        "packageNames": [
+          "blocky"
+        ],
+        "registryUrls": ["https://billimek.com/billimek-charts/"]
+      }
+    ]
+  }
