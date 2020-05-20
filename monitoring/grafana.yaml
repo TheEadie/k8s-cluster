@@ -16,5 +16,5 @@ spec:
         enabled: true
         label: grafana_datasource
       dashboards:
-        enabled: false
+        enabled: true
         label: grafana_dashboard
