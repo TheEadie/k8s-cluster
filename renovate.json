@@ -24,10 +24,10 @@
         "datasources": ["helm"],
         "managers": ["regex"],
         "packageNames": [
-          "metallb",
-          "nginx-ingress"
+          "loki",
+          "promtail"
         ],
-        "registryUrls": ["https://kubernetes-charts.storage.googleapis.com/"]
+        "registryUrls": ["https://grafana.github.io/loki/charts/"]
       },
       {
         "datasources": ["helm"],
@@ -36,6 +36,15 @@
           "blocky"
         ],
         "registryUrls": ["https://billimek.com/billimek-charts/"]
+      },
+      {
+        "datasources": ["helm"],
+        "managers": ["regex"],
+        "packageNames": [
+          "flux",
+          "helm-operator"
+        ],
+        "registryUrls": ["https://charts.fluxcd.io/"]
       }
     ]
   }
