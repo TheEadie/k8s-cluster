@@ -15,3 +15,6 @@ spec:
       datasources:
         enabled: true
         label: grafana_datasource
+      dashboards:
+        enabled: false
+        label: grafana_dashboard
