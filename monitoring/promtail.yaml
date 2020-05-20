@@ -8,7 +8,7 @@ spec:
   chart:
     repository: https://grafana.github.io/loki/charts
     name: promtail
-    version: 0.22.2
+    version: 0.23.0
   values:
     loki:
       serviceName: "loki"
