@@ -46,5 +46,6 @@
         ],
         "registryUrls": ["https://charts.fluxcd.io/"]
       }
-    ]
+    ],
+    "masterIssue": true
   }
