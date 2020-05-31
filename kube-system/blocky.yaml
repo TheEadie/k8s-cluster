@@ -18,7 +18,7 @@ spec:
       blocking:
         blackLists:
           ads:
-            - https://raw.githubusercontent.com/ookangzheng/dbl-oisd-nl/master/dbl.txt
+            - https://raw.githubusercontent.com/ookangzheng/dbl-oisd-nl/master/dblzero.txt
         clientGroupsBlock:
           default:
             - ads
