@@ -11,6 +11,7 @@ spec:
     version: 11.4.0
   values:
     server:
+      skipTSDBLock : true
       persistentVolume:
         enabled: true
         accessModes:
