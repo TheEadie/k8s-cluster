@@ -10,6 +10,12 @@ spec:
     name: prometheus
     version: 11.4.0
   values:
+    server:
+      persistentVolume:
+        enabled: true
+        accessModes:
+          - ReadWriteMany
+        size: 8Gi
     alertmanager:
       enabled: false
     kubeStateMetrics:
