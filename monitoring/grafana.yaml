@@ -10,6 +10,9 @@ spec:
     name: grafana
     version: 5.1.4
   values:
+    persistence:
+      enabled: true
+      size: 10Gi
     sidecar:
       image: ramsrib/k8s-sidecar
       datasources:
