@@ -18,9 +18,12 @@ spec:
         accessModes:
           - ReadWriteMany
         size: 8Gi
-    alertmanager:
-      enabled: false
     kubeStateMetrics:
+      enabled: true
+    kube-state-metrics:
+      image:
+        repository: carlosedp/kube-state-metrics
+    alertmanager:
       enabled: false
     pushgateway:
       enabled: false
