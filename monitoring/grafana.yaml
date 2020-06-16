@@ -14,7 +14,8 @@ spec:
       enabled: true
       size: 10Gi
     sidecar:
-      image: ramsrib/k8s-sidecar
+      image: 
+        repository: ramsrib/k8s-sidecar
       datasources:
         enabled: true
         label: grafana_datasource
