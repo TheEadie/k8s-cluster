@@ -162,7 +162,7 @@ data:
                   },
                   {
                     "color": "red",
-                    "value": 0.8
+                    "value": 80
                   }
                 ]
               },
@@ -171,14 +171,15 @@ data:
             "overrides": []
           },
           "gridPos": {
-            "h": 6,
+            "h": 5,
             "w": 6,
             "x": 12,
             "y": 0
           },
-          "id": 12,
+          "id": 13,
           "options": {
-            "orientation": "auto",
+            "displayMode": "gradient",
+            "orientation": "horizontal",
             "reduceOptions": {
               "calcs": [
                 "last"
@@ -186,23 +187,22 @@ data:
               "fields": "",
               "values": false
             },
-            "showThresholdLabels": false,
-            "showThresholdMarkers": true
+            "showUnfilled": true
           },
           "pluginVersion": "7.0.3",
           "targets": [
             {
-              "expr": "(Sum(node_filesystem_free_bytes) - Sum(node_filesystem_avail_bytes)) / Sum(node_filesystem_free_bytes)",
+              "expr": "(sum by (kubernetes_node, mountpoint) (1 - node_filesystem_avail_bytes / node_filesystem_size_bytes))",
               "interval": "",
-              "legendFormat": "",
+              "legendFormat": "{{kubernetes_node}} - {{mountpoint}}",
               "refId": "A"
             }
           ],
           "timeFrom": null,
           "timeShift": null,
-          "title": "Cluster Local Disk Usage",
+          "title": "Disk Usage",
           "transparent": true,
-          "type": "gauge"
+          "type": "bargauge"
         },
         {
           "cacheTimeout": null,
@@ -323,65 +323,6 @@ data:
           "timeFrom": null,
           "timeShift": null,
           "title": "Memory Usage",
-          "transparent": true,
-          "type": "stat"
-        },
-        {
-          "datasource": "Prometheus",
-          "fieldConfig": {
-            "defaults": {
-              "custom": {},
-              "decimals": 0,
-              "mappings": [],
-              "thresholds": {
-                "mode": "absolute",
-                "steps": [
-                  {
-                    "color": "green",
-                    "value": null
-                  },
-                  {
-                    "color": "red",
-                    "value": 80
-                  }
-                ]
-              },
-              "unit": "percentunit"
-            },
-            "overrides": []
-          },
-          "gridPos": {
-            "h": 5,
-            "w": 6,
-            "x": 12,
-            "y": 6
-          },
-          "id": 13,
-          "options": {
-            "colorMode": "value",
-            "graphMode": "area",
-            "justifyMode": "auto",
-            "orientation": "horizontal",
-            "reduceOptions": {
-              "calcs": [
-                "last"
-              ],
-              "fields": "",
-              "values": false
-            }
-          },
-          "pluginVersion": "7.0.3",
-          "targets": [
-            {
-              "expr": "(sum by (kubernetes_node) (1 - node_filesystem_avail_bytes / node_filesystem_size_bytes))",
-              "interval": "",
-              "legendFormat": "{{kubernetes_node}}",
-              "refId": "A"
-            }
-          ],
-          "timeFrom": null,
-          "timeShift": null,
-          "title": "Local Disk Usage",
           "transparent": true,
           "type": "stat"
         },
@@ -583,107 +524,9 @@ data:
             "align": false,
             "alignLevel": null
           }
-        },
-        {
-          "aliasColors": {},
-          "bars": false,
-          "dashLength": 10,
-          "dashes": false,
-          "datasource": "Prometheus",
-          "fieldConfig": {
-            "defaults": {
-              "custom": {}
-            },
-            "overrides": []
-          },
-          "fill": 1,
-          "fillGradient": 0,
-          "gridPos": {
-            "h": 6,
-            "w": 6,
-            "x": 12,
-            "y": 11
-          },
-          "hiddenSeries": false,
-          "id": 14,
-          "legend": {
-            "avg": false,
-            "current": false,
-            "max": false,
-            "min": false,
-            "rightSide": false,
-            "show": true,
-            "total": false,
-            "values": false
-          },
-          "lines": true,
-          "linewidth": 1,
-          "nullPointMode": "null",
-          "options": {
-            "dataLinks": []
-          },
-          "percentage": false,
-          "pointradius": 2,
-          "points": false,
-          "renderer": "flot",
-          "seriesOverrides": [],
-          "spaceLength": 10,
-          "stack": false,
-          "steppedLine": false,
-          "targets": [
-            {
-              "expr": "(sum by (kubernetes_node) (node_filesystem_size_bytes - node_filesystem_avail_bytes))",
-              "interval": "",
-              "legendFormat": "{{kubernetes_node}}",
-              "refId": "A"
-            }
-          ],
-          "thresholds": [],
-          "timeFrom": null,
-          "timeRegions": [],
-          "timeShift": null,
-          "title": "Local Disk Usage Details",
-          "tooltip": {
-            "shared": true,
-            "sort": 0,
-            "value_type": "individual"
-          },
-          "transparent": true,
-          "type": "graph",
-          "xaxis": {
-            "buckets": null,
-            "mode": "time",
-            "name": null,
-            "show": true,
-            "values": []
-          },
-          "yaxes": [
-            {
-              "$$hashKey": "object:232",
-              "decimals": 0,
-              "format": "decbytes",
-              "label": null,
-              "logBase": 1,
-              "max": "64000000000",
-              "min": "0",
-              "show": true
-            },
-            {
-              "$$hashKey": "object:233",
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            }
-          ],
-          "yaxis": {
-            "align": false,
-            "alignLevel": null
-          }
         }
       ],
+      "refresh": "",
       "schemaVersion": 25,
       "style": "dark",
       "tags": [],
@@ -711,5 +554,5 @@ data:
       "timezone": "",
       "title": "Node stats",
       "uid": "FTfaB9RRk",
-      "version": 1
+      "version": 2
     }
