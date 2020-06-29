@@ -11,7 +11,7 @@ spec:
   chart:
     repository: https://kubernetes-charts.storage.googleapis.com/
     name: nginx-ingress
-    version: 1.40.1
+    version: 1.40.2
   values:
     rbac:
       create: true
