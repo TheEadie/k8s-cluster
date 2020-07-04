@@ -4,6 +4,7 @@ git:
   url: "ssh://git@ssh.github.com:443/TheEadie/k8s-cluster.git"
   branch: master
   path: picluster
+  label: flux-sync-pi
 image:
   repository: raspbernetes/flux
   tag: 1.18.0
