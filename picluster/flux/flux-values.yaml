@@ -3,6 +3,7 @@ helmOperator:
 git:
   url: "ssh://git@ssh.github.com:443/TheEadie/k8s-cluster.git"
   branch: master
+  path: picluster
 image:
   repository: raspbernetes/flux
   tag: 1.18.0
