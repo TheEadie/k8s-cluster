@@ -102,6 +102,8 @@ helm install flux fluxcd/flux --namespace flux --values flux/flux-values.yaml --
 helm install helm-operator fluxcd/helm-operator --namespace flux --values flux/helm-operator-values.yaml
 ```
 
+Add the generated flux key as a deploy key in GitHub on the repo.
+
 ## Get the Grafana admin password
 ```
 kubectl -n monitoring get secret grafana -o jsonpath="{.data.admin-password}" | base64 --decode ; echo  
