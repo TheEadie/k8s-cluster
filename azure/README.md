@@ -25,3 +25,5 @@ helm install flux fluxcd/flux --namespace flux --values flux/flux-values.yaml
 helm install helm-operator fluxcd/helm-operator --namespace flux --values flux/helm-operator-values.yaml
 ```
 
+Add the generated flux key as a deploy key in GitHub on the repo.
+
