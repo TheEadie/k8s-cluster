@@ -28,3 +28,7 @@ spec:
       enabled: false
     pushgateway:
       enabled: false
+    nodeExporter:
+      enabled: true
+      extraArgs:
+        collector.mountstats: ""
