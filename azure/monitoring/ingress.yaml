@@ -1,0 +1,21 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: grafana
+  namespace: monitoring
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+spec:
+  rules:
+    - host: grafana.davideadie.dev
+      http:
+        paths:
+          - backend:
+              serviceName: grafana
+              servicePort: 80
+            path: /
+  tls:
+  - hosts:
+    - grafana.davideadie.dev
+    secretName: grafana-tls
