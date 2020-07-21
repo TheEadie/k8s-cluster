@@ -41,15 +41,20 @@ spec:
 apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
+  name: mysite-nginx-ingress
   annotations:
     kubernetes.io/ingress.class: nginx
-  name: mysite-nginx-ingress
+    cert-manager.io/issuer: "letsencrypt-staging"
 spec:
   rules:
-    - host: 
+    - host: davideadie.dev
       http:
         paths:
           - backend:
               serviceName: mysite-nginx-service
               servicePort: 80
             path: /
+  tls:
+  - hosts:
+    - davideadie.dev
+    secretName: mysite-tls
