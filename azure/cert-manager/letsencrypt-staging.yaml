@@ -1,5 +1,5 @@
 ---
-kind: Issuer
+kind: ClusterIssuer
 apiVersion: cert-manager.io/v1alpha2
 metadata:
   name: letsencrypt-staging
