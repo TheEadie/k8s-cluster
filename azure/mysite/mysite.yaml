@@ -47,7 +47,7 @@ metadata:
     cert-manager.io/cluster-issuer: "letsencrypt-prod"
 spec:
   rules:
-    - host: davideadie.dev
+    - host: test.davideadie.dev
       http:
         paths:
           - backend:
@@ -56,5 +56,5 @@ spec:
             path: /
   tls:
   - hosts:
-    - davideadie.dev
+    - test.davideadie.dev
     secretName: mysite-tls
