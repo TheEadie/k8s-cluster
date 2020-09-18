@@ -17,6 +17,5 @@ spec:
       create: true
     controller:
       image:
-        repository: "quay.io/kubernetes-ingress-controller/nginx-ingress-controller"
-        tag: "0.33.0"
-        digest: sha256:0e57d295e67d431cecfb2d926bd71921ac8bf2ed585b37830fdfbefc5a3257a3
+        tag: "v0.35.0"
+        digest: sha256:ccc7883f993e8eca9795d10762d8ae6588a2e3b9200ece38503544bf4f75d94f
