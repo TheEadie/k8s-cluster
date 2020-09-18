@@ -6,9 +6,9 @@ metadata:
 spec:
   releaseName: grafana
   chart:
-    repository: https://kubernetes-charts.storage.googleapis.com/
+    repository: https://grafana.github.io/helm-charts/
     name: grafana
-    version: 5.5.7
+    version: 5.6.6
   values:
     persistence:
       enabled: true
