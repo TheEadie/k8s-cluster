@@ -9,9 +9,9 @@ metadata:
 spec:
   releaseName: nginx
   chart:
-    repository: https://kubernetes-charts.storage.googleapis.com/
+    repository: https://kubernetes.github.io/
     name: nginx-ingress
-    version: 1.41.2
+    version: 3.1.0
   values:
     rbac:
       create: true
