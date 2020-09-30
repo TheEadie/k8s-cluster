@@ -17,6 +17,27 @@ TODO - Get the Kubeconfig
 helm repo add stable https://kubernetes-charts.storage.googleapis.com/
 ```
 
+## Configure secrets
+
+### Nest-Exporter
+```
+mkdir secrets
+touch secrets/node-exporter.env
+```
+
+Add the following to the file and update with correct values:
+
+```
+NestApi__ClientId=
+NestApi__ClientSecret=
+NestApi__ProjectId=
+NestApi__RefreshToken=
+```
+
+```
+kubectl create secret generic nest-exporter --from-env-file=./secrets/nest-exporter.env
+```
+
 ## Install Flux
 ```
 helm repo add fluxcd https://charts.fluxcd.io
