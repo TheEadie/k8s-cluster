@@ -13,6 +13,7 @@ spec:
     server:
       strategy:
         type: Recreate
+      retention: "90d"
     kubeStateMetrics:
       enabled: true
     alertmanager:
