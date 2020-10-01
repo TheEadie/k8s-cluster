@@ -38,6 +38,21 @@ NestApi__RefreshToken=
 kubectl create secret generic nest-exporter --from-env-file=./secrets/nest-exporter.env
 ```
 
+### OpenWeather-Exporter
+```
+touch secrets/openweather-exporter.env
+```
+
+Add the following to the file and update with correct values:
+
+```
+OW_APIKEY=
+```
+
+```
+kubectl create secret generic openweather-exporter --from-env-file=./secrets/openweather-exporter.env
+```
+
 ## Install Flux
 ```
 helm repo add fluxcd https://charts.fluxcd.io
