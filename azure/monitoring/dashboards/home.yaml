@@ -24,335 +24,8 @@ data:
       "editable": true,
       "gnetId": null,
       "graphTooltip": 0,
-      "id": 2,
       "links": [],
       "panels": [
-        {
-          "datasource": "Prometheus",
-          "description": "",
-          "fieldConfig": {
-            "defaults": {
-              "custom": {},
-              "decimals": 1,
-              "mappings": [],
-              "max": 30,
-              "min": 10,
-              "thresholds": {
-                "mode": "absolute",
-                "steps": [
-                  {
-                    "color": "blue",
-                    "value": null
-                  },
-                  {
-                    "color": "green",
-                    "value": 17
-                  },
-                  {
-                    "color": "red",
-                    "value": 26
-                  }
-                ]
-              },
-              "unit": "celsius"
-            },
-            "overrides": []
-          },
-          "gridPos": {
-            "h": 6,
-            "w": 4,
-            "x": 0,
-            "y": 0
-          },
-          "id": 5,
-          "options": {
-            "reduceOptions": {
-              "calcs": [
-                "last"
-              ],
-              "fields": "",
-              "values": false
-            },
-            "showThresholdLabels": false,
-            "showThresholdMarkers": true
-          },
-          "pluginVersion": "7.1.5",
-          "targets": [
-            {
-              "expr": "nest_thermostat_actual_temperature",
-              "instant": true,
-              "interval": "",
-              "legendFormat": "{{name}}",
-              "refId": "A"
-            }
-          ],
-          "timeFrom": null,
-          "timeShift": null,
-          "title": "Temperature",
-          "type": "gauge"
-        },
-        {
-          "datasource": "Prometheus",
-          "description": "",
-          "fieldConfig": {
-            "defaults": {
-              "custom": {},
-              "decimals": 1,
-              "mappings": [],
-              "max": 40,
-              "min": 0,
-              "thresholds": {
-                "mode": "absolute",
-                "steps": [
-                  {
-                    "color": "blue",
-                    "value": null
-                  },
-                  {
-                    "color": "green",
-                    "value": 12
-                  },
-                  {
-                    "color": "red",
-                    "value": 26
-                  }
-                ]
-              },
-              "unit": "celsius"
-            },
-            "overrides": []
-          },
-          "gridPos": {
-            "h": 6,
-            "w": 4,
-            "x": 4,
-            "y": 0
-          },
-          "id": 9,
-          "options": {
-            "reduceOptions": {
-              "calcs": [
-                "last"
-              ],
-              "fields": "",
-              "values": false
-            },
-            "showThresholdLabels": false,
-            "showThresholdMarkers": true
-          },
-          "pluginVersion": "7.1.5",
-          "targets": [
-            {
-              "expr": "openweather_temperature",
-              "instant": true,
-              "interval": "",
-              "legendFormat": "Outside",
-              "refId": "A"
-            }
-          ],
-          "timeFrom": null,
-          "timeShift": null,
-          "title": "Temperature",
-          "type": "gauge"
-        },
-        {
-          "aliasColors": {
-            "Actual": "red",
-            "Heating On": "super-light-green",
-            "Humidity": "green",
-            "Living Room": "purple",
-            "Outside": "blue",
-            "Target ": "orange",
-            "Thermostat ": "orange"
-          },
-          "bars": false,
-          "dashLength": 10,
-          "dashes": false,
-          "datasource": "Prometheus",
-          "decimals": 1,
-          "description": "",
-          "fieldConfig": {
-            "defaults": {
-              "custom": {}
-            },
-            "overrides": []
-          },
-          "fill": 1,
-          "fillGradient": 0,
-          "gridPos": {
-            "h": 6,
-            "w": 8,
-            "x": 8,
-            "y": 0
-          },
-          "hiddenSeries": false,
-          "id": 2,
-          "legend": {
-            "alignAsTable": false,
-            "avg": false,
-            "current": false,
-            "max": false,
-            "min": false,
-            "rightSide": false,
-            "show": true,
-            "total": false,
-            "values": false
-          },
-          "lines": true,
-          "linewidth": 1,
-          "nullPointMode": "null",
-          "percentage": false,
-          "pluginVersion": "7.1.5",
-          "pointradius": 2,
-          "points": false,
-          "renderer": "flot",
-          "seriesOverrides": [
-            {
-              "alias": "Heating On",
-              "fill": 0,
-              "yaxis": 2
-            }
-          ],
-          "spaceLength": 10,
-          "stack": false,
-          "steppedLine": false,
-          "targets": [
-            {
-              "expr": "(avg by (name) (nest_thermostat_actual_temperature))",
-              "instant": false,
-              "interval": "",
-              "legendFormat": "{{name}}",
-              "refId": "A"
-            },
-            {
-              "expr": "(avg by (name) (nest_thermostat_target_temperature))",
-              "interval": "",
-              "legendFormat": "Thermostat ",
-              "refId": "B"
-            },
-            {
-              "expr": "(avg by (name) (nest_thermostat_status))",
-              "interval": "",
-              "legendFormat": "Heating On",
-              "refId": "C"
-            },
-            {
-              "expr": "(avg by (location) (openweather_temperature))",
-              "interval": "",
-              "legendFormat": "Outside",
-              "refId": "D"
-            }
-          ],
-          "thresholds": [],
-          "timeFrom": null,
-          "timeRegions": [],
-          "timeShift": null,
-          "title": "Temperature",
-          "tooltip": {
-            "shared": true,
-            "sort": 0,
-            "value_type": "individual"
-          },
-          "type": "graph",
-          "xaxis": {
-            "buckets": null,
-            "mode": "time",
-            "name": null,
-            "show": true,
-            "values": []
-          },
-          "yaxes": [
-            {
-              "decimals": null,
-              "format": "celsius",
-              "label": "",
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            },
-            {
-              "decimals": 0,
-              "format": "none",
-              "label": "",
-              "logBase": 1,
-              "max": "1",
-              "min": "0",
-              "show": true
-            }
-          ],
-          "yaxis": {
-            "align": false,
-            "alignLevel": null
-          }
-        },
-        {
-          "datasource": "Prometheus",
-          "description": "",
-          "fieldConfig": {
-            "defaults": {
-              "custom": {},
-              "decimals": 1,
-              "mappings": [],
-              "max": 30,
-              "min": 10,
-              "thresholds": {
-                "mode": "absolute",
-                "steps": [
-                  {
-                    "color": "blue",
-                    "value": null
-                  },
-                  {
-                    "color": "green",
-                    "value": 17
-                  },
-                  {
-                    "color": "red",
-                    "value": 26
-                  }
-                ]
-              },
-              "unit": "celsius"
-            },
-            "overrides": []
-          },
-          "gridPos": {
-            "h": 3,
-            "w": 3,
-            "x": 16,
-            "y": 0
-          },
-          "id": 6,
-          "options": {
-            "colorMode": "value",
-            "graphMode": "area",
-            "justifyMode": "auto",
-            "orientation": "auto",
-            "reduceOptions": {
-              "calcs": [
-                "last"
-              ],
-              "fields": "",
-              "values": false
-            },
-            "textMode": "auto"
-          },
-          "pluginVersion": "7.1.5",
-          "targets": [
-            {
-              "expr": "nest_thermostat_target_temperature",
-              "instant": true,
-              "interval": "",
-              "legendFormat": "{{name}}",
-              "refId": "A"
-            }
-          ],
-          "timeFrom": null,
-          "timeShift": null,
-          "title": "Thermostat",
-          "type": "stat"
-        },
         {
           "datasource": "Prometheus",
           "description": "",
@@ -402,8 +75,8 @@ data:
           "gridPos": {
             "h": 3,
             "w": 3,
-            "x": 16,
-            "y": 3
+            "x": 0,
+            "y": 0
           },
           "id": 8,
           "options": {
@@ -420,7 +93,7 @@ data:
             },
             "textMode": "auto"
           },
-          "pluginVersion": "7.1.5",
+          "pluginVersion": "7.2.0",
           "targets": [
             {
               "expr": "nest_thermostat_status",
@@ -433,6 +106,407 @@ data:
           "timeFrom": null,
           "timeShift": null,
           "title": "Heating",
+          "type": "stat"
+        },
+        {
+          "datasource": "Prometheus",
+          "description": "",
+          "fieldConfig": {
+            "defaults": {
+              "custom": {},
+              "decimals": 1,
+              "mappings": [],
+              "max": 30,
+              "min": 10,
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "blue",
+                    "value": null
+                  },
+                  {
+                    "color": "green",
+                    "value": 17
+                  },
+                  {
+                    "color": "red",
+                    "value": 26
+                  }
+                ]
+              },
+              "unit": "celsius"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 6,
+            "w": 4,
+            "x": 3,
+            "y": 0
+          },
+          "id": 5,
+          "options": {
+            "reduceOptions": {
+              "calcs": [
+                "last"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "showThresholdLabels": false,
+            "showThresholdMarkers": true
+          },
+          "pluginVersion": "7.2.0",
+          "targets": [
+            {
+              "expr": "nest_thermostat_actual_temperature",
+              "instant": true,
+              "interval": "",
+              "legendFormat": "{{name}}",
+              "refId": "A"
+            }
+          ],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "Living room",
+          "type": "gauge"
+        },
+        {
+          "aliasColors": {
+            "Actual": "red",
+            "Heating On": "super-light-green",
+            "Humidity": "green",
+            "Living Room": "orange",
+            "Outside": "blue",
+            "Target ": "orange",
+            "Thermostat ": "red"
+          },
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "Prometheus",
+          "decimals": 1,
+          "description": "",
+          "fieldConfig": {
+            "defaults": {
+              "custom": {}
+            },
+            "overrides": []
+          },
+          "fill": 1,
+          "fillGradient": 0,
+          "gridPos": {
+            "h": 6,
+            "w": 8,
+            "x": 7,
+            "y": 0
+          },
+          "hiddenSeries": false,
+          "id": 2,
+          "legend": {
+            "alignAsTable": false,
+            "avg": false,
+            "current": false,
+            "max": false,
+            "min": false,
+            "rightSide": false,
+            "show": true,
+            "total": false,
+            "values": false
+          },
+          "lines": true,
+          "linewidth": 1,
+          "nullPointMode": "null",
+          "options": {
+            "alertThreshold": true
+          },
+          "percentage": false,
+          "pluginVersion": "7.2.0",
+          "pointradius": 2,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [
+            {
+              "alias": "Heating On",
+              "fill": 0,
+              "yaxis": 2
+            }
+          ],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "expr": "(avg by (name) (nest_thermostat_actual_temperature))",
+              "instant": false,
+              "interval": "",
+              "legendFormat": "{{name}}",
+              "refId": "A"
+            },
+            {
+              "expr": "(avg by (name) (nest_thermostat_target_temperature))",
+              "interval": "",
+              "legendFormat": "Thermostat ",
+              "refId": "B"
+            },
+            {
+              "expr": "(avg by (name) (nest_thermostat_status))",
+              "interval": "",
+              "legendFormat": "Heating On",
+              "refId": "C"
+            },
+            {
+              "expr": "(avg by (location) (openweather_temperature)) > 0",
+              "interval": "",
+              "legendFormat": "Outside",
+              "refId": "D"
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeRegions": [],
+          "timeShift": null,
+          "title": "Temperature",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "$$hashKey": "object:214",
+              "decimals": null,
+              "format": "celsius",
+              "label": "",
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            },
+            {
+              "$$hashKey": "object:215",
+              "decimals": 0,
+              "format": "none",
+              "label": "",
+              "logBase": 1,
+              "max": "1",
+              "min": "0",
+              "show": true
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
+        },
+        {
+          "datasource": "Prometheus",
+          "description": "",
+          "fieldConfig": {
+            "defaults": {
+              "custom": {},
+              "decimals": 1,
+              "mappings": [],
+              "max": 40,
+              "min": 0,
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "blue",
+                    "value": null
+                  },
+                  {
+                    "color": "green",
+                    "value": 12
+                  },
+                  {
+                    "color": "red",
+                    "value": 26
+                  }
+                ]
+              },
+              "unit": "celsius"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 3,
+            "w": 3,
+            "x": 15,
+            "y": 0
+          },
+          "id": 9,
+          "options": {
+            "colorMode": "value",
+            "graphMode": "area",
+            "justifyMode": "auto",
+            "orientation": "auto",
+            "reduceOptions": {
+              "calcs": [
+                "last"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "textMode": "auto"
+          },
+          "pluginVersion": "7.2.0",
+          "targets": [
+            {
+              "expr": "openweather_temperature",
+              "instant": true,
+              "interval": "",
+              "legendFormat": "Outside",
+              "refId": "A"
+            }
+          ],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "Outside",
+          "type": "stat"
+        },
+        {
+          "datasource": "Prometheus",
+          "description": "",
+          "fieldConfig": {
+            "defaults": {
+              "custom": {},
+              "decimals": 1,
+              "mappings": [],
+              "max": 30,
+              "min": 10,
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "blue",
+                    "value": null
+                  },
+                  {
+                    "color": "green",
+                    "value": 17
+                  },
+                  {
+                    "color": "red",
+                    "value": 26
+                  }
+                ]
+              },
+              "unit": "celsius"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 3,
+            "w": 3,
+            "x": 0,
+            "y": 3
+          },
+          "id": 6,
+          "options": {
+            "colorMode": "value",
+            "graphMode": "area",
+            "justifyMode": "auto",
+            "orientation": "auto",
+            "reduceOptions": {
+              "calcs": [
+                "last"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "textMode": "auto"
+          },
+          "pluginVersion": "7.2.0",
+          "targets": [
+            {
+              "expr": "nest_thermostat_target_temperature",
+              "instant": true,
+              "interval": "",
+              "legendFormat": "{{name}}",
+              "refId": "A"
+            }
+          ],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "Thermostat",
+          "type": "stat"
+        },
+        {
+          "datasource": "Prometheus",
+          "description": "",
+          "fieldConfig": {
+            "defaults": {
+              "custom": {},
+              "decimals": 1,
+              "mappings": [],
+              "max": 40,
+              "min": 0,
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "blue",
+                    "value": null
+                  },
+                  {
+                    "color": "green",
+                    "value": 12
+                  },
+                  {
+                    "color": "red",
+                    "value": 26
+                  }
+                ]
+              },
+              "unit": "celsius"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 3,
+            "w": 3,
+            "x": 15,
+            "y": 3
+          },
+          "id": 11,
+          "options": {
+            "colorMode": "value",
+            "graphMode": "area",
+            "justifyMode": "auto",
+            "orientation": "auto",
+            "reduceOptions": {
+              "calcs": [
+                "last"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "textMode": "auto"
+          },
+          "pluginVersion": "7.2.0",
+          "targets": [
+            {
+              "expr": "openweather_feelslike",
+              "instant": true,
+              "interval": "",
+              "legendFormat": "Outside",
+              "refId": "A"
+            }
+          ],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "Feels like",
           "type": "stat"
         },
         {
@@ -473,7 +547,7 @@ data:
           "gridPos": {
             "h": 6,
             "w": 4,
-            "x": 0,
+            "x": 3,
             "y": 6
           },
           "id": 7,
@@ -489,7 +563,7 @@ data:
             "showThresholdLabels": false,
             "showThresholdMarkers": true
           },
-          "pluginVersion": "7.1.5",
+          "pluginVersion": "7.2.0",
           "targets": [
             {
               "expr": "nest_thermostat_humidity",
@@ -501,71 +575,14 @@ data:
           ],
           "timeFrom": null,
           "timeShift": null,
-          "title": "Humidity",
-          "type": "gauge"
-        },
-        {
-          "datasource": "Prometheus",
-          "description": "",
-          "fieldConfig": {
-            "defaults": {
-              "custom": {},
-              "decimals": 0,
-              "mappings": [],
-              "max": 100,
-              "min": 0,
-              "thresholds": {
-                "mode": "absolute",
-                "steps": [
-                  {
-                    "color": "green",
-                    "value": null
-                  }
-                ]
-              },
-              "unit": "percent"
-            },
-            "overrides": []
-          },
-          "gridPos": {
-            "h": 6,
-            "w": 4,
-            "x": 4,
-            "y": 6
-          },
-          "id": 10,
-          "options": {
-            "orientation": "auto",
-            "reduceOptions": {
-              "calcs": [
-                "last"
-              ],
-              "fields": "",
-              "values": false
-            },
-            "showThresholdLabels": false,
-            "showThresholdMarkers": false
-          },
-          "pluginVersion": "7.1.5",
-          "targets": [
-            {
-              "expr": "openweather_humidity",
-              "instant": true,
-              "interval": "",
-              "legendFormat": "Outside",
-              "refId": "A"
-            }
-          ],
-          "timeFrom": null,
-          "timeShift": null,
-          "title": "Humidity",
+          "title": "Living room",
           "type": "gauge"
         },
         {
           "aliasColors": {
             "Actual": "red",
             "Humidity": "red",
-            "Living Room": "purple",
+            "Living Room": "orange",
             "Outside": "blue",
             "Target ": "orange"
           },
@@ -586,7 +603,7 @@ data:
           "gridPos": {
             "h": 6,
             "w": 8,
-            "x": 8,
+            "x": 7,
             "y": 6
           },
           "hiddenSeries": false,
@@ -605,8 +622,11 @@ data:
           "lines": true,
           "linewidth": 1,
           "nullPointMode": "null",
+          "options": {
+            "alertThreshold": true
+          },
           "percentage": false,
-          "pluginVersion": "7.1.5",
+          "pluginVersion": "7.2.0",
           "pointradius": 2,
           "points": false,
           "renderer": "flot",
@@ -627,7 +647,7 @@ data:
               "refId": "C"
             },
             {
-              "expr": "(avg by (location) (openweather_humidity))",
+              "expr": "(avg by (location) (openweather_humidity)) > 0",
               "interval": "",
               "legendFormat": "Outside",
               "refId": "A"
@@ -653,6 +673,7 @@ data:
           },
           "yaxes": [
             {
+              "$$hashKey": "object:269",
               "decimals": null,
               "format": "percent",
               "label": "",
@@ -662,6 +683,7 @@ data:
               "show": true
             },
             {
+              "$$hashKey": "object:270",
               "decimals": null,
               "format": "percent",
               "label": "",
@@ -675,6 +697,65 @@ data:
             "align": false,
             "alignLevel": null
           }
+        },
+        {
+          "datasource": "Prometheus",
+          "description": "",
+          "fieldConfig": {
+            "defaults": {
+              "custom": {},
+              "decimals": 0,
+              "mappings": [],
+              "max": 100,
+              "min": 0,
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  }
+                ]
+              },
+              "unit": "percent"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 3,
+            "w": 3,
+            "x": 15,
+            "y": 6
+          },
+          "id": 10,
+          "options": {
+            "colorMode": "value",
+            "graphMode": "area",
+            "justifyMode": "auto",
+            "orientation": "auto",
+            "reduceOptions": {
+              "calcs": [
+                "last"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "textMode": "auto"
+          },
+          "pluginVersion": "7.2.0",
+          "targets": [
+            {
+              "expr": "openweather_humidity",
+              "instant": true,
+              "interval": "",
+              "legendFormat": "Outside",
+              "refId": "A"
+            }
+          ],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "Outside",
+          "type": "stat"
         }
       ],
       "refresh": "1m",
@@ -685,7 +766,7 @@ data:
         "list": []
       },
       "time": {
-        "from": "now-3h",
+        "from": "now-24h",
         "to": "now"
       },
       "timepicker": {
@@ -705,5 +786,5 @@ data:
       "timezone": "",
       "title": "Home",
       "uid": "HKdv7xKMk",
-      "version": 17
+      "version": 1
     }
