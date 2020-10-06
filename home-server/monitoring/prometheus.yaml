@@ -1,0 +1,26 @@
+apiVersion: helm.fluxcd.io/v1
+kind: HelmRelease
+metadata:
+  name: prometheus
+  namespace: monitoring
+spec:
+  releaseName: prometheus
+  chart:
+    repository: https://prometheus-community.github.io/helm-charts/
+    name: prometheus
+    version: 11.16.0
+  values:
+    server:
+      strategy:
+        type: Recreate
+      retention: "90d"
+    kubeStateMetrics:
+      enabled: true
+    alertmanager:
+      enabled: false
+    pushgateway:
+      enabled: false
+    nodeExporter:
+      enabled: true
+      extraArgs:
+        collector.mountstats: ""
