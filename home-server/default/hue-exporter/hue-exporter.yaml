@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hue-exporter
+  labels:
+    app: hue-exporter
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hue-exporter
+  template:
+    metadata:
+      labels:
+        app: hue-exporter
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/path: /metrics
+        prometheus.io/port: "9366"
+    spec:
+      containers:
+      - name: hue-exporter
+        image: mitchellrj/hue_exporter
+        ports:
+        - containerPort: 9366
+        volumeMounts:
+        - name: config-volume
+          mountPath: /etc/hue_exporter
+      volumes:
+      - name: config-volume
+        configMap:
+          name: hue-exporter-config
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: hue-exporter
+spec:
+  selector:
+    app: hue-exporter
+  ports:
+    - protocol: TCP
+      port: 9366

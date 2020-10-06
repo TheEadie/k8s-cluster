@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: hue-exporter-config
+data:
+  config.yml: |
+    ip_address: 192.168.50.50
+    api_key: "QSi55Q1PG5R-DT7eedSyRG8otTeLH9vKRV4EPY01"
+    sensors:
+      # With `match_names` set, the exporter will set the names of temperature
+      # sensors and light level sensors to that of the motion sensor (the one that
+      # you've actually configured in the Hue app)
+      match_names: true
