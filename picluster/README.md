@@ -83,10 +83,8 @@ ssh pi@192.168.1.102
 curl -sLS https://get.k3sup.dev | sh
 sudo install k3sup /usr/local/bin/
 
-k3sup install --ip 192.168.1.101 --user pi --k3s-extra-args '--no-deploy traefik --no-deploy servicelb' --context pi
+k3sup install --ip 192.168.1.101 --user pi --k3s-extra-args '--no-deploy traefik --no-deploy servicelb' --context pi --merge --local-path .kube/config
 k3sup join --ip 192.168.1.102 --server-ip 192.168.1.101 --user pi
-
-mv kubeconfig ~/.kube/config
 ```
 
 ## Setup Helm
