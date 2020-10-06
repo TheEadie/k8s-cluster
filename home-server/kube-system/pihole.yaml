@@ -1,0 +1,28 @@
+apiVersion: helm.fluxcd.io/v1
+kind: HelmRelease
+metadata:
+  name: pihole
+  namespace: kube-system
+spec:
+  releaseName: pihole
+  chart:
+    repository: https://mojo2600.github.io/pihole-kubernetes/
+    name: pihole
+    version: 1.7.17
+  values:
+    dnsmasq:
+      customDnsEntries:
+        - address=/.home.eadie.net/192.168.50.200
+        - address=/pi.hole/192.168.50.200
+    serviceTCP:
+      loadBalancerIP: 192.168.50.201
+      annotations:
+        metallb.universe.tf/address-pool: default
+        metallb.universe.tf/allow-shared-ip: pihole-svc
+      type: LoadBalancer
+    serviceUDP:
+      loadBalancerIP: 192.168.50.201
+      annotations:
+        metallb.universe.tf/address-pool: default
+        metallb.universe.tf/allow-shared-ip: pihole-svc
+      type: LoadBalancer
