@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: openweather-exporter
+  labels:
+    app: openweather-exporter
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: openweather-exporter
+  template:
+    metadata:
+      labels:
+        app: openweather-exporter
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/path: /metrics
+        prometheus.io/port: "9091"
+    spec:
+      containers:
+      - name: openweather-exporter
+        image: billykwooten/openweather-exporter
+        ports:
+        - containerPort: 9091
+        env:
+        - name: OW_APIKEY
+          valueFrom:
+            secretKeyRef:
+              name: openweather-exporter
+              key: OW_APIKEY
+        - name: OW_CITY
+          value: Willingham,GB
+        - name: OW_DEGREES_UNIT
+          value: C
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: openweather-exporter
+spec:
+  selector:
+    app: openweather-exporter
+  ports:
+    - protocol: TCP
+      port: 9091

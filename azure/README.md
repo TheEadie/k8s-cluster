@@ -22,7 +22,7 @@ helm repo add stable https://kubernetes-charts.storage.googleapis.com/
 ### Nest-Exporter
 ```
 mkdir secrets
-touch secrets/node-exporter.env
+touch secrets/nest-exporter.env
 ```
 
 Add the following to the file and update with correct values:
