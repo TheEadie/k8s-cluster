@@ -1,0 +1,24 @@
+helmOperator:
+  create: false
+git:
+  url: "ssh://git@ssh.github.com:443/TheEadie/k8s-cluster.git"
+  branch: master
+  path: home-server
+  label: flux-sync-home
+ssh:
+  known_hosts: "[ssh.github.com]:443 ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAq2A7hRGmdnm9tUDbO9IDSwBK6TbQa+PXYPCPy6rbTrTtw7PHkccKrpp0yVhp5HdEIcKr6pLlVDBfOLX9QUsyCOV0wzfjIJNlGEYsdlLJizHhbn2mUjvSAHQqZETYP81eFzLQNnPHt4EVVUh7VfDESU84KezmD5QlWpXLmvU31/yMf+Se8xhHTvKSCZIFImWwoG6mbUoWf9nzpIoaSjB+weqqUUmpaaasXVal72J+UX2B+2RPW3RcT0eOzQgqlJL3RKrTJvdsjE3JEAvGq3lGHSZXy28G3skua2SmVi/w4yCE6gbODqnTWlg7+wC604ydGXA8VJiS5ap43JXiUFFAaQ=="
+registry:
+  rps: 1
+  burst: 1
+memcached:
+  enabled: true
+syncGarbageCollection:
+  enabled: true
+  dry: false
+prometheus:
+  enabled: true
+  serviceMonitor:
+    create: false
+    interval: 30s
+    scrapeTimeout: 10s
+    namespace: flux

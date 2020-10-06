@@ -1,0 +1,13 @@
+createCRD: false
+git:
+  ssh:
+    secretName: flux-git-deploy
+helm:
+  versions: "v3"
+prometheus:
+  enabled: false
+  serviceMonitor:
+    create: false
+    namespace: flux
+    interval: 30s
+    scrapeTimeout: 10s
