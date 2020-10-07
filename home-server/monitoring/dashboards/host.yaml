@@ -71,7 +71,7 @@ data:
             "showThresholdLabels": false,
             "showThresholdMarkers": true
           },
-          "pluginVersion": "7.0.3",
+          "pluginVersion": "7.2.0",
           "targets": [
             {
               "expr": "1 - (avg (irate(node_cpu_seconds_total{mode=\"idle\"}[5m])))",
@@ -131,7 +131,7 @@ data:
             "showThresholdLabels": false,
             "showThresholdMarkers": true
           },
-          "pluginVersion": "7.0.3",
+          "pluginVersion": "7.2.0",
           "targets": [
             {
               "expr": "(Sum(node_memory_MemTotal_bytes) - Sum(node_memory_MemAvailable_bytes)) / Sum(node_memory_MemTotal_bytes)",
@@ -171,14 +171,14 @@ data:
             "overrides": []
           },
           "gridPos": {
-            "h": 5,
+            "h": 3,
             "w": 6,
             "x": 12,
             "y": 0
           },
           "id": 13,
           "options": {
-            "displayMode": "gradient",
+            "displayMode": "lcd",
             "orientation": "horizontal",
             "reduceOptions": {
               "calcs": [
@@ -189,7 +189,7 @@ data:
             },
             "showUnfilled": true
           },
-          "pluginVersion": "7.0.3",
+          "pluginVersion": "7.2.0",
           "targets": [
             {
               "expr": "(sum by (kubernetes_node, mountpoint) (1 - node_filesystem_avail_bytes / node_filesystem_size_bytes))",
@@ -210,6 +210,7 @@ data:
           "fieldConfig": {
             "defaults": {
               "custom": {},
+              "decimals": 0,
               "links": [],
               "mappings": [],
               "thresholds": {
@@ -230,7 +231,7 @@ data:
             "overrides": []
           },
           "gridPos": {
-            "h": 5,
+            "h": 3,
             "w": 6,
             "x": 0,
             "y": 6
@@ -248,12 +249,14 @@ data:
               ],
               "fields": "",
               "values": false
-            }
+            },
+            "textMode": "auto"
           },
-          "pluginVersion": "7.0.3",
+          "pluginVersion": "7.2.0",
           "targets": [
             {
               "expr": "(avg by (kubernetes_node) (1 - irate(node_cpu_seconds_total{mode=\"idle\"}[5m])))",
+              "instant": false,
               "interval": "",
               "intervalFactor": 1,
               "legendFormat": "{{kubernetes_node}}",
@@ -291,7 +294,7 @@ data:
             "overrides": []
           },
           "gridPos": {
-            "h": 5,
+            "h": 3,
             "w": 6,
             "x": 6,
             "y": 6
@@ -308,9 +311,10 @@ data:
               ],
               "fields": "",
               "values": false
-            }
+            },
+            "textMode": "auto"
           },
-          "pluginVersion": "7.0.3",
+          "pluginVersion": "7.2.0",
           "targets": [
             {
               "expr": "(sum by (kubernetes_node) (1 - node_memory_MemAvailable_bytes / node_memory_MemTotal_bytes))",
@@ -334,7 +338,8 @@ data:
           "datasource": "Prometheus",
           "fieldConfig": {
             "defaults": {
-              "custom": {}
+              "custom": {},
+              "links": []
             },
             "overrides": []
           },
@@ -344,7 +349,7 @@ data:
             "h": 6,
             "w": 6,
             "x": 0,
-            "y": 11
+            "y": 9
           },
           "hiddenSeries": false,
           "id": 10,
@@ -362,9 +367,10 @@ data:
           "linewidth": 1,
           "nullPointMode": "null",
           "options": {
-            "dataLinks": []
+            "alertThreshold": true
           },
           "percentage": false,
+          "pluginVersion": "7.2.0",
           "pointradius": 2,
           "points": false,
           "renderer": "flot",
@@ -434,7 +440,8 @@ data:
           "datasource": "Prometheus",
           "fieldConfig": {
             "defaults": {
-              "custom": {}
+              "custom": {},
+              "links": []
             },
             "overrides": []
           },
@@ -444,7 +451,7 @@ data:
             "h": 6,
             "w": 6,
             "x": 6,
-            "y": 11
+            "y": 9
           },
           "hiddenSeries": false,
           "id": 11,
@@ -462,9 +469,10 @@ data:
           "linewidth": 1,
           "nullPointMode": "null",
           "options": {
-            "dataLinks": []
+            "alertThreshold": true
           },
           "percentage": false,
+          "pluginVersion": "7.2.0",
           "pointradius": 2,
           "points": false,
           "renderer": "flot",
@@ -502,11 +510,11 @@ data:
           "yaxes": [
             {
               "$$hashKey": "object:232",
-              "decimals": 0,
+              "decimals": 1,
               "format": "decbytes",
               "label": null,
               "logBase": 1,
-              "max": "2000000000",
+              "max": null,
               "min": "0",
               "show": true
             },
@@ -517,7 +525,7 @@ data:
               "logBase": 1,
               "max": null,
               "min": null,
-              "show": true
+              "show": false
             }
           ],
           "yaxis": {
@@ -526,8 +534,8 @@ data:
           }
         }
       ],
-      "refresh": "",
-      "schemaVersion": 25,
+      "refresh": "1m",
+      "schemaVersion": 26,
       "style": "dark",
       "tags": [],
       "templating": {
@@ -554,5 +562,5 @@ data:
       "timezone": "",
       "title": "Node stats",
       "uid": "FTfaB9RRk",
-      "version": 2
+      "version": 1
     }
