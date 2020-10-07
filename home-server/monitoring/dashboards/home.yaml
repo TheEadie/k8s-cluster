@@ -35,282 +35,6 @@ data:
             "x": 0,
             "y": 0
           },
-          "id": 19,
-          "panels": [],
-          "title": "Lights",
-          "type": "row"
-        },
-        {
-          "datasource": "Prometheus",
-          "description": "",
-          "fieldConfig": {
-            "defaults": {
-              "custom": {},
-              "mappings": [
-                {
-                  "from": "",
-                  "id": 0,
-                  "text": "OFF",
-                  "to": "",
-                  "type": 1,
-                  "value": "0"
-                },
-                {
-                  "from": "1",
-                  "id": 1,
-                  "text": "ON",
-                  "to": "5",
-                  "type": 2
-                }
-              ],
-              "thresholds": {
-                "mode": "absolute",
-                "steps": [
-                  {
-                    "color": "rgb(162, 150, 155)",
-                    "value": null
-                  },
-                  {
-                    "color": "yellow",
-                    "value": 1
-                  }
-                ]
-              }
-            },
-            "overrides": []
-          },
-          "gridPos": {
-            "h": 3,
-            "w": 3,
-            "x": 0,
-            "y": 1
-          },
-          "id": 13,
-          "options": {
-            "colorMode": "value",
-            "graphMode": "area",
-            "justifyMode": "auto",
-            "orientation": "auto",
-            "reduceOptions": {
-              "calcs": [
-                "mean"
-              ],
-              "fields": "",
-              "values": false
-            },
-            "textMode": "auto"
-          },
-          "pluginVersion": "7.2.0",
-          "targets": [
-            {
-              "expr": "hue_group_on{name=\"Living room\"}",
-              "instant": true,
-              "interval": "",
-              "legendFormat": "{{name}}",
-              "refId": "A"
-            }
-          ],
-          "timeFrom": null,
-          "timeShift": null,
-          "title": "Living Room",
-          "type": "stat"
-        },
-        {
-          "datasource": "Prometheus",
-          "description": "",
-          "fieldConfig": {
-            "defaults": {
-              "custom": {},
-              "mappings": [
-                {
-                  "from": "",
-                  "id": 0,
-                  "text": "OFF",
-                  "to": "",
-                  "type": 1,
-                  "value": "0"
-                },
-                {
-                  "from": "1",
-                  "id": 1,
-                  "text": "ON",
-                  "to": "5",
-                  "type": 2
-                }
-              ],
-              "thresholds": {
-                "mode": "absolute",
-                "steps": [
-                  {
-                    "color": "rgb(162, 150, 155)",
-                    "value": null
-                  },
-                  {
-                    "color": "yellow",
-                    "value": 1
-                  }
-                ]
-              }
-            },
-            "overrides": []
-          },
-          "gridPos": {
-            "h": 3,
-            "w": 3,
-            "x": 3,
-            "y": 1
-          },
-          "id": 21,
-          "options": {
-            "colorMode": "value",
-            "graphMode": "area",
-            "justifyMode": "auto",
-            "orientation": "auto",
-            "reduceOptions": {
-              "calcs": [
-                "mean"
-              ],
-              "fields": "",
-              "values": false
-            },
-            "textMode": "auto"
-          },
-          "pluginVersion": "7.2.0",
-          "targets": [
-            {
-              "expr": "hue_group_on{name=\"Hall\"}",
-              "instant": true,
-              "interval": "",
-              "legendFormat": "{{name}}",
-              "refId": "A"
-            }
-          ],
-          "timeFrom": null,
-          "timeShift": null,
-          "title": "Hall",
-          "type": "stat"
-        },
-        {
-          "aliasColors": {
-            "Actual": "red",
-            "Heating On": "super-light-green",
-            "Humidity": "green",
-            "Living Room": "orange",
-            "Outside": "blue",
-            "Target ": "orange",
-            "Thermostat ": "red"
-          },
-          "bars": false,
-          "dashLength": 10,
-          "dashes": false,
-          "datasource": "Prometheus",
-          "decimals": 1,
-          "description": "",
-          "fieldConfig": {
-            "defaults": {
-              "custom": {}
-            },
-            "overrides": []
-          },
-          "fill": 1,
-          "fillGradient": 0,
-          "gridPos": {
-            "h": 6,
-            "w": 8,
-            "x": 7,
-            "y": 1
-          },
-          "hiddenSeries": false,
-          "id": 22,
-          "legend": {
-            "alignAsTable": false,
-            "avg": false,
-            "current": false,
-            "max": false,
-            "min": false,
-            "rightSide": false,
-            "show": true,
-            "total": false,
-            "values": false
-          },
-          "lines": true,
-          "linewidth": 1,
-          "nullPointMode": "null as zero",
-          "options": {
-            "alertThreshold": true
-          },
-          "percentage": false,
-          "pluginVersion": "7.2.0",
-          "pointradius": 2,
-          "points": false,
-          "renderer": "flot",
-          "seriesOverrides": [],
-          "spaceLength": 10,
-          "stack": false,
-          "steppedLine": false,
-          "targets": [
-            {
-              "expr": "((hue_group_brightness / 254) * hue_group_on) / hue_group_on",
-              "instant": false,
-              "interval": "",
-              "legendFormat": "{{name}}",
-              "refId": "A"
-            }
-          ],
-          "thresholds": [],
-          "timeFrom": null,
-          "timeRegions": [],
-          "timeShift": null,
-          "title": "Lights",
-          "tooltip": {
-            "shared": true,
-            "sort": 0,
-            "value_type": "individual"
-          },
-          "type": "graph",
-          "xaxis": {
-            "buckets": null,
-            "mode": "time",
-            "name": null,
-            "show": true,
-            "values": []
-          },
-          "yaxes": [
-            {
-              "$$hashKey": "object:214",
-              "decimals": 0,
-              "format": "percentunit",
-              "label": "",
-              "logBase": 1,
-              "max": "1",
-              "min": "0",
-              "show": true
-            },
-            {
-              "$$hashKey": "object:215",
-              "decimals": 0,
-              "format": "none",
-              "label": "",
-              "logBase": 1,
-              "max": "1",
-              "min": "0",
-              "show": true
-            }
-          ],
-          "yaxis": {
-            "align": false,
-            "alignLevel": null
-          }
-        },
-        {
-          "collapsed": false,
-          "datasource": null,
-          "gridPos": {
-            "h": 1,
-            "w": 24,
-            "x": 0,
-            "y": 7
-          },
           "id": 15,
           "panels": [],
           "title": "Temperature",
@@ -366,7 +90,7 @@ data:
             "h": 3,
             "w": 3,
             "x": 0,
-            "y": 8
+            "y": 1
           },
           "id": 8,
           "options": {
@@ -433,7 +157,7 @@ data:
             "h": 6,
             "w": 4,
             "x": 3,
-            "y": 8
+            "y": 1
           },
           "id": 5,
           "options": {
@@ -463,8 +187,73 @@ data:
           "type": "gauge"
         },
         {
+          "datasource": "Prometheus",
+          "description": "",
+          "fieldConfig": {
+            "defaults": {
+              "custom": {},
+              "decimals": 1,
+              "mappings": [],
+              "max": 30,
+              "min": 10,
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "blue",
+                    "value": null
+                  },
+                  {
+                    "color": "green",
+                    "value": 17
+                  },
+                  {
+                    "color": "red",
+                    "value": 26
+                  }
+                ]
+              },
+              "unit": "celsius"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 6,
+            "w": 4,
+            "x": 7,
+            "y": 1
+          },
+          "id": 23,
+          "options": {
+            "reduceOptions": {
+              "calcs": [
+                "last"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "showThresholdLabels": false,
+            "showThresholdMarkers": true
+          },
+          "pluginVersion": "7.2.0",
+          "targets": [
+            {
+              "expr": "hue_sensor_value{type=\"ZLLTemperature\"} / 100",
+              "instant": true,
+              "interval": "",
+              "legendFormat": "{{name}}",
+              "refId": "A"
+            }
+          ],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "Bedroom",
+          "type": "gauge"
+        },
+        {
           "aliasColors": {
             "Actual": "red",
+            "Bedroom": "green",
             "Heating On": "super-light-green",
             "Humidity": "green",
             "Living Room": "orange",
@@ -489,8 +278,8 @@ data:
           "gridPos": {
             "h": 6,
             "w": 8,
-            "x": 7,
-            "y": 8
+            "x": 11,
+            "y": 1
           },
           "hiddenSeries": false,
           "id": 2,
@@ -518,9 +307,17 @@ data:
           "renderer": "flot",
           "seriesOverrides": [
             {
+              "$$hashKey": "object:208",
               "alias": "Heating On",
               "fill": 0,
               "yaxis": 2
+            },
+            {
+              "$$hashKey": "object:217",
+              "alias": "Hue motion sensor 1",
+              "hiddenSeries": true,
+              "hideTooltip": true,
+              "legend": false
             }
           ],
           "spaceLength": 10,
@@ -551,6 +348,12 @@ data:
               "interval": "",
               "legendFormat": "Outside",
               "refId": "D"
+            },
+            {
+              "expr": "(avg by (name) (hue_sensor_value{type=\"ZLLTemperature\"} / 100))",
+              "interval": "",
+              "legendFormat": "{{name}}",
+              "refId": "E"
             }
           ],
           "thresholds": [],
@@ -632,8 +435,8 @@ data:
           "gridPos": {
             "h": 3,
             "w": 3,
-            "x": 15,
-            "y": 8
+            "x": 19,
+            "y": 1
           },
           "id": 9,
           "options": {
@@ -700,7 +503,7 @@ data:
             "h": 3,
             "w": 3,
             "x": 0,
-            "y": 11
+            "y": 4
           },
           "id": 6,
           "options": {
@@ -766,8 +569,8 @@ data:
           "gridPos": {
             "h": 3,
             "w": 3,
-            "x": 15,
-            "y": 11
+            "x": 19,
+            "y": 4
           },
           "id": 11,
           "options": {
@@ -806,7 +609,7 @@ data:
             "h": 1,
             "w": 24,
             "x": 0,
-            "y": 14
+            "y": 7
           },
           "id": 17,
           "panels": [],
@@ -849,10 +652,10 @@ data:
             "overrides": []
           },
           "gridPos": {
-            "h": 6,
+            "h": 5,
             "w": 4,
             "x": 3,
-            "y": 15
+            "y": 8
           },
           "id": 7,
           "options": {
@@ -905,10 +708,10 @@ data:
           "fill": 1,
           "fillGradient": 0,
           "gridPos": {
-            "h": 6,
+            "h": 5,
             "w": 8,
-            "x": 7,
-            "y": 15
+            "x": 11,
+            "y": 8
           },
           "hiddenSeries": false,
           "id": 3,
@@ -1028,8 +831,8 @@ data:
           "gridPos": {
             "h": 3,
             "w": 3,
-            "x": 15,
-            "y": 15
+            "x": 19,
+            "y": 8
           },
           "id": 10,
           "options": {
@@ -1060,6 +863,304 @@ data:
           "timeShift": null,
           "title": "Outside",
           "type": "stat"
+        },
+        {
+          "collapsed": false,
+          "datasource": null,
+          "gridPos": {
+            "h": 1,
+            "w": 24,
+            "x": 0,
+            "y": 13
+          },
+          "id": 19,
+          "panels": [],
+          "title": "Lights",
+          "type": "row"
+        },
+        {
+          "datasource": "Prometheus",
+          "description": "",
+          "fieldConfig": {
+            "defaults": {
+              "custom": {},
+              "mappings": [
+                {
+                  "from": "",
+                  "id": 0,
+                  "text": "OFF",
+                  "to": "",
+                  "type": 1,
+                  "value": "0"
+                },
+                {
+                  "from": "1",
+                  "id": 1,
+                  "text": "ON",
+                  "to": "5",
+                  "type": 2
+                }
+              ],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "rgb(162, 150, 155)",
+                    "value": null
+                  },
+                  {
+                    "color": "yellow",
+                    "value": 1
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 4,
+            "w": 4,
+            "x": 3,
+            "y": 14
+          },
+          "id": 13,
+          "options": {
+            "colorMode": "value",
+            "graphMode": "area",
+            "justifyMode": "auto",
+            "orientation": "auto",
+            "reduceOptions": {
+              "calcs": [
+                "mean"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "textMode": "auto"
+          },
+          "pluginVersion": "7.2.0",
+          "targets": [
+            {
+              "expr": "hue_group_on{name=\"Living room\"}",
+              "instant": true,
+              "interval": "",
+              "legendFormat": "{{name}}",
+              "refId": "A"
+            }
+          ],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "Living Room",
+          "type": "stat"
+        },
+        {
+          "datasource": "Prometheus",
+          "description": "",
+          "fieldConfig": {
+            "defaults": {
+              "custom": {},
+              "mappings": [
+                {
+                  "from": "",
+                  "id": 0,
+                  "text": "OFF",
+                  "to": "",
+                  "type": 1,
+                  "value": "0"
+                },
+                {
+                  "from": "1",
+                  "id": 1,
+                  "text": "ON",
+                  "to": "5",
+                  "type": 2
+                }
+              ],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "rgb(162, 150, 155)",
+                    "value": null
+                  },
+                  {
+                    "color": "yellow",
+                    "value": 1
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 4,
+            "w": 4,
+            "x": 7,
+            "y": 14
+          },
+          "id": 21,
+          "options": {
+            "colorMode": "value",
+            "graphMode": "area",
+            "justifyMode": "auto",
+            "orientation": "auto",
+            "reduceOptions": {
+              "calcs": [
+                "mean"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "textMode": "auto"
+          },
+          "pluginVersion": "7.2.0",
+          "targets": [
+            {
+              "expr": "(hue_light_on{name=\"Hall\"} * hue_light_reachable{name=\"Hall\"})",
+              "instant": true,
+              "interval": "",
+              "legendFormat": "{{name}}",
+              "refId": "A"
+            }
+          ],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "Hall",
+          "type": "stat"
+        },
+        {
+          "aliasColors": {
+            "Actual": "red",
+            "Heating On": "super-light-green",
+            "Humidity": "green",
+            "Living Room": "orange",
+            "Outside": "blue",
+            "Target ": "orange",
+            "Thermostat ": "red"
+          },
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "Prometheus",
+          "decimals": 1,
+          "description": "",
+          "fieldConfig": {
+            "defaults": {
+              "custom": {}
+            },
+            "overrides": []
+          },
+          "fill": 1,
+          "fillGradient": 0,
+          "gridPos": {
+            "h": 4,
+            "w": 8,
+            "x": 11,
+            "y": 14
+          },
+          "hiddenSeries": false,
+          "id": 22,
+          "legend": {
+            "alignAsTable": false,
+            "avg": false,
+            "current": false,
+            "max": false,
+            "min": false,
+            "rightSide": false,
+            "show": true,
+            "total": false,
+            "values": false
+          },
+          "lines": true,
+          "linewidth": 1,
+          "nullPointMode": "null as zero",
+          "options": {
+            "alertThreshold": true
+          },
+          "percentage": false,
+          "pluginVersion": "7.2.0",
+          "pointradius": 2,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [
+            {
+              "$$hashKey": "object:264",
+              "alias": "Hue color lamp 1",
+              "hiddenSeries": true,
+              "hideTooltip": true,
+              "legend": false
+            },
+            {
+              "$$hashKey": "object:281",
+              "alias": "Hue color lamp 2",
+              "hiddenSeries": true,
+              "hideTooltip": true,
+              "legend": false
+            },
+            {
+              "$$hashKey": "object:448",
+              "alias": "Hue color lamp 3",
+              "hiddenSeries": true,
+              "hideTooltip": true,
+              "legend": false
+            }
+          ],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "expr": "((hue_light_brightness / 254) * hue_light_on * hue_light_reachable) ",
+              "instant": false,
+              "interval": "",
+              "legendFormat": "{{name}}",
+              "refId": "A"
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeRegions": [],
+          "timeShift": null,
+          "title": "Lights",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "$$hashKey": "object:214",
+              "decimals": 0,
+              "format": "percentunit",
+              "label": "",
+              "logBase": 1,
+              "max": "1",
+              "min": "0",
+              "show": true
+            },
+            {
+              "$$hashKey": "object:215",
+              "decimals": 0,
+              "format": "none",
+              "label": "",
+              "logBase": 1,
+              "max": "1",
+              "min": "0",
+              "show": true
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
         }
       ],
       "refresh": "1m",
@@ -1070,7 +1171,7 @@ data:
         "list": []
       },
       "time": {
-        "from": "now-24h",
+        "from": "now-1h",
         "to": "now"
       },
       "timepicker": {
@@ -1090,5 +1191,5 @@ data:
       "timezone": "",
       "title": "Home stats",
       "uid": "HKdv7xKMk",
-      "version": 1
+      "version": 2
     }
