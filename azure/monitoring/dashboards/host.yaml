@@ -71,7 +71,7 @@ data:
             "showThresholdLabels": false,
             "showThresholdMarkers": true
           },
-          "pluginVersion": "7.0.3",
+          "pluginVersion": "7.2.0",
           "targets": [
             {
               "expr": "1 - (avg (irate(node_cpu_seconds_total{mode=\"idle\"}[5m])))",
@@ -131,7 +131,7 @@ data:
             "showThresholdLabels": false,
             "showThresholdMarkers": true
           },
-          "pluginVersion": "7.0.3",
+          "pluginVersion": "7.2.0",
           "targets": [
             {
               "expr": "(Sum(node_memory_MemTotal_bytes) - Sum(node_memory_MemAvailable_bytes)) / Sum(node_memory_MemTotal_bytes)",
@@ -162,7 +162,7 @@ data:
                   },
                   {
                     "color": "red",
-                    "value": 80
+                    "value": 0.8
                   }
                 ]
               },
@@ -171,15 +171,14 @@ data:
             "overrides": []
           },
           "gridPos": {
-            "h": 5,
+            "h": 6,
             "w": 6,
             "x": 12,
             "y": 0
           },
-          "id": 13,
+          "id": 15,
           "options": {
-            "displayMode": "gradient",
-            "orientation": "horizontal",
+            "orientation": "auto",
             "reduceOptions": {
               "calcs": [
                 "last"
@@ -187,22 +186,24 @@ data:
               "fields": "",
               "values": false
             },
-            "showUnfilled": true
+            "showThresholdLabels": false,
+            "showThresholdMarkers": true
           },
-          "pluginVersion": "7.0.3",
+          "pluginVersion": "7.2.0",
           "targets": [
             {
-              "expr": "(sum by (kubernetes_node, mountpoint) (1 - node_filesystem_avail_bytes / node_filesystem_size_bytes))",
+              "expr": "(Sum(node_filesystem_size_bytes) - Sum(node_filesystem_avail_bytes)) / Sum(node_filesystem_size_bytes)",
+              "instant": true,
               "interval": "",
-              "legendFormat": "{{kubernetes_node}} - {{mountpoint}}",
+              "legendFormat": "",
               "refId": "A"
             }
           ],
           "timeFrom": null,
           "timeShift": null,
-          "title": "Disk Usage",
+          "title": "Cluster Disk Usage",
           "transparent": true,
-          "type": "bargauge"
+          "type": "gauge"
         },
         {
           "cacheTimeout": null,
@@ -210,6 +211,7 @@ data:
           "fieldConfig": {
             "defaults": {
               "custom": {},
+              "decimals": 0,
               "links": [],
               "mappings": [],
               "thresholds": {
@@ -248,12 +250,14 @@ data:
               ],
               "fields": "",
               "values": false
-            }
+            },
+            "textMode": "auto"
           },
-          "pluginVersion": "7.0.3",
+          "pluginVersion": "7.2.0",
           "targets": [
             {
               "expr": "(avg by (kubernetes_node) (1 - irate(node_cpu_seconds_total{mode=\"idle\"}[5m])))",
+              "instant": true,
               "interval": "",
               "intervalFactor": 1,
               "legendFormat": "{{kubernetes_node}}",
@@ -308,12 +312,14 @@ data:
               ],
               "fields": "",
               "values": false
-            }
+            },
+            "textMode": "auto"
           },
-          "pluginVersion": "7.0.3",
+          "pluginVersion": "7.2.0",
           "targets": [
             {
               "expr": "(sum by (kubernetes_node) (1 - node_memory_MemAvailable_bytes / node_memory_MemTotal_bytes))",
+              "instant": true,
               "interval": "",
               "intervalFactor": 1,
               "legendFormat": "{{kubernetes_node}}",
@@ -327,6 +333,65 @@ data:
           "type": "stat"
         },
         {
+          "datasource": "Prometheus",
+          "fieldConfig": {
+            "defaults": {
+              "custom": {},
+              "decimals": 0,
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              },
+              "unit": "percentunit"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 5,
+            "w": 6,
+            "x": 12,
+            "y": 6
+          },
+          "id": 13,
+          "options": {
+            "displayMode": "gradient",
+            "orientation": "horizontal",
+            "reduceOptions": {
+              "calcs": [
+                "last"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "showUnfilled": true
+          },
+          "pluginVersion": "7.2.0",
+          "targets": [
+            {
+              "expr": "(sum by (kubernetes_node, mountpoint) (1 - node_filesystem_avail_bytes / node_filesystem_size_bytes))",
+              "instant": true,
+              "interval": "",
+              "legendFormat": "{{kubernetes_node}} - {{mountpoint}}",
+              "refId": "A"
+            }
+          ],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "Disk Usage",
+          "transparent": true,
+          "type": "bargauge"
+        },
+        {
           "aliasColors": {},
           "bars": false,
           "dashLength": 10,
@@ -334,7 +399,8 @@ data:
           "datasource": "Prometheus",
           "fieldConfig": {
             "defaults": {
-              "custom": {}
+              "custom": {},
+              "links": []
             },
             "overrides": []
           },
@@ -362,9 +428,10 @@ data:
           "linewidth": 1,
           "nullPointMode": "null",
           "options": {
-            "dataLinks": []
+            "alertThreshold": true
           },
           "percentage": false,
+          "pluginVersion": "7.2.0",
           "pointradius": 2,
           "points": false,
           "renderer": "flot",
@@ -434,7 +501,8 @@ data:
           "datasource": "Prometheus",
           "fieldConfig": {
             "defaults": {
-              "custom": {}
+              "custom": {},
+              "links": []
             },
             "overrides": []
           },
@@ -462,9 +530,10 @@ data:
           "linewidth": 1,
           "nullPointMode": "null",
           "options": {
-            "dataLinks": []
+            "alertThreshold": true
           },
           "percentage": false,
+          "pluginVersion": "7.2.0",
           "pointradius": 2,
           "points": false,
           "renderer": "flot",
@@ -524,17 +593,118 @@ data:
             "align": false,
             "alignLevel": null
           }
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "Prometheus",
+          "fieldConfig": {
+            "defaults": {
+              "custom": {},
+              "links": []
+            },
+            "overrides": []
+          },
+          "fill": 1,
+          "fillGradient": 0,
+          "gridPos": {
+            "h": 6,
+            "w": 6,
+            "x": 12,
+            "y": 11
+          },
+          "hiddenSeries": false,
+          "id": 14,
+          "legend": {
+            "avg": false,
+            "current": false,
+            "max": false,
+            "min": false,
+            "rightSide": false,
+            "show": true,
+            "total": false,
+            "values": false
+          },
+          "lines": true,
+          "linewidth": 1,
+          "nullPointMode": "null",
+          "options": {
+            "alertThreshold": true
+          },
+          "percentage": false,
+          "pluginVersion": "7.2.0",
+          "pointradius": 2,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "expr": "(sum by (kubernetes_node, mountpoint) (node_filesystem_size_bytes - node_filesystem_avail_bytes))",
+              "interval": "",
+              "legendFormat": "{{kubernetes_node}}",
+              "refId": "A"
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeRegions": [],
+          "timeShift": null,
+          "title": "Disk Usage Details",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "transparent": true,
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "$$hashKey": "object:232",
+              "decimals": 0,
+              "format": "decbytes",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": "0",
+              "show": true
+            },
+            {
+              "$$hashKey": "object:233",
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
         }
       ],
       "refresh": "",
-      "schemaVersion": 25,
+      "schemaVersion": 26,
       "style": "dark",
       "tags": [],
       "templating": {
         "list": []
       },
       "time": {
-        "from": "now-24h",
+        "from": "now-7d",
         "to": "now"
       },
       "timepicker": {
@@ -554,5 +724,5 @@ data:
       "timezone": "",
       "title": "Node stats",
       "uid": "FTfaB9RRk",
-      "version": 2
+      "version": 1
     }
