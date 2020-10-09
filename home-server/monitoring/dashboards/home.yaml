@@ -238,7 +238,7 @@ data:
           "pluginVersion": "7.2.0",
           "targets": [
             {
-              "expr": "hue_sensor_value{type=\"ZLLTemperature\"} / 100",
+              "expr": "(hue_sensor_value{type=\"ZLLTemperature\"} / 100) + 1.8",
               "instant": true,
               "interval": "",
               "legendFormat": "{{name}}",
@@ -350,7 +350,7 @@ data:
               "refId": "D"
             },
             {
-              "expr": "(avg by (name) (hue_sensor_value{type=\"ZLLTemperature\"} / 100))",
+              "expr": "(avg by (name) (hue_sensor_value{type=\"ZLLTemperature\"} / 100)) + 1.8",
               "interval": "",
               "legendFormat": "{{name}}",
               "refId": "E"
@@ -1171,7 +1171,7 @@ data:
         "list": []
       },
       "time": {
-        "from": "now-1h",
+        "from": "now-24h",
         "to": "now"
       },
       "timepicker": {
@@ -1191,5 +1191,5 @@ data:
       "timezone": "",
       "title": "Home stats",
       "uid": "HKdv7xKMk",
-      "version": 2
+      "version": 1
     }
