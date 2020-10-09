@@ -27,74 +27,48 @@ data:
       "links": [],
       "panels": [
         {
+          "collapsed": false,
+          "datasource": null,
+          "gridPos": {
+            "h": 1,
+            "w": 24,
+            "x": 0,
+            "y": 0
+          },
+          "id": 15,
+          "panels": [],
+          "title": "Temperature",
+          "type": "row"
+        },
+        {
           "datasource": "Prometheus",
+          "description": "",
           "fieldConfig": {
             "defaults": {
               "custom": {
                 "align": null
               },
               "decimals": 0,
-              "mappings": [],
-              "thresholds": {
-                "mode": "absolute",
-                "steps": [
-                  {
-                    "color": "green",
-                    "value": null
-                  },
-                  {
-                    "color": "red",
-                    "value": 0.8
-                  }
-                ]
-              },
-              "unit": "percentunit"
-            },
-            "overrides": []
-          },
-          "gridPos": {
-            "h": 6,
-            "w": 6,
-            "x": 0,
-            "y": 0
-          },
-          "id": 6,
-          "options": {
-            "orientation": "auto",
-            "reduceOptions": {
-              "calcs": [
-                "last"
+              "mappings": [
+                {
+                  "from": "",
+                  "id": 0,
+                  "text": "OFF",
+                  "to": "",
+                  "type": 1,
+                  "value": "0"
+                },
+                {
+                  "from": "",
+                  "id": 1,
+                  "text": "ON",
+                  "to": "",
+                  "type": 1,
+                  "value": "1"
+                }
               ],
-              "fields": "",
-              "values": false
-            },
-            "showThresholdLabels": false,
-            "showThresholdMarkers": true
-          },
-          "pluginVersion": "7.2.0",
-          "targets": [
-            {
-              "expr": "1 - (avg (irate(node_cpu_seconds_total{mode=\"idle\"}[5m])))",
-              "instant": false,
-              "interval": "",
-              "intervalFactor": 1,
-              "legendFormat": "",
-              "refId": "A"
-            }
-          ],
-          "timeFrom": null,
-          "timeShift": null,
-          "title": "Cluster CPU Usage",
-          "transparent": true,
-          "type": "gauge"
-        },
-        {
-          "datasource": "Prometheus",
-          "fieldConfig": {
-            "defaults": {
-              "custom": {},
-              "decimals": 0,
-              "mappings": [],
+              "max": 1,
+              "min": 0,
               "thresholds": {
                 "mode": "absolute",
                 "steps": [
@@ -104,23 +78,89 @@ data:
                   },
                   {
                     "color": "red",
-                    "value": 0.8
+                    "value": 1
                   }
                 ]
               },
-              "unit": "percentunit"
+              "unit": "none"
             },
             "overrides": []
           },
           "gridPos": {
-            "h": 6,
-            "w": 6,
-            "x": 6,
-            "y": 0
+            "h": 3,
+            "w": 3,
+            "x": 0,
+            "y": 1
           },
           "id": 8,
           "options": {
+            "colorMode": "value",
+            "graphMode": "area",
+            "justifyMode": "auto",
             "orientation": "auto",
+            "reduceOptions": {
+              "calcs": [
+                "last"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "textMode": "auto"
+          },
+          "pluginVersion": "7.2.0",
+          "targets": [
+            {
+              "expr": "nest_thermostat_status",
+              "instant": true,
+              "interval": "",
+              "legendFormat": "{{name}}",
+              "refId": "A"
+            }
+          ],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "Heating",
+          "type": "stat"
+        },
+        {
+          "datasource": "Prometheus",
+          "description": "",
+          "fieldConfig": {
+            "defaults": {
+              "custom": {},
+              "decimals": 1,
+              "mappings": [],
+              "max": 30,
+              "min": 10,
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "blue",
+                    "value": null
+                  },
+                  {
+                    "color": "green",
+                    "value": 17
+                  },
+                  {
+                    "color": "red",
+                    "value": 26
+                  }
+                ]
+              },
+              "unit": "celsius"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 6,
+            "w": 4,
+            "x": 3,
+            "y": 1
+          },
+          "id": 5,
+          "options": {
             "reduceOptions": {
               "calcs": [
                 "last"
@@ -134,52 +174,57 @@ data:
           "pluginVersion": "7.2.0",
           "targets": [
             {
-              "expr": "(Sum(node_memory_MemTotal_bytes) - Sum(node_memory_MemAvailable_bytes)) / Sum(node_memory_MemTotal_bytes)",
+              "expr": "nest_thermostat_actual_temperature",
+              "instant": true,
               "interval": "",
-              "legendFormat": "",
+              "legendFormat": "{{name}}",
               "refId": "A"
             }
           ],
           "timeFrom": null,
           "timeShift": null,
-          "title": "Cluster Memory Usage",
-          "transparent": true,
+          "title": "Living room",
           "type": "gauge"
         },
         {
           "datasource": "Prometheus",
+          "description": "",
           "fieldConfig": {
             "defaults": {
               "custom": {},
-              "decimals": 0,
+              "decimals": 1,
               "mappings": [],
+              "max": 30,
+              "min": 10,
               "thresholds": {
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green",
+                    "color": "blue",
                     "value": null
                   },
                   {
+                    "color": "green",
+                    "value": 17
+                  },
+                  {
                     "color": "red",
-                    "value": 80
+                    "value": 26
                   }
                 ]
               },
-              "unit": "percentunit"
+              "unit": "celsius"
             },
             "overrides": []
           },
           "gridPos": {
-            "h": 3,
-            "w": 6,
-            "x": 12,
-            "y": 0
+            "h": 6,
+            "w": 4,
+            "x": 7,
+            "y": 1
           },
-          "id": 13,
+          "id": 23,
           "options": {
-            "displayMode": "lcd",
-            "orientation": "horizontal",
             "reduceOptions": {
               "calcs": [
                 "last"
@@ -187,159 +232,44 @@ data:
               "fields": "",
               "values": false
             },
-            "showUnfilled": true
+            "showThresholdLabels": false,
+            "showThresholdMarkers": true
           },
           "pluginVersion": "7.2.0",
           "targets": [
             {
-              "expr": "(sum by (kubernetes_node, mountpoint) (1 - node_filesystem_avail_bytes / node_filesystem_size_bytes))",
+              "expr": "(hue_sensor_value{type=\"ZLLTemperature\"} / 100) + 1.8",
+              "instant": true,
               "interval": "",
-              "legendFormat": "{{kubernetes_node}} - {{mountpoint}}",
+              "legendFormat": "{{name}}",
               "refId": "A"
             }
           ],
           "timeFrom": null,
           "timeShift": null,
-          "title": "Disk Usage",
-          "transparent": true,
-          "type": "bargauge"
+          "title": "Bedroom",
+          "type": "gauge"
         },
         {
-          "cacheTimeout": null,
-          "datasource": "Prometheus",
-          "fieldConfig": {
-            "defaults": {
-              "custom": {},
-              "decimals": 0,
-              "links": [],
-              "mappings": [],
-              "thresholds": {
-                "mode": "absolute",
-                "steps": [
-                  {
-                    "color": "green",
-                    "value": null
-                  },
-                  {
-                    "color": "red",
-                    "value": 80
-                  }
-                ]
-              },
-              "unit": "percentunit"
-            },
-            "overrides": []
+          "aliasColors": {
+            "Actual": "red",
+            "Bedroom": "green",
+            "Heating On": "super-light-green",
+            "Humidity": "green",
+            "Living Room": "orange",
+            "Outside": "blue",
+            "Target ": "orange",
+            "Thermostat ": "red"
           },
-          "gridPos": {
-            "h": 3,
-            "w": 6,
-            "x": 0,
-            "y": 6
-          },
-          "id": 2,
-          "links": [],
-          "options": {
-            "colorMode": "value",
-            "graphMode": "area",
-            "justifyMode": "auto",
-            "orientation": "horizontal",
-            "reduceOptions": {
-              "calcs": [
-                "last"
-              ],
-              "fields": "",
-              "values": false
-            },
-            "textMode": "auto"
-          },
-          "pluginVersion": "7.2.0",
-          "targets": [
-            {
-              "expr": "(avg by (kubernetes_node) (1 - irate(node_cpu_seconds_total{mode=\"idle\"}[5m])))",
-              "instant": false,
-              "interval": "",
-              "intervalFactor": 1,
-              "legendFormat": "{{kubernetes_node}}",
-              "refId": "A"
-            }
-          ],
-          "timeFrom": null,
-          "timeShift": null,
-          "title": "CPU Usage",
-          "transparent": true,
-          "type": "stat"
-        },
-        {
-          "datasource": "Prometheus",
-          "fieldConfig": {
-            "defaults": {
-              "custom": {},
-              "decimals": 0,
-              "mappings": [],
-              "thresholds": {
-                "mode": "absolute",
-                "steps": [
-                  {
-                    "color": "green",
-                    "value": null
-                  },
-                  {
-                    "color": "red",
-                    "value": 80
-                  }
-                ]
-              },
-              "unit": "percentunit"
-            },
-            "overrides": []
-          },
-          "gridPos": {
-            "h": 3,
-            "w": 6,
-            "x": 6,
-            "y": 6
-          },
-          "id": 4,
-          "options": {
-            "colorMode": "value",
-            "graphMode": "area",
-            "justifyMode": "auto",
-            "orientation": "horizontal",
-            "reduceOptions": {
-              "calcs": [
-                "last"
-              ],
-              "fields": "",
-              "values": false
-            },
-            "textMode": "auto"
-          },
-          "pluginVersion": "7.2.0",
-          "targets": [
-            {
-              "expr": "(sum by (kubernetes_node) (1 - node_memory_MemAvailable_bytes / node_memory_MemTotal_bytes))",
-              "interval": "",
-              "intervalFactor": 1,
-              "legendFormat": "{{kubernetes_node}}",
-              "refId": "A"
-            }
-          ],
-          "timeFrom": null,
-          "timeShift": null,
-          "title": "Memory Usage",
-          "transparent": true,
-          "type": "stat"
-        },
-        {
-          "aliasColors": {},
           "bars": false,
           "dashLength": 10,
           "dashes": false,
           "datasource": "Prometheus",
+          "decimals": 1,
+          "description": "",
           "fieldConfig": {
             "defaults": {
-              "custom": {},
-              "links": []
+              "custom": {}
             },
             "overrides": []
           },
@@ -347,13 +277,14 @@ data:
           "fillGradient": 0,
           "gridPos": {
             "h": 6,
-            "w": 6,
-            "x": 0,
-            "y": 9
+            "w": 8,
+            "x": 11,
+            "y": 1
           },
           "hiddenSeries": false,
-          "id": 10,
+          "id": 2,
           "legend": {
+            "alignAsTable": false,
             "avg": false,
             "current": false,
             "max": false,
@@ -374,30 +305,67 @@ data:
           "pointradius": 2,
           "points": false,
           "renderer": "flot",
-          "seriesOverrides": [],
+          "seriesOverrides": [
+            {
+              "$$hashKey": "object:208",
+              "alias": "Heating On",
+              "fill": 0,
+              "yaxis": 2
+            },
+            {
+              "$$hashKey": "object:217",
+              "alias": "Hue motion sensor 1",
+              "hiddenSeries": true,
+              "hideTooltip": true,
+              "legend": false
+            }
+          ],
           "spaceLength": 10,
           "stack": false,
           "steppedLine": false,
           "targets": [
             {
-              "expr": "(avg by (kubernetes_node) (1 - irate(node_cpu_seconds_total{mode=\"idle\"}[5m])))",
+              "expr": "(avg by (name) (nest_thermostat_actual_temperature))",
+              "instant": false,
               "interval": "",
-              "intervalFactor": 1,
-              "legendFormat": "{{kubernetes_node}}",
+              "legendFormat": "{{name}}",
               "refId": "A"
+            },
+            {
+              "expr": "(avg by (name) (nest_thermostat_target_temperature))",
+              "interval": "",
+              "legendFormat": "Thermostat ",
+              "refId": "B"
+            },
+            {
+              "expr": "(avg by (name) (nest_thermostat_status))",
+              "interval": "",
+              "legendFormat": "Heating On",
+              "refId": "C"
+            },
+            {
+              "expr": "(avg by (location) (openweather_temperature)) > 0",
+              "interval": "",
+              "legendFormat": "Outside",
+              "refId": "D"
+            },
+            {
+              "expr": "(avg by (name) (hue_sensor_value{type=\"ZLLTemperature\"} / 100)) + 1.8",
+              "interval": "",
+              "legendFormat": "{{name}}",
+              "refId": "E"
             }
           ],
           "thresholds": [],
           "timeFrom": null,
           "timeRegions": [],
           "timeShift": null,
-          "title": "CPU Usage Details",
+          "title": "Temperature",
           "tooltip": {
             "shared": true,
             "sort": 0,
             "value_type": "individual"
           },
-          "transparent": true,
           "type": "graph",
           "xaxis": {
             "buckets": null,
@@ -408,22 +376,23 @@ data:
           },
           "yaxes": [
             {
-              "$$hashKey": "object:232",
-              "decimals": 2,
-              "format": "percentunit",
-              "label": null,
-              "logBase": 1,
-              "max": "1",
-              "min": "0",
-              "show": true
-            },
-            {
-              "$$hashKey": "object:233",
-              "format": "short",
-              "label": null,
+              "$$hashKey": "object:214",
+              "decimals": null,
+              "format": "celsius",
+              "label": "",
               "logBase": 1,
               "max": null,
               "min": null,
+              "show": true
+            },
+            {
+              "$$hashKey": "object:215",
+              "decimals": 0,
+              "format": "none",
+              "label": "",
+              "logBase": 1,
+              "max": "1",
+              "min": "0",
               "show": true
             }
           ],
@@ -433,29 +402,321 @@ data:
           }
         },
         {
-          "aliasColors": {},
+          "datasource": "Prometheus",
+          "description": "",
+          "fieldConfig": {
+            "defaults": {
+              "custom": {},
+              "decimals": 1,
+              "mappings": [],
+              "max": 40,
+              "min": 0,
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "blue",
+                    "value": null
+                  },
+                  {
+                    "color": "green",
+                    "value": 12
+                  },
+                  {
+                    "color": "red",
+                    "value": 26
+                  }
+                ]
+              },
+              "unit": "celsius"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 3,
+            "w": 3,
+            "x": 19,
+            "y": 1
+          },
+          "id": 9,
+          "options": {
+            "colorMode": "value",
+            "graphMode": "area",
+            "justifyMode": "auto",
+            "orientation": "auto",
+            "reduceOptions": {
+              "calcs": [
+                "last"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "textMode": "auto"
+          },
+          "pluginVersion": "7.2.0",
+          "targets": [
+            {
+              "expr": "openweather_temperature",
+              "instant": true,
+              "interval": "",
+              "legendFormat": "Outside",
+              "refId": "A"
+            }
+          ],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "Outside",
+          "type": "stat"
+        },
+        {
+          "datasource": "Prometheus",
+          "description": "",
+          "fieldConfig": {
+            "defaults": {
+              "custom": {},
+              "decimals": 1,
+              "mappings": [],
+              "max": 30,
+              "min": 10,
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "blue",
+                    "value": null
+                  },
+                  {
+                    "color": "green",
+                    "value": 17
+                  },
+                  {
+                    "color": "red",
+                    "value": 26
+                  }
+                ]
+              },
+              "unit": "celsius"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 3,
+            "w": 3,
+            "x": 0,
+            "y": 4
+          },
+          "id": 6,
+          "options": {
+            "colorMode": "value",
+            "graphMode": "area",
+            "justifyMode": "auto",
+            "orientation": "auto",
+            "reduceOptions": {
+              "calcs": [
+                "last"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "textMode": "auto"
+          },
+          "pluginVersion": "7.2.0",
+          "targets": [
+            {
+              "expr": "nest_thermostat_target_temperature",
+              "instant": true,
+              "interval": "",
+              "legendFormat": "{{name}}",
+              "refId": "A"
+            }
+          ],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "Thermostat",
+          "type": "stat"
+        },
+        {
+          "datasource": "Prometheus",
+          "description": "",
+          "fieldConfig": {
+            "defaults": {
+              "custom": {},
+              "decimals": 1,
+              "mappings": [],
+              "max": 40,
+              "min": 0,
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "blue",
+                    "value": null
+                  },
+                  {
+                    "color": "green",
+                    "value": 12
+                  },
+                  {
+                    "color": "red",
+                    "value": 26
+                  }
+                ]
+              },
+              "unit": "celsius"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 3,
+            "w": 3,
+            "x": 19,
+            "y": 4
+          },
+          "id": 11,
+          "options": {
+            "colorMode": "value",
+            "graphMode": "area",
+            "justifyMode": "auto",
+            "orientation": "auto",
+            "reduceOptions": {
+              "calcs": [
+                "last"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "textMode": "auto"
+          },
+          "pluginVersion": "7.2.0",
+          "targets": [
+            {
+              "expr": "openweather_feelslike",
+              "instant": true,
+              "interval": "",
+              "legendFormat": "Outside",
+              "refId": "A"
+            }
+          ],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "Feels like",
+          "type": "stat"
+        },
+        {
+          "collapsed": false,
+          "datasource": null,
+          "gridPos": {
+            "h": 1,
+            "w": 24,
+            "x": 0,
+            "y": 7
+          },
+          "id": 17,
+          "panels": [],
+          "title": "Humidity",
+          "type": "row"
+        },
+        {
+          "datasource": "Prometheus",
+          "description": "",
+          "fieldConfig": {
+            "defaults": {
+              "custom": {},
+              "decimals": 0,
+              "mappings": [],
+              "max": 100,
+              "min": 0,
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "blue",
+                    "value": null
+                  },
+                  {
+                    "color": "green",
+                    "value": 30
+                  },
+                  {
+                    "color": "orange",
+                    "value": 60
+                  },
+                  {
+                    "color": "red",
+                    "value": 70
+                  }
+                ]
+              },
+              "unit": "percent"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 5,
+            "w": 4,
+            "x": 3,
+            "y": 8
+          },
+          "id": 7,
+          "options": {
+            "orientation": "auto",
+            "reduceOptions": {
+              "calcs": [
+                "last"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "showThresholdLabels": false,
+            "showThresholdMarkers": true
+          },
+          "pluginVersion": "7.2.0",
+          "targets": [
+            {
+              "expr": "nest_thermostat_humidity",
+              "instant": true,
+              "interval": "",
+              "legendFormat": "{{name}}",
+              "refId": "A"
+            }
+          ],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "Living room",
+          "type": "gauge"
+        },
+        {
+          "aliasColors": {
+            "Actual": "red",
+            "Humidity": "red",
+            "Living Room": "orange",
+            "Outside": "blue",
+            "Target ": "orange"
+          },
           "bars": false,
           "dashLength": 10,
           "dashes": false,
           "datasource": "Prometheus",
+          "decimals": 1,
+          "description": "",
           "fieldConfig": {
             "defaults": {
-              "custom": {},
-              "links": []
+              "custom": {}
             },
             "overrides": []
           },
           "fill": 1,
           "fillGradient": 0,
           "gridPos": {
-            "h": 6,
-            "w": 6,
-            "x": 6,
-            "y": 9
+            "h": 5,
+            "w": 8,
+            "x": 11,
+            "y": 8
           },
           "hiddenSeries": false,
-          "id": 11,
+          "id": 3,
           "legend": {
+            "alignAsTable": false,
             "avg": false,
             "current": false,
             "max": false,
@@ -476,15 +737,26 @@ data:
           "pointradius": 2,
           "points": false,
           "renderer": "flot",
-          "seriesOverrides": [],
+          "seriesOverrides": [
+            {
+              "alias": "Humidity",
+              "yaxis": 1
+            }
+          ],
           "spaceLength": 10,
           "stack": false,
           "steppedLine": false,
           "targets": [
             {
-              "expr": "(sum by (kubernetes_node) (node_memory_MemTotal_bytes - node_memory_MemAvailable_bytes))",
+              "expr": "(avg by (name) (nest_thermostat_humidity))",
               "interval": "",
-              "legendFormat": "{{kubernetes_node}}",
+              "legendFormat": "{{name}}",
+              "refId": "C"
+            },
+            {
+              "expr": "(avg by (location) (openweather_humidity)) > 0",
+              "interval": "",
+              "legendFormat": "Outside",
               "refId": "A"
             }
           ],
@@ -492,13 +764,12 @@ data:
           "timeFrom": null,
           "timeRegions": [],
           "timeShift": null,
-          "title": "Memory Usage Details",
+          "title": "Humidity",
           "tooltip": {
             "shared": true,
             "sort": 0,
             "value_type": "individual"
           },
-          "transparent": true,
           "type": "graph",
           "xaxis": {
             "buckets": null,
@@ -509,23 +780,381 @@ data:
           },
           "yaxes": [
             {
-              "$$hashKey": "object:232",
-              "decimals": 1,
-              "format": "decbytes",
-              "label": null,
+              "$$hashKey": "object:269",
+              "decimals": null,
+              "format": "percent",
+              "label": "",
               "logBase": 1,
-              "max": null,
+              "max": "100",
               "min": "0",
               "show": true
             },
             {
-              "$$hashKey": "object:233",
-              "format": "short",
-              "label": null,
+              "$$hashKey": "object:270",
+              "decimals": null,
+              "format": "percent",
+              "label": "",
               "logBase": 1,
-              "max": null,
-              "min": null,
+              "max": "100",
+              "min": "0",
               "show": false
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
+        },
+        {
+          "datasource": "Prometheus",
+          "description": "",
+          "fieldConfig": {
+            "defaults": {
+              "custom": {},
+              "decimals": 0,
+              "mappings": [],
+              "max": 100,
+              "min": 0,
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  }
+                ]
+              },
+              "unit": "percent"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 3,
+            "w": 3,
+            "x": 19,
+            "y": 8
+          },
+          "id": 10,
+          "options": {
+            "colorMode": "value",
+            "graphMode": "area",
+            "justifyMode": "auto",
+            "orientation": "auto",
+            "reduceOptions": {
+              "calcs": [
+                "last"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "textMode": "auto"
+          },
+          "pluginVersion": "7.2.0",
+          "targets": [
+            {
+              "expr": "openweather_humidity",
+              "instant": true,
+              "interval": "",
+              "legendFormat": "Outside",
+              "refId": "A"
+            }
+          ],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "Outside",
+          "type": "stat"
+        },
+        {
+          "collapsed": false,
+          "datasource": null,
+          "gridPos": {
+            "h": 1,
+            "w": 24,
+            "x": 0,
+            "y": 13
+          },
+          "id": 19,
+          "panels": [],
+          "title": "Lights",
+          "type": "row"
+        },
+        {
+          "datasource": "Prometheus",
+          "description": "",
+          "fieldConfig": {
+            "defaults": {
+              "custom": {},
+              "mappings": [
+                {
+                  "from": "",
+                  "id": 0,
+                  "text": "OFF",
+                  "to": "",
+                  "type": 1,
+                  "value": "0"
+                },
+                {
+                  "from": "1",
+                  "id": 1,
+                  "text": "ON",
+                  "to": "5",
+                  "type": 2
+                }
+              ],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "rgb(162, 150, 155)",
+                    "value": null
+                  },
+                  {
+                    "color": "yellow",
+                    "value": 1
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 4,
+            "w": 4,
+            "x": 3,
+            "y": 14
+          },
+          "id": 13,
+          "options": {
+            "colorMode": "value",
+            "graphMode": "area",
+            "justifyMode": "auto",
+            "orientation": "auto",
+            "reduceOptions": {
+              "calcs": [
+                "mean"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "textMode": "auto"
+          },
+          "pluginVersion": "7.2.0",
+          "targets": [
+            {
+              "expr": "hue_group_on{name=\"Living room\"}",
+              "instant": true,
+              "interval": "",
+              "legendFormat": "{{name}}",
+              "refId": "A"
+            }
+          ],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "Living Room",
+          "type": "stat"
+        },
+        {
+          "datasource": "Prometheus",
+          "description": "",
+          "fieldConfig": {
+            "defaults": {
+              "custom": {},
+              "mappings": [
+                {
+                  "from": "",
+                  "id": 0,
+                  "text": "OFF",
+                  "to": "",
+                  "type": 1,
+                  "value": "0"
+                },
+                {
+                  "from": "1",
+                  "id": 1,
+                  "text": "ON",
+                  "to": "5",
+                  "type": 2
+                }
+              ],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "rgb(162, 150, 155)",
+                    "value": null
+                  },
+                  {
+                    "color": "yellow",
+                    "value": 1
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 4,
+            "w": 4,
+            "x": 7,
+            "y": 14
+          },
+          "id": 21,
+          "options": {
+            "colorMode": "value",
+            "graphMode": "area",
+            "justifyMode": "auto",
+            "orientation": "auto",
+            "reduceOptions": {
+              "calcs": [
+                "mean"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "textMode": "auto"
+          },
+          "pluginVersion": "7.2.0",
+          "targets": [
+            {
+              "expr": "(hue_light_on{name=\"Hall\"} * hue_light_reachable{name=\"Hall\"})",
+              "instant": true,
+              "interval": "",
+              "legendFormat": "{{name}}",
+              "refId": "A"
+            }
+          ],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "Hall",
+          "type": "stat"
+        },
+        {
+          "aliasColors": {
+            "Actual": "red",
+            "Heating On": "super-light-green",
+            "Humidity": "green",
+            "Living Room": "orange",
+            "Outside": "blue",
+            "Target ": "orange",
+            "Thermostat ": "red"
+          },
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "Prometheus",
+          "decimals": 1,
+          "description": "",
+          "fieldConfig": {
+            "defaults": {
+              "custom": {}
+            },
+            "overrides": []
+          },
+          "fill": 1,
+          "fillGradient": 0,
+          "gridPos": {
+            "h": 4,
+            "w": 8,
+            "x": 11,
+            "y": 14
+          },
+          "hiddenSeries": false,
+          "id": 22,
+          "legend": {
+            "alignAsTable": false,
+            "avg": false,
+            "current": false,
+            "max": false,
+            "min": false,
+            "rightSide": false,
+            "show": true,
+            "total": false,
+            "values": false
+          },
+          "lines": true,
+          "linewidth": 1,
+          "nullPointMode": "null as zero",
+          "options": {
+            "alertThreshold": true
+          },
+          "percentage": false,
+          "pluginVersion": "7.2.0",
+          "pointradius": 2,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [
+            {
+              "$$hashKey": "object:264",
+              "alias": "Hue color lamp 1",
+              "hiddenSeries": true,
+              "hideTooltip": true,
+              "legend": false
+            },
+            {
+              "$$hashKey": "object:281",
+              "alias": "Hue color lamp 2",
+              "hiddenSeries": true,
+              "hideTooltip": true,
+              "legend": false
+            },
+            {
+              "$$hashKey": "object:448",
+              "alias": "Hue color lamp 3",
+              "hiddenSeries": true,
+              "hideTooltip": true,
+              "legend": false
+            }
+          ],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "expr": "((hue_light_brightness / 254) * hue_light_on * hue_light_reachable) ",
+              "instant": false,
+              "interval": "",
+              "legendFormat": "{{name}}",
+              "refId": "A"
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeRegions": [],
+          "timeShift": null,
+          "title": "Lights",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "$$hashKey": "object:214",
+              "decimals": 0,
+              "format": "percentunit",
+              "label": "",
+              "logBase": 1,
+              "max": "1",
+              "min": "0",
+              "show": true
+            },
+            {
+              "$$hashKey": "object:215",
+              "decimals": 0,
+              "format": "none",
+              "label": "",
+              "logBase": 1,
+              "max": "1",
+              "min": "0",
+              "show": true
             }
           ],
           "yaxis": {
@@ -560,7 +1189,7 @@ data:
         ]
       },
       "timezone": "",
-      "title": "Node stats",
-      "uid": "FTfaB9RRk",
+      "title": "Home stats",
+      "uid": "HKdv7xKMk",
       "version": 1
     }
