@@ -14,6 +14,7 @@ spec:
       customDnsEntries:
         - address=/.home.eadie.net/192.168.50.200
         - address=/pi.hole/192.168.50.200
+        - address=/files.home.eadie.net/192.168.50.202
     serviceTCP:
       loadBalancerIP: 192.168.50.201
       annotations:
