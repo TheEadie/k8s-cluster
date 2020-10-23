@@ -1,0 +1,20 @@
+---
+apiVersion: helm.fluxcd.io/v1
+kind: HelmRelease
+metadata:
+  name: plex
+  annotations:
+    fluxcd.io/automated: "true"
+spec:
+  releaseName: plex
+  chart:
+    repository: https://k8s-at-home.com/charts/
+    name: plex
+    version: 2.0.4
+  values:
+    claimToken: "claim-EHj_ou-SGGpY4ikivECq"
+    persistence:
+      config:
+        claimName: "plex-config-claim"
+      data:
+        claimName: "plex-data-claim"
