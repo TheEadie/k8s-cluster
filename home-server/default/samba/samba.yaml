@@ -41,7 +41,7 @@ spec:
       volumes:
         - name: share
           hostPath:
-            path: /home/eadie/data/share/
+            path: /mnt/data/share/
             type: Directory
 ---
 apiVersion: v1
