@@ -13,6 +13,7 @@ spec:
     dnsmasq:
       customDnsEntries:
         - address=/.home.eadie.net/192.168.50.200
+        - address=/.pi.eadie.net/192.168.50.230
         - address=/pi.hole/192.168.50.200
         - address=/files.home.eadie.net/192.168.50.202
         - address=/plex.home.eadie.net/192.168.50.203
