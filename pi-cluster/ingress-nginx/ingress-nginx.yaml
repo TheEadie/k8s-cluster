@@ -31,6 +31,4 @@ spec:
     controller:
       enabled: true
     defaultBackend:
-      enabled: true
-      image:
-        repository: k8s.gcr.io/defaultbackend-arm
+      enabled: false
