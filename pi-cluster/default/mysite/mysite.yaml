@@ -49,10 +49,12 @@ spec:
     - host: test.pi.eadie.net
       http:
         paths:
-          - backend:
+          - pathType: Prefix
+            path: /
+            backend:
               service:
                 name: mysite-nginx-service
                 port:
                   number: 80
-            path: /
-            pathType: Prefix
+            
+            
