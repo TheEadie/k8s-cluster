@@ -32,3 +32,5 @@ spec:
       enabled: true
     defaultBackend:
       enabled: false
+    admissionWebhooks:
+      enabled: false
