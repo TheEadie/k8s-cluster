@@ -29,4 +29,5 @@ data:
     </html>
 kind: ConfigMap
 metadata:
-  name: mysite-html
+  name: html
+  namespace: test-site
