@@ -6,15 +6,15 @@ kind: Secret
 metadata:
     creationTimestamp: null
     name: basic-auth
-    namespace: default
+    namespace: test-site
 sops:
     kms: []
     gcp_kms: []
     azure_kv: []
     hc_vault: []
     age: []
-    lastmodified: "2021-05-03T14:18:08Z"
-    mac: ENC[AES256_GCM,data:+upqgLhSX3orQ4ZxONbRv7XHrvLw0LwEcj4oWd3IkwiJb/4kExl/I6ZCPi9WUHLPiYtl2nXlRL0kuGTfy7T6Mlq5qKKKlJq2BM2eLyUNBbC8e1qFgKTHzdE1E5/DKM7NmMBpPXm3/QKhgO0Qkcs4jUNbqFV25wEuJBBH9ErO5lY=,iv:EArj2HseeAvVF2IkQ6jXlGsyUXYWMZE/gYI/xlAHlUA=,tag:Qa8knc5EsFobTUXYgm/+Yg==,type:str]
+    lastmodified: "2021-05-03T15:24:33Z"
+    mac: ENC[AES256_GCM,data:rCM6SWmgkxr9+o4rMOLpz7VMxgZgtmvND/SUdECnenoCXqs/14l2FCdAND+HcQGx4/oY5EDkivahafndu6PPkMhSKs5LVI0nWKMHAasty+H9tEKxRGIZ5PMu44oEB1T2HKLbTWZhQziv64xEVjhViAwhiQ5FtsGaGv0X3fhmJ0s=,iv:h/p4ZSNcxe7/a9BsyV0wu0WGOu/+baZJBRcbpZ9ci3s=,tag:NU/67waajI5hLctemkqKlg==,type:str]
     pgp:
         - created_at: "2021-05-03T14:18:02Z"
           enc: |
