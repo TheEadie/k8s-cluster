@@ -19,7 +19,61 @@ metadata:
   namespace: flux-system
 spec:
   interval: 10m0s
-  path: ./pi-cluster
+  path: ./pi-cluster/flux-system
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+  validation: client
+  decryption:
+    provider: sops
+    secretRef:
+      name: sops-gpg
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1beta1
+kind: Kustomization
+metadata:
+  name: mysite
+  namespace: flux-system
+spec:
+  interval: 10m0s
+  path: ./pi-cluster/default/mysite
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+  validation: client
+  decryption:
+    provider: sops
+    secretRef:
+      name: sops-gpg
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1beta1
+kind: Kustomization
+metadata:
+  name: ingress-nginx
+  namespace: flux-system
+spec:
+  interval: 10m0s
+  path: ./pi-cluster/ingress-nginx
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+  validation: client
+  decryption:
+    provider: sops
+    secretRef:
+      name: sops-gpg
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1beta1
+kind: Kustomization
+metadata:
+  name: metallb
+  namespace: flux-system
+spec:
+  interval: 10m0s
+  path: ./pi-cluster/metallb
   prune: true
   sourceRef:
     kind: GitRepository
