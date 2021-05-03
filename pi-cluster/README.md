@@ -99,3 +99,16 @@ export GITHUB_TOKEN=<token>
 export GITHUB_USER=TheEadie
 flux bootstrap github --owner=$GITHUB_USER --repository=k8s-cluster --branch=master --path=./pi-cluster --personal
 ```
+
+## Setup SOPS (Encrypted secrets)
+
+Following the guide here: https://fluxcd.io/docs/guides/mozilla-sops/
+
+To recover load the private key from 1Password back into the cluster.
+
+To encrypt new secrets run:
+
+```
+gpg --import ./pi-cluster/.sops.pub.asc
+sops --encrypt --in-place <filename>.yaml
+```
