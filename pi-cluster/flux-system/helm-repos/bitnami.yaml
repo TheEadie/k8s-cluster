@@ -5,5 +5,5 @@ metadata:
   name: bitnami
   namespace: flux-system
 spec:
-  interval: 24h
+  interval: 10m
   url: https://charts.bitnami.com/bitnami/

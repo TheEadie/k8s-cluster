@@ -13,7 +13,7 @@ spec:
         kind: HelmRepository
         name: bitnami
         namespace: flux-system
-  interval: 1h
+  interval: 5m
   releaseName: metallb
   values:
     controller:
