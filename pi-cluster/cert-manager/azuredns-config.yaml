@@ -1,0 +1,38 @@
+apiVersion: v1
+kind: Secret
+metadata:
+    name: azuredns-config
+    namespace: cert-manager
+stringData:
+    client-secret: ENC[AES256_GCM,data:lq28H9a7QbPkln248bh7YFIzbIbpSymPx0+Kdgc0ZPSKcg==,iv:ED0UtNQE8XxMLyroM9d2tSBZR5o76XAmiGnqe1AMOaE=,tag:oGAWVdbLIDwmltH25IC0gg==,type:str]
+sops:
+    kms: []
+    gcp_kms: []
+    azure_kv: []
+    hc_vault: []
+    age: []
+    lastmodified: "2021-05-04T20:51:37Z"
+    mac: ENC[AES256_GCM,data:IwiIRG5MCxoLADBpyoA18gqykIzneh7ZKCqaOlRmzCe6z3MnvoHYu+VdF+aJ7xIdqhVB0y3HUkMH9blDxHIX2J/tDy26LZpyiesPs8fbhDubD0ENwrxTzZ+AI76r5FQlvFxom2JXFV553oOKkymqWmTbtU+Hiq4qp4Gp3gI3rMY=,iv:XmTfDmlAGDd/jrcyz0XfrP2cqbyMm0kNrRODqUOnrQQ=,tag:4xPyR9UTqs5n0WExLc0erQ==,type:str]
+    pgp:
+        - created_at: "2021-05-04T20:51:36Z"
+          enc: |
+            -----BEGIN PGP MESSAGE-----
+
+            hQIMAx7w+dz/TE0ZAQ//ZzunL0N7P40QN9JxUGGldZ4zUn/JGn/U8FgP2tOenu87
+            n6WUQuXjujw2zfWtjSOMjTfVmsH/pe89JOnnYatLCXRiDRDcBSai44F9dMnKW3Pn
+            zvk906s7r/pwKeVKVyr3lSqWBpi7db6ZJneEb8b92qr1NF+qHPZid49ks0K2qSGm
+            pftkL6qmMqKzgNf6KDSODDQkrvZgbMXcPL1C5hSKxt+xB3OhUawdK52+b8+g/lfE
+            n82ngiSqGdQIomUIvOjJYmutWCuyNMJnfVO+IrAtrqUtQ8fJCovFei8NVw0mDxNj
+            E0GbvVnc6kfc56hkpYJ+mB+keU+6Cmxl1tLZGmnBQnIRbhJEML+Agqh0yp9S5OnE
+            dl+oJATQtzHvNLyR5J1Nm3x5z1/lWHXdMZAlvjf/6Wxe3F0Q3TeAyCS3K5Q72e97
+            Cy5wiNmcFkFDhB0LaGZ4mACoqS6iLPoYZVbxbleTG4TQzIq501C9MaWtlZDC1QfB
+            fWQ4K+il1X5rngapNrwhsH6Jm7DASSt11pdVugoddXQNyh6WjBPMYvL9udgftO5V
+            vFHu172ZWjKVQG6B/Cd/tCb5Feo3ksrlc8Aoy6+WOK+ibvnIzL8mzXSk/6+IfOLY
+            cQnXKkSFOD4bXbqamW0/ho0E1NrdwgYHoqTH4hMByBWi7searz0+j7YqeOss7WHS
+            XgEFtSAKnUHxZlbEKIhxQrqz1ZM/whxdSWGDrgNaHze6gPMbYw1RuX4KFbF5MoH6
+            lh/HbVOLYVQT+h66epFrevitJjoMVAmlEYt6pfEWFA+r6l3r+fhDtxxil5pGTYE=
+            =P1GX
+            -----END PGP MESSAGE-----
+          fp: D3D53D22793960761CDE144C0EF386217DAD811D
+    encrypted_regex: ^(data|stringData)$
+    version: 3.7.1
