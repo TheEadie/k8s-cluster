@@ -16,17 +16,14 @@ spec:
         app: test-site
     spec:
       containers:
-      - name: nginx
-        image: nginx
-        ports:
-        - containerPort: 80
-        volumeMounts:
-        - name: html-volume
-          mountPath: /usr/share/nginx/html
+        - name: nginx
+          image: nginx
+          ports:
+            - containerPort: 80
+          volumeMounts:
+            - name: html-volume
+              mountPath: /usr/share/nginx/html
       volumes:
-      - name: html-volume
-        configMap:
-          name: html
-
-            
-            
+        - name: html-volume
+          configMap:
+            name: html
