@@ -18,6 +18,8 @@ spec:
   values:
     controller:
       enabled: true
+      service:
+        loadBalancerIP: "${NGINX_IP}"
     defaultBackend:
       enabled: false
     admissionWebhooks:
