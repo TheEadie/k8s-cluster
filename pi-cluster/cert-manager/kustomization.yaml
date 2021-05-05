@@ -6,4 +6,5 @@ resources:
 - azuredns-config.yaml
 - issuer-staging.yaml
 - issuer-prod.yaml
+# renovate: registryUrl=https://charts.jetstack.io chart=cert-manager
 - https://github.com/jetstack/cert-manager/releases/download/v1.3.1/cert-manager.crds.yaml
