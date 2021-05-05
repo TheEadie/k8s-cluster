@@ -8,7 +8,7 @@ metadata:
   namespace: test-site
 spec:
   rules:
-    - host: pi.davideadie.dev
+    - host: test.pi.davideadie.dev
       http:
         paths:
           - pathType: Prefix
@@ -20,5 +20,5 @@ spec:
                   number: 80
   tls:
     - hosts:
-        - pi.davideadie.dev
+        - test.pi.davideadie.dev
       secretName: test-site-tls
