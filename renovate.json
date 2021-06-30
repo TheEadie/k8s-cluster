@@ -9,6 +9,7 @@
         "matchStrings": [
           "chart:\n *repository: .*?\n *name: (?<depName>.*?)\n *version: (?<currentValue>.*)\n",
           "registryUrl=(?<registryUrl>.*?)\n *chart: (?<depName>.*?)\n *version: (?<currentValue>.*)\n",
+          "registryUrl=(?<registryUrl>.*?)\n *tag: (?<depName>.*)-(?<currentValue>.*?)\n",
           "registryUrl=(?<registryUrl>.*?) chart=(?<depName>.*?)\n.*\\/(?<currentValue>.*?)\\/"
         ],
         "datasourceTemplate": "helm"
