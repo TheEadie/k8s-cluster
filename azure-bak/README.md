@@ -3,14 +3,10 @@
 ## Create the cluster
 
 ```
-az aks create -n myCluster \
-    --node-count 1 \
-    --node-vm-size Standard_B2s \
-    --load-balancer-sku basic \
-    --node-osdisk-size 32
-```
+az aks create -n azure-k8s -g K8sCluster -l uksouth --node-count 1 --node-vm-size Standard_B2s --load-balancer-sku basic --node-osdisk-size 32
 
-TODO - Get the Kubeconfig
+az aks get-credentials --resource-group K8sCluster --name azure-k8s
+```
 
 ## Setup Helm
 ```
