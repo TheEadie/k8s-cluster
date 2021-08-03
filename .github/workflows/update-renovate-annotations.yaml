@@ -16,7 +16,12 @@ jobs:
         token: ${{ secrets.GITHUB_TOKEN }}
         fetch-depth: 1
 
-    - name: Renovate Helm Releases
+    - name: Renovate Helm Releases (Pi)
+      uses: k8s-at-home/renovate-helm-releases@v1
+      with:
+        cluster-path: "./pi-cluster"
+    
+    - name: Renovate Helm Releases (Azure)
       uses: k8s-at-home/renovate-helm-releases@v1
       with:
         cluster-path: "./pi-cluster"
