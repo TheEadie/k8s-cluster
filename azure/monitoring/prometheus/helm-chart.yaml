@@ -20,6 +20,10 @@ spec:
   values:
     prometheusOperator:
       createCustomResource: false
+      admissionWebhooks:
+        enabled: false
+        patch:
+          enabled: false
     alertmanager:
       enabled: false
     nodeExporter:
