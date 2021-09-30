@@ -6,4 +6,4 @@ resources:
 - issuer-staging.yaml
 - issuer-prod.yaml
 # renovate: registryUrl=https://charts.jetstack.io chart=cert-manager
-- https://github.com/jetstack/cert-manager/releases/download/v1.5.3/cert-manager.crds.yaml
+- https://github.com/jetstack/cert-manager/releases/download/v1.5.4/cert-manager.crds.yaml
