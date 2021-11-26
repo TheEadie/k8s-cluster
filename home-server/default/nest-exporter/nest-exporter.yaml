@@ -20,7 +20,8 @@ spec:
     spec:
       containers:
       - name: nest-exporter
-        image: theeadie/nest-exporter
+        image: theeadie/nest-exporter:latest
+        imagePullPolicy: Always
         ports:
         - containerPort: 80
         env:
