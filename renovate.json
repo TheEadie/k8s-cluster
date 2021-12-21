@@ -80,6 +80,14 @@
           "metallb"
         ],
         "registryUrls": ["https://charts.bitnami.com/bitnami/"]
+      },
+      {
+        "datasources": ["helm"],
+        "managers": ["regex"],
+        "packageNames": [
+          "jellyfin"
+        ],
+        "registryUrls": ["https://k8s-at-home.com/charts/"]
       }
     ],
     "masterIssue": true
