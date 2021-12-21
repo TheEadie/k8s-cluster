@@ -10,7 +10,7 @@ spec:
   chart:
     repository: https://k8s-at-home.com/charts/
     name: jellyfin
-    version: 5.1.0
+    version: 9.2.0
   values:
     persistence:
       config:
