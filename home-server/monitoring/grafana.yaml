@@ -8,7 +8,7 @@ spec:
   chart:
     repository: https://grafana.github.io/helm-charts/
     name: grafana
-    version: 6.20.3
+    version: 6.20.4
   values:
     sidecar:
       datasources:
