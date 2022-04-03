@@ -24,3 +24,9 @@ spec:
       annotations:
         metallb.universe.tf/allow-shared-ip: pihole-svc
       type: LoadBalancer
+
+    serviceDhcp:
+      loadBalancerIP: ${DNS_IP}
+      annotations:
+        metallb.universe.tf/allow-shared-ip: pihole-svc
+      type: LoadBalancer
