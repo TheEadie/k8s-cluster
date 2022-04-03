@@ -14,6 +14,6 @@ spec:
             path: /
             backend:
               service:
-                name: pihole-dns-tcp
+                name: pihole-web
                 port:
                   number: 80
