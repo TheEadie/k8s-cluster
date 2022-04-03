@@ -18,15 +18,13 @@ spec:
     dnsmasq:
       customDnsEntries:
         - address=/.${SECRET_DOMAIN}/${NGINX_IP}
-    serviceTCP:
+    serviceWeb:
       loadBalancerIP: ${DNS_IP}
       annotations:
-        metallb.universe.tf/address-pool: default
         metallb.universe.tf/allow-shared-ip: pihole-svc
       type: LoadBalancer
-    serviceUDP:
+    serviceDns:
       loadBalancerIP: ${DNS_IP}
       annotations:
-        metallb.universe.tf/address-pool: default
         metallb.universe.tf/allow-shared-ip: pihole-svc
       type: LoadBalancer
