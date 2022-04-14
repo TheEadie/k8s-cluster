@@ -1,0 +1,26 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: samba
+  name: samba
+  namespace: samba
+  annotations:
+    metallb.universe.tf/allow-shared-ip: "default"
+spec:
+  ports:
+  - name: one
+    port: 139
+    protocol: TCP
+    targetPort: 139
+  - name: two
+    port: 445
+    protocol: TCP
+    targetPort: 445
+  selector:
+    app: samba
+  type: LoadBalancer
+  loadBalancerIP: ${SAMBA_IP}
+status:
+  loadBalancer: {}

@@ -1,0 +1,42 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: samba
+  namespace: samba
+  labels:
+    app: samba
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: samba
+  template:
+    metadata:
+      labels:
+        app: samba
+    spec:
+      containers:
+      - image: dperson/samba
+        name: samba-server
+        resources:
+          limits:
+            cpu: 200m
+            memory: 500Mi
+        args:
+          # disable recycle bin
+          - -r
+          - -s
+          - "share;/share;yes;no;;;;;"
+        ports:
+          - name: one
+            containerPort: 139
+          - name: two
+            containerPort: 445
+        volumeMounts:
+          - name: share
+            mountPath: /share
+      volumes:
+        - name: share
+          persistentVolumeClaim:
+            claimName: samba-share
