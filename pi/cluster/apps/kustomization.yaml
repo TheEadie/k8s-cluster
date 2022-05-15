@@ -6,3 +6,4 @@ resources:
   - pihole
   - samba
   - jellyfin
+  - monitoring
