@@ -19,6 +19,8 @@ spec:
   values:
     prometheusOperator:
       createCustomResource: false
+      tls:
+        enabled: false
       admissionWebhooks:
         enabled: false
         patch:
