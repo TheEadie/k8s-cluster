@@ -6,3 +6,4 @@ resources:
   - pihole.yaml
   - k8s-at-home.yaml
   - prometheus-community-charts.yaml
+  - grafana.yaml
