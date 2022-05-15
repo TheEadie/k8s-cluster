@@ -5,3 +5,4 @@ resources:
   - pihole.yaml
   - samba.yaml
   - jellyfin.yaml
+  - monitoring.yaml

@@ -1,0 +1,54 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: prometheus
+  namespace: monitoring
+spec:
+  interval: 5m
+  chart:
+    spec:
+      chart: kube-prometheus-stack
+      version: 35.2.0
+      sourceRef:
+        kind: HelmRepository
+        name: prometheus-community-charts
+        namespace: flux-system
+      interval: 5m
+  timeout: 40m
+  values:
+    prometheusOperator:
+      createCustomResource: false
+      admissionWebhooks:
+        enabled: false
+        patch:
+          enabled: false
+    alertmanager:
+      enabled: false
+    nodeExporter:
+      enabled: true
+      serviceMonitor:
+        relabelings:
+        - action: replace
+          regex: (.*)
+          replacement: $1
+          sourceLabels:
+          - __meta_kubernetes_pod_node_name
+          targetLabel: kubernetes_node
+    grafana:
+      enabled: false
+    kubelet:
+      enabled: true
+    kubeApiServer:
+      enabled: true
+    kubeControllerManager:
+      enabled: false
+    kubeScheduler:
+      enabled: false
+    kubeProxy:
+      enabled: false
+    kubeEtcd:
+      enabled: false
+    prometheus:
+      prometheusSpec:
+        retention: 30d
