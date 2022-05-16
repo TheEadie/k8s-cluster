@@ -17,17 +17,27 @@ data:
             "hide": true,
             "iconColor": "rgba(0, 211, 255, 1)",
             "name": "Annotations & Alerts",
+            "target": {
+              "limit": 100,
+              "matchAny": false,
+              "tags": [],
+              "type": "dashboard"
+            },
             "type": "dashboard"
           }
         ]
       },
       "editable": true,
-      "gnetId": null,
+      "fiscalYearStartMonth": 0,
       "graphTooltip": 0,
       "links": [],
+      "liveNow": false,
       "panels": [
         {
-          "datasource": "Prometheus",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
           "fieldConfig": {
             "defaults": {
               "decimals": 0,
@@ -71,7 +81,7 @@ data:
             "showThresholdMarkers": true,
             "text": {}
           },
-          "pluginVersion": "8.0.5",
+          "pluginVersion": "8.4.2",
           "targets": [
             {
               "expr": "1 - (avg (irate(node_cpu_seconds_total{mode=\"idle\"}[5m])))",
@@ -82,14 +92,15 @@ data:
               "refId": "A"
             }
           ],
-          "timeFrom": null,
-          "timeShift": null,
           "title": "Cluster CPU Usage",
           "transparent": true,
           "type": "gauge"
         },
         {
-          "datasource": "Prometheus",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
           "fieldConfig": {
             "defaults": {
               "decimals": 0,
@@ -133,7 +144,7 @@ data:
             "showThresholdMarkers": true,
             "text": {}
           },
-          "pluginVersion": "8.0.5",
+          "pluginVersion": "8.4.2",
           "targets": [
             {
               "expr": "(Sum(node_memory_MemTotal_bytes) - Sum(node_memory_MemAvailable_bytes)) / Sum(node_memory_MemTotal_bytes)",
@@ -142,14 +153,15 @@ data:
               "refId": "A"
             }
           ],
-          "timeFrom": null,
-          "timeShift": null,
           "title": "Cluster Memory Usage",
           "transparent": true,
           "type": "gauge"
         },
         {
-          "datasource": "Prometheus",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
           "fieldConfig": {
             "defaults": {
               "decimals": 0,
@@ -193,25 +205,29 @@ data:
             "showUnfilled": true,
             "text": {}
           },
-          "pluginVersion": "8.0.5",
+          "pluginVersion": "8.4.2",
           "targets": [
             {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "PBFA97CFB590B2093"
+              },
               "exemplar": true,
-              "expr": "(sum by (kubernetes_node, mountpoint) (1 - node_filesystem_avail_bytes{mountpoint=~\"/|/mnt\"} / node_filesystem_size_bytes{mountpoint=~\"/|/mnt\"}))",
+              "expr": "(sum by (kubernetes_node, mountpoint) (1 - node_filesystem_avail_bytes{mountpoint=~\"/|/mnt/usb\"} / node_filesystem_size_bytes{mountpoint=~\"/|/mnt/usb\"}))",
               "interval": "",
               "legendFormat": "{{kubernetes_node}} - {{mountpoint}}",
               "refId": "A"
             }
           ],
-          "timeFrom": null,
-          "timeShift": null,
           "title": "Disk Usage",
           "transparent": true,
           "type": "bargauge"
         },
         {
-          "cacheTimeout": null,
-          "datasource": "Prometheus",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
           "fieldConfig": {
             "defaults": {
               "links": [],
@@ -258,7 +274,7 @@ data:
             "text": {},
             "textMode": "auto"
           },
-          "pluginVersion": "8.0.5",
+          "pluginVersion": "8.4.2",
           "targets": [
             {
               "expr": "(avg by (kubernetes_node) (1 - irate(node_cpu_seconds_total{mode=\"idle\"}[5m])))",
@@ -268,14 +284,15 @@ data:
               "refId": "A"
             }
           ],
-          "timeFrom": null,
-          "timeShift": null,
           "title": "CPU Usage",
           "transparent": true,
           "type": "stat"
         },
         {
-          "datasource": "Prometheus",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
           "fieldConfig": {
             "defaults": {
               "decimals": 0,
@@ -321,7 +338,7 @@ data:
             "text": {},
             "textMode": "auto"
           },
-          "pluginVersion": "8.0.5",
+          "pluginVersion": "8.4.2",
           "targets": [
             {
               "expr": "(sum by (kubernetes_node) (1 - node_memory_MemAvailable_bytes / node_memory_MemTotal_bytes))",
@@ -331,14 +348,15 @@ data:
               "refId": "A"
             }
           ],
-          "timeFrom": null,
-          "timeShift": null,
           "title": "Memory Usage",
           "transparent": true,
           "type": "stat"
         },
         {
-          "datasource": "Prometheus",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
           "fieldConfig": {
             "defaults": {
               "color": {
@@ -406,7 +424,8 @@ data:
               "placement": "bottom"
             },
             "tooltip": {
-              "mode": "single"
+              "mode": "single",
+              "sort": "none"
             }
           },
           "pluginVersion": "8.0.5",
@@ -428,14 +447,15 @@ data:
               "refId": "B"
             }
           ],
-          "timeFrom": null,
-          "timeShift": null,
           "title": "Disk IO",
           "transparent": true,
           "type": "timeseries"
         },
         {
-          "datasource": "Prometheus",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
           "fieldConfig": {
             "defaults": {
               "color": {
@@ -505,7 +525,8 @@ data:
               "placement": "bottom"
             },
             "tooltip": {
-              "mode": "single"
+              "mode": "single",
+              "sort": "none"
             }
           },
           "pluginVersion": "8.0.5",
@@ -518,14 +539,15 @@ data:
               "refId": "A"
             }
           ],
-          "timeFrom": null,
-          "timeShift": null,
           "title": "CPU Usage Details",
           "transparent": true,
           "type": "timeseries"
         },
         {
-          "datasource": "Prometheus",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
           "fieldConfig": {
             "defaults": {
               "color": {
@@ -593,7 +615,8 @@ data:
               "placement": "bottom"
             },
             "tooltip": {
-              "mode": "single"
+              "mode": "single",
+              "sort": "none"
             }
           },
           "pluginVersion": "8.0.5",
@@ -605,14 +628,15 @@ data:
               "refId": "A"
             }
           ],
-          "timeFrom": null,
-          "timeShift": null,
           "title": "Memory Usage Details",
           "transparent": true,
           "type": "timeseries"
         },
         {
-          "datasource": "Prometheus",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
           "fieldConfig": {
             "defaults": {
               "color": {
@@ -680,7 +704,8 @@ data:
               "placement": "bottom"
             },
             "tooltip": {
-              "mode": "single"
+              "mode": "single",
+              "sort": "none"
             }
           },
           "pluginVersion": "8.0.5",
@@ -702,15 +727,13 @@ data:
               "refId": "B"
             }
           ],
-          "timeFrom": null,
-          "timeShift": null,
           "title": "Network Usage",
           "transparent": true,
           "type": "timeseries"
         }
       ],
       "refresh": "",
-      "schemaVersion": 30,
+      "schemaVersion": 35,
       "style": "dark",
       "tags": [],
       "templating": {
@@ -737,5 +760,6 @@ data:
       "timezone": "",
       "title": "Node stats",
       "uid": "FTfaB9RRk",
-      "version": 1
+      "version": 1,
+      "weekStart": ""
     }
