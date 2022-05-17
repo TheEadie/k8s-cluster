@@ -4,6 +4,8 @@ kind: ServiceMonitor
 metadata:
   name: nest-exporter
   namespace: nest-exporter
+  labels:
+    app: nest-exporter
 spec:
   selector:
     matchLabels:
