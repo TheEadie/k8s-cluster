@@ -10,3 +10,4 @@ spec:
       app: nest-exporter
   endpoints:
   - port: metrics
+    path: /metrics
