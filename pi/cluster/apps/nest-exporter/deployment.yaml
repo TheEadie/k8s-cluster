@@ -7,7 +7,7 @@ metadata:
   labels:
     app: nest-exporter
 spec:
-  replicas: 0
+  replicas: 1
   selector:
     matchLabels:
       app: nest-exporter
@@ -25,10 +25,22 @@ spec:
           containerPort: 80
         env:
         - name: NestExporter_NestApi__ClientId
-          value: '${NEST_EXPORTER_CLIENT_ID}'
+          valueFrom:
+            secretKeyRef:
+              name: nest-exporter
+              key: NestApi__ClientId
         - name: NestExporter_NestApi__ClientSecret
-          value: '${NEST_EXPORTER_CLIENT_SECRET}'
+          valueFrom:
+            secretKeyRef:
+              name: nest-exporter
+              key: NestApi__ClientSecret
         - name: NestExporter_NestApi__ProjectId
-          value: '${NEST_EXPORTER_PROJECT_ID}'
+          valueFrom:
+            secretKeyRef:
+              name: nest-exporter
+              key: NestApi__ProjectId
         - name: NestExporter_NestApi__RefreshToken
-          value: '${NEST_EXPORTER_REFRESH_TOKEN}'
+          valueFrom:
+            secretKeyRef:
+              name: nest-exporter
+              key: NestApi__RefreshToken
