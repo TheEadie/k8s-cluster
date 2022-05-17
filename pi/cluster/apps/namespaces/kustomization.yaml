@@ -6,3 +6,4 @@ resources:
   - samba.yaml
   - jellyfin.yaml
   - monitoring.yaml
+  - nest-exporter.yaml

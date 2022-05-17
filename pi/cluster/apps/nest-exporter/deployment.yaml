@@ -1,0 +1,34 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nest-exporter
+  namespace: nest-exporter
+  labels:
+    app: nest-exporter
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nest-exporter
+  template:
+    metadata:
+      labels:
+        app: nest-exporter
+    spec:
+      containers:
+      - name: nest-exporter
+        image: theeadie/nest-exporter:latest@sha256:87a369ba46ec5df87c7ef19e1574d70bb8f066ad289154e80c314fc49cd00350
+        imagePullPolicy: Always
+        ports:
+        - name: metrics
+          containerPort: 80
+        env:
+        - name: NestExporter_NestApi__ClientId
+          value: ${NEST_EXPORTER_CLIENT_ID}
+        - name: NestExporter_NestApi__ClientSecret
+          value: ${NEST_EXPORTER_CLIENT_SECRET}
+        - name: NestExporter_NestApi__ProjectId
+          value: ${NEST_EXPORTER_PROJECT_ID}
+        - name: NestExporter_NestApi__RefreshToken
+          value: ${NEST_EXPORTER_REFRESH_TOKEN}

@@ -1,0 +1,12 @@
+---
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: nest-exporter
+  namespace: nest-exporter
+spec:
+  selector:
+    matchLabels:
+      app: nest-exporter
+  endpoints:
+  - port: metrics
