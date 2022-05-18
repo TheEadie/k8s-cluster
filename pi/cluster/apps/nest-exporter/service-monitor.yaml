@@ -7,6 +7,9 @@ metadata:
   labels:
     app: nest-exporter
 spec:
+  namespaceSelector:
+    matchNames:
+    - nest-exporter
   selector:
     matchLabels:
       app: nest-exporter
