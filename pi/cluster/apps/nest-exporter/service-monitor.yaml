@@ -14,5 +14,5 @@ spec:
     matchLabels:
       app: nest-exporter
   endpoints:
-  - port: metrics
+  - port: http
     path: /metrics
