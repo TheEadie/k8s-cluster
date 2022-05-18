@@ -8,3 +8,4 @@ resources:
   - jellyfin
   - monitoring
   - nest-exporter
+  - hue-exporter

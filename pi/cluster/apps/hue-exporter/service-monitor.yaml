@@ -1,0 +1,18 @@
+---
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: hue-exporter
+  namespace: hue-exporter
+  labels:
+    app: hue-exporter
+spec:
+  namespaceSelector:
+    matchNames:
+    - hue-exporter
+  selector:
+    matchLabels:
+      app: hue-exporter
+  endpoints:
+  - port: http
+    path: /metrics
