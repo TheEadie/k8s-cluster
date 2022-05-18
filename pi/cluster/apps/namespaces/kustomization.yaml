@@ -7,3 +7,4 @@ resources:
   - jellyfin.yaml
   - monitoring.yaml
   - nest-exporter.yaml
+  - hue-exporter.yaml
