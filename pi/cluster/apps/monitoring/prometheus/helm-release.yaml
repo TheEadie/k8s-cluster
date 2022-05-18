@@ -66,3 +66,13 @@ spec:
         podMonitorSelectorNilUsesHelmValues: false
         probeSelectorNilUsesHelmValues: false
         retention: 30d
+        storageSpec:
+          volumeClaimTemplate:
+            spec:
+              volumeName: prometheus-config
+              accessModes: 
+                - "ReadWriteMany"
+              storageClassName: ""
+              resources:
+                requests:
+                  storage: 10Gi
