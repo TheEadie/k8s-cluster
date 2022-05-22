@@ -22,3 +22,9 @@ spec:
       media:
         enabled: true
         existingClaim: "jellyfin-media"
+    resources:
+      requests:
+        cpu: 200m
+        memory: 1028Mi
+      limits:
+        memory: 4096Mi
