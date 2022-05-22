@@ -4,3 +4,4 @@ resources:
   - namespaces
   - metallb-system
   - ingress-nginx
+  - cert-manager
