@@ -19,89 +19,31 @@
     },
     "regexManagers": [
       {
-        "fileMatch": ["\\.yaml$"],
+        "description": "Process various dependencies",
+        "fileMatch": [
+          "\\.ya?ml$"
+        ],
         "matchStrings": [
-          "chart:\n *repository: .*?\n *name: (?<depName>.*?)\n *version: (?<currentValue>.*)\n",
-          "registryUrl=(?<registryUrl>.*?)\n *chart: (?<depName>.*?)\n *version: (?<currentValue>.*)\n",
-          "registryUrl=(?<registryUrl>.*?)\n *tag: (?<depName>.*)-(?<currentValue>.*?)\n",
-          "registryUrl=(?<registryUrl>.*?) chart=(?<depName>.*?)\n.*\\/(?<currentValue>.*?)\\/"
+          "datasource=(?<datasource>\\S+) depName=(?<depName>\\S+)( versioning=(?<versioning>\\S+))?\n.*?\"(?<currentValue>.*)\"\n"
+        ],
+        "datasourceTemplate": "{{#if datasource}}{{{datasource}}}{{else}}github-releases{{/if}}",
+        "versioningTemplate": "{{#if versioning}}{{{versioning}}}{{else}}semver{{/if}}"
+      },
+      {
+        "description": "Process GitRepository CRD dependencies - Chart and Github Release are the same version",
+        "fileMatch": ["pi/cluster/crds/.+\\.ya?ml$"],
+        "matchStrings": [
+          "registryUrl=(?<registryUrl>\\S+) chart=(?<depName>\\S+)\n.*?(?<currentValue>[^-\\s]*)\n"
         ],
         "datasourceTemplate": "helm"
       },
       {
-        "fileMatch": ["\\.yaml$"],
+        "description": "Process Kustomization CRD dependencies - Image and Github Release are the same version",
+        "fileMatch": ["pi/cluster/crds/.+\\.ya?ml$"],
         "matchStrings": [
-          "chart:\n *git: git@github.com:(?<depName>.*?).git\n *ref: (?<currentValue>.*?)\n"
+          "datasource=(?<datasource>\\S+) image=(?<depName>\\S+)\n.*?-\\s(.*?)\/(?<currentValue>[^/]+)\/[^/]+\n"
         ],
-        "datasourceTemplate": "github-tags"
-      }
-    ],
-    "packageRules": [
-      {
-        "datasources": ["helm"],
-        "managers": ["regex"],
-        "packageNames": [
-          "loki",
-          "promtail"
-        ],
-        "registryUrls": ["https://grafana.github.io/loki/charts/"]
-      },
-      {
-        "datasources": ["helm"],
-        "managers": ["regex"],
-        "packageNames": [
-          "blocky"
-        ],
-        "registryUrls": ["https://billimek.com/billimek-charts/"]
-      },
-      {
-        "datasources": ["helm"],
-        "managers": ["regex"],
-        "packageNames": [
-          "flux",
-          "helm-operator"
-        ],
-        "registryUrls": ["https://charts.fluxcd.io/"]
-      },
-      {
-        "datasources": ["helm"],
-        "managers": ["regex"],
-        "packageNames": [
-          "ingress-nginx"
-        ],
-        "registryUrls": ["https://kubernetes.github.io/ingress-nginx/"]
-      },
-      {
-        "datasources": ["helm"],
-        "managers": ["regex"],
-        "packageNames": [
-          "grafana"
-        ],
-        "registryUrls": ["https://grafana.github.io/helm-charts/"]
-      },
-      {
-        "datasources": ["helm"],
-        "managers": ["regex"],
-        "packageNames": [
-          "prometheus"
-        ],
-        "registryUrls": ["https://prometheus-community.github.io/helm-charts/"]
-      },
-      {
-        "datasources": ["helm"],
-        "managers": ["regex"],
-        "packageNames": [
-          "metallb"
-        ],
-        "registryUrls": ["https://charts.bitnami.com/bitnami/"]
-      },
-      {
-        "datasources": ["helm"],
-        "managers": ["regex"],
-        "packageNames": [
-          "jellyfin"
-        ],
-        "registryUrls": ["https://k8s-at-home.com/charts/"]
+        "datasourceTemplate": "docker"
       }
     ],
     "masterIssue": true
