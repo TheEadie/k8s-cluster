@@ -54,12 +54,6 @@ spec:
     kubeEtcd:
       enabled: false
     prometheus:
-      ingress:
-        enabled: true
-        pathType: Prefix
-        ingressClassName: "nginx"
-        hosts:
-          - &host "prometheus.${SECRET_DOMAIN}"
       prometheusSpec:
         ruleSelectorNilUsesHelmValues: false
         serviceMonitorSelectorNilUsesHelmValues: false
