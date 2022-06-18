@@ -59,6 +59,14 @@ Add the following line to `/etc/rc.local` before the return
 ip link set wlan0 promisc on
 ```
 
+Disable Swap:
+```
+$ sudo dphys-swapfile swapoff
+$ sudo dphys-swapfile uninstall
+$ sudo update-rc.d dphys-swapfile remove
+$ sudo apt purge dphys-swapfile
+```
+
 Update:
 ```
 sudo apt-get update && sudo apt-get upgrade -y
