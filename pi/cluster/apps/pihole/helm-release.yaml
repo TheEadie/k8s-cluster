@@ -15,12 +15,13 @@ spec:
         name: pihole
         namespace: flux-system
   values:
+    image:
+      repository: "pihole/pihole"
+      tag: "2022.05"
+
     dnsmasq:
       customDnsEntries:
         - address=/.${SECRET_DOMAIN}/${NGINX_IP}
-
-    podDnsConfig:
-      enabled: false
 
     serviceDns:
       loadBalancerIP: ${DNS_IP}
