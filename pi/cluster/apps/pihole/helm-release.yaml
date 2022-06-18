@@ -19,6 +19,9 @@ spec:
       customDnsEntries:
         - address=/.${SECRET_DOMAIN}/${NGINX_IP}
 
+    podDnsConfig:
+      enabled: false
+
     serviceDns:
       loadBalancerIP: ${DNS_IP}
       annotations:
