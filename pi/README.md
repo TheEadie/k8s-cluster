@@ -30,6 +30,8 @@ network={
 ```
 ssh-copy-id pi@192.168.50.11
 ssh-copy-id pi@192.168.50.12
+ssh-copy-id pi@192.168.50.13
+ssh-copy-id pi@192.168.50.14
 ```
 
 ### Config the Pi - Once per node
@@ -91,8 +93,10 @@ ssh pi@192.168.50.12
 curl -sLS https://get.k3sup.dev | sh
 sudo install k3sup /usr/local/bin/
 
-k3sup install --ip 192.168.50.11 --user pi --k3s-channel latest --k3s-extra-args '--no-deploy traefik --no-deploy servicelb' --context pi --merge --local-path .kube/config
-k3sup join --ip 192.168.50.12 --server-ip 192.168.50.11 --user pi --k3s-channel latest
+k3sup install --ip 192.168.50.12 --user pi --k3s-channel latest --k3s-extra-args '--disable traefik --disable servicelb' --context pi --merge --local-path .kube/config --ssh-key ~/.ssh/id_ed25519
+k3sup join --ip 192.168.50.11 --server-ip 192.168.50.12 --user pi --k3s-channel latest --ssh-key ~/.ssh/id_ed25519
+k3sup join --ip 192.168.50.13 --server-ip 192.168.50.12 --user pi --k3s-channel latest --ssh-key ~/.ssh/id_ed25519
+k3sup join --ip 192.168.50.14 --server-ip 192.168.50.12 --user pi --k3s-channel latest --ssh-key ~/.ssh/id_ed25519
 ```
 
 ## Install Flux v2
