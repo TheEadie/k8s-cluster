@@ -1,0 +1,16 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  namespace: flux-system
+  name: cluster-settings
+data:
+  # IPs
+  METALLB_ARP_RANGE: "192.168.50.230-192.168.50.254"
+  NGINX_IP: "192.168.50.230"
+  DNS_IP: "192.168.50.231"
+  SAMBA_IP: "192.168.50.232"
+
+  # NFS Share
+  NFS_SERVER_IP: "192.168.50.11"
+  NFS_BASE_PATH: "/mnt/usb"
