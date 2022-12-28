@@ -9,7 +9,7 @@ spec:
   chart:
     spec:
       chart: pihole
-      version: 2.9.0
+      version: 2.11.0
       sourceRef:
         kind: HelmRepository
         name: pihole
@@ -17,7 +17,7 @@ spec:
   values:
     image:
       repository: "pihole/pihole"
-      tag: "2022.05"
+      tag: "2022.12"
 
     dnsmasq:
       customDnsEntries:
