@@ -3,7 +3,6 @@ kind: Kustomization
 resources:
   - test-site.yaml
   - pihole.yaml
-  - samba.yaml
   - jellyfin.yaml
   - monitoring.yaml
   - nest-exporter.yaml
