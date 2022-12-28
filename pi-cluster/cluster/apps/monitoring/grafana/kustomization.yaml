@@ -1,7 +1,7 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
-  - namespaces
-  - test-site
-  - jellyfin
-  - monitoring
+  - helm-release.yaml
+  - ingress.yaml
+  - dashboards
+  - datasources
