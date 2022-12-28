@@ -12,5 +12,5 @@ data:
   SAMBA_IP: "192.168.50.232"
 
   # NFS Share
-  NFS_SERVER_IP: "192.168.50.11"
-  NFS_BASE_PATH: "/mnt/usb"
+  NFS_SERVER_IP: "192.168.50.10"
+  NFS_BASE_PATH: "/mnt"
