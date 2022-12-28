@@ -9,7 +9,7 @@ spec:
   chart:
     spec:
       chart: kube-prometheus-stack
-      version: 36.2.1
+      version: 42.1.1
       sourceRef:
         kind: HelmRepository
         name: prometheus-community-charts
@@ -33,12 +33,12 @@ spec:
       prometheus:
         monitor:
           relabelings:
-          - action: replace
-            regex: (.*)
-            replacement: $1
-            sourceLabels:
-            - __meta_kubernetes_pod_node_name
-            targetLabel: kubernetes_node
+            - action: replace
+              regex: (.*)
+              replacement: $1
+              sourceLabels:
+                - __meta_kubernetes_pod_node_name
+              targetLabel: kubernetes_node
     grafana:
       enabled: false
     kubelet:
@@ -69,7 +69,7 @@ spec:
           volumeClaimTemplate:
             spec:
               volumeName: prometheus-config
-              accessModes: 
+              accessModes:
                 - "ReadWriteMany"
               storageClassName: ""
               resources:
