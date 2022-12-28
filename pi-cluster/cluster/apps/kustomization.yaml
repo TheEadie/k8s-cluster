@@ -5,3 +5,5 @@ resources:
   - test-site
   - jellyfin
   - monitoring
+  - hue-exporter
+  - nest-exporter

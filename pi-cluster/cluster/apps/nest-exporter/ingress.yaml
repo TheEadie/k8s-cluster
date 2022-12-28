@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    cert-manager.io/cluster-issuer: "letsencrypt-production"
+  name: nest-exporter
+  namespace: nest-exporter
+spec:
+  rules:
+    - host: "nest-exporter.${SECRET_DOMAIN}"
+      http:
+        paths:
+          - pathType: Prefix
+            path: /
+            backend:
+              service:
+                name: nest-exporter
+                port:
+                  number: 80
+  tls:
+    - hosts:
+        - nest-exporter.${SECRET_DOMAIN}
+      secretName: nest-exporter-tls
