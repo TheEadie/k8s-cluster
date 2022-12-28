@@ -1,4 +1,5 @@
 # k8s-cluster
+
 Config for the Raspberry PI cluster
 
 ## Prep the Pi
@@ -46,11 +47,13 @@ Update the following:
 
 Enable containers:
 Edit `/boot/cmdline.txt` and add the following to the end of the line:
+
 ```
 cgroup_enable=cpuset cgroup_memory=1 cgroup_enable=memory
 ```
 
 Fix networking:
+
 ```
 sudo apt remove iptables -y && sudo apt install nftables
 ```
@@ -62,6 +65,7 @@ ip link set wlan0 promisc on
 ```
 
 Disable Swap:
+
 ```
 sudo dphys-swapfile swapoff
 sudo dphys-swapfile uninstall
@@ -70,6 +74,7 @@ sudo apt purge dphys-swapfile
 ```
 
 Update:
+
 ```
 sudo apt-get update && sudo apt-get upgrade -y
 Sudo reboot
@@ -100,8 +105,9 @@ k3sup join --ip 192.168.50.14 --server-ip 192.168.50.12 --user pi --k3s-channel 
 ```
 
 ## Install Flux v2
+
 ```
-curl -s https://fluxcd.io/install.sh | sudo bash 
+curl -s https://fluxcd.io/install.sh | sudo bash
 ```
 
 Generate a PAT token for GitHub
@@ -116,7 +122,7 @@ flux bootstrap github --owner=$GITHUB_USER --repository=k8s-cluster --branch=mas
 
 Following the guide here: https://fluxcd.io/docs/guides/mozilla-sops/
 
-To recover load the private key from 1Password back into the cluster.
+To recover load the private key from Keeper back into the cluster.
 
 To encrypt new secrets run:
 
