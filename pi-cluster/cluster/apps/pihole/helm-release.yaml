@@ -17,7 +17,7 @@ spec:
   values:
     image:
       repository: "pihole/pihole"
-      tag: "2022.12"
+      tag: "2023.1"
 
     dnsmasq:
       customDnsEntries:
