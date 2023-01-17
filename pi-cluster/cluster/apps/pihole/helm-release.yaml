@@ -15,10 +15,6 @@ spec:
         name: pihole
         namespace: flux-system
   values:
-    image:
-      repository: "pihole/pihole"
-      tag: "2023.01"
-
     dnsmasq:
       customDnsEntries:
         - address=/.${SECRET_DOMAIN}/${NGINX_IP}
