@@ -48,8 +48,14 @@ spec:
               valueFrom:
                 secretKeyRef:
                   name: nest-exporter
-                  key: OpenWeather__ApiKey
+                  key: OpenWeatherApi__ApiKey
             - name: NestExporter_OpenWeatherApi__Longitude
-              value: ${NEST_EXPORTER_OPENWEATHER_LONGITUDE}
+              valueFrom:
+                secretKeyRef:
+                  name: nest-exporter
+                  key: OpenWeatherApi__Longitude
             - name: NestExporter_OpenWeatherApi__Latitude
-              value: ${NEST_EXPORTER_OPENWEATHER_LATITUDE}
+              valueFrom:
+                secretKeyRef:
+                  name: nest-exporter
+                  key: OpenWeatherApi__Latitude
