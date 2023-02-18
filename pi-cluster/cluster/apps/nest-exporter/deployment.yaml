@@ -17,30 +17,39 @@ spec:
         app: nest-exporter
     spec:
       containers:
-      - name: nest-exporter
-        image: theeadie/nest-exporter:2.0.6@sha256:cbfd7a69920dea04e04c694cbbd32d15bfbabd7e27927e3c9cdfcb621075f536
-        imagePullPolicy: Always
-        ports:
-        - name: http
-          containerPort: 80
-        env:
-        - name: NestExporter_NestApi__ClientId
-          valueFrom:
-            secretKeyRef:
-              name: nest-exporter
-              key: NestApi__ClientId
-        - name: NestExporter_NestApi__ClientSecret
-          valueFrom:
-            secretKeyRef:
-              name: nest-exporter
-              key: NestApi__ClientSecret
-        - name: NestExporter_NestApi__ProjectId
-          valueFrom:
-            secretKeyRef:
-              name: nest-exporter
-              key: NestApi__ProjectId
-        - name: NestExporter_NestApi__RefreshToken
-          valueFrom:
-            secretKeyRef:
-              name: nest-exporter
-              key: NestApi__RefreshToken
+        - name: nest-exporter
+          image: theeadie/nest-exporter:2.0.6@sha256:cbfd7a69920dea04e04c694cbbd32d15bfbabd7e27927e3c9cdfcb621075f536
+          imagePullPolicy: Always
+          ports:
+            - name: http
+              containerPort: 80
+          env:
+            - name: NestExporter_NestApi__ClientId
+              valueFrom:
+                secretKeyRef:
+                  name: nest-exporter
+                  key: NestApi__ClientId
+            - name: NestExporter_NestApi__ClientSecret
+              valueFrom:
+                secretKeyRef:
+                  name: nest-exporter
+                  key: NestApi__ClientSecret
+            - name: NestExporter_NestApi__ProjectId
+              valueFrom:
+                secretKeyRef:
+                  name: nest-exporter
+                  key: NestApi__ProjectId
+            - name: NestExporter_NestApi__RefreshToken
+              valueFrom:
+                secretKeyRef:
+                  name: nest-exporter
+                  key: NestApi__RefreshToken
+            - name: NestExporter_OpenWeatherApi__ApiKey
+              valueFrom:
+                secretKeyRef:
+                  name: nest-exporter
+                  key: OpenWeather__ApiKey
+            - name: NestExporter_OpenWeatherApi__Longitude
+              value: ${NEST_EXPORTER_OPENWEATHER_LONGITUDE}
+            - name: NestExporter_OpenWeatherApi__Latitude
+              value: ${NEST_EXPORTER_OPENWEATHER_LATITUDE}
