@@ -12,23 +12,36 @@ data:
         "list": [
           {
             "builtIn": 1,
-            "datasource": "-- Grafana --",
+            "datasource": {
+              "type": "datasource",
+              "uid": "grafana"
+            },
             "enable": true,
             "hide": true,
             "iconColor": "rgba(0, 211, 255, 1)",
             "name": "Annotations & Alerts",
+            "target": {
+              "limit": 100,
+              "matchAny": false,
+              "tags": [],
+              "type": "dashboard"
+            },
             "type": "dashboard"
           }
         ]
       },
       "editable": true,
-      "gnetId": null,
+      "fiscalYearStartMonth": 0,
       "graphTooltip": 0,
       "links": [],
+      "liveNow": false,
       "panels": [
         {
           "collapsed": false,
-          "datasource": null,
+          "datasource": {
+            "type": "loki",
+            "uid": "P8E80F9AEF21F6940"
+          },
           "gridPos": {
             "h": 1,
             "w": 24,
@@ -37,34 +50,38 @@ data:
           },
           "id": 15,
           "panels": [],
+          "targets": [
+            {
+              "datasource": {
+                "type": "loki",
+                "uid": "P8E80F9AEF21F6940"
+              },
+              "refId": "A"
+            }
+          ],
           "title": "Temperature",
           "type": "row"
         },
         {
-          "datasource": "Prometheus",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
           "description": "",
           "fieldConfig": {
             "defaults": {
-              "custom": {
-                "align": null
-              },
               "decimals": 0,
               "mappings": [
                 {
-                  "from": "",
-                  "id": 0,
-                  "text": "OFF",
-                  "to": "",
-                  "type": 1,
-                  "value": "0"
-                },
-                {
-                  "from": "",
-                  "id": 1,
-                  "text": "ON",
-                  "to": "",
-                  "type": 1,
-                  "value": "1"
+                  "options": {
+                    "0": {
+                      "text": "OFF"
+                    },
+                    "1": {
+                      "text": "ON"
+                    }
+                  },
+                  "type": "value"
                 }
               ],
               "max": 1,
@@ -107,9 +124,13 @@ data:
             },
             "textMode": "auto"
           },
-          "pluginVersion": "7.2.0",
+          "pluginVersion": "9.3.6",
           "targets": [
             {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "PBFA97CFB590B2093"
+              },
               "expr": "nest_thermostat_status",
               "instant": true,
               "interval": "",
@@ -117,17 +138,17 @@ data:
               "refId": "A"
             }
           ],
-          "timeFrom": null,
-          "timeShift": null,
           "title": "Heating",
           "type": "stat"
         },
         {
-          "datasource": "Prometheus",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
           "description": "",
           "fieldConfig": {
             "defaults": {
-              "custom": {},
               "decimals": 1,
               "mappings": [],
               "max": 30,
@@ -161,6 +182,7 @@ data:
           },
           "id": 5,
           "options": {
+            "orientation": "auto",
             "reduceOptions": {
               "calcs": [
                 "last"
@@ -171,9 +193,13 @@ data:
             "showThresholdLabels": false,
             "showThresholdMarkers": true
           },
-          "pluginVersion": "7.2.0",
+          "pluginVersion": "9.3.6",
           "targets": [
             {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "PBFA97CFB590B2093"
+              },
               "expr": "nest_thermostat_actual_temperature",
               "instant": true,
               "interval": "",
@@ -181,17 +207,17 @@ data:
               "refId": "A"
             }
           ],
-          "timeFrom": null,
-          "timeShift": null,
           "title": "Living room",
           "type": "gauge"
         },
         {
-          "datasource": "Prometheus",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
           "description": "",
           "fieldConfig": {
             "defaults": {
-              "custom": {},
               "decimals": 1,
               "mappings": [],
               "max": 30,
@@ -225,6 +251,7 @@ data:
           },
           "id": 23,
           "options": {
+            "orientation": "auto",
             "reduceOptions": {
               "calcs": [
                 "last"
@@ -235,9 +262,13 @@ data:
             "showThresholdLabels": false,
             "showThresholdMarkers": true
           },
-          "pluginVersion": "7.2.0",
+          "pluginVersion": "9.3.6",
           "targets": [
             {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "PBFA97CFB590B2093"
+              },
               "expr": "(hue_sensor_value{type=\"ZLLTemperature\"} / 100) + 1.8",
               "instant": true,
               "interval": "",
@@ -245,8 +276,6 @@ data:
               "refId": "A"
             }
           ],
-          "timeFrom": null,
-          "timeShift": null,
           "title": "Bedroom",
           "type": "gauge"
         },
@@ -264,15 +293,12 @@ data:
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "Prometheus",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
           "decimals": 1,
           "description": "",
-          "fieldConfig": {
-            "defaults": {
-              "custom": {}
-            },
-            "overrides": []
-          },
           "fill": 1,
           "fillGradient": 0,
           "gridPos": {
@@ -301,19 +327,19 @@ data:
             "alertThreshold": true
           },
           "percentage": false,
-          "pluginVersion": "7.2.0",
+          "pluginVersion": "9.3.6",
           "pointradius": 2,
           "points": false,
           "renderer": "flot",
           "seriesOverrides": [
             {
-              "$$hashKey": "object:208",
+              "$hashKey": "object:208",
               "alias": "Heating On",
               "fill": 0,
               "yaxis": 2
             },
             {
-              "$$hashKey": "object:217",
+              "$hashKey": "object:217",
               "alias": "Hue motion sensor 1",
               "hiddenSeries": true,
               "hideTooltip": true,
@@ -325,6 +351,10 @@ data:
           "steppedLine": false,
           "targets": [
             {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "PBFA97CFB590B2093"
+              },
               "expr": "(avg by (name) (nest_thermostat_actual_temperature))",
               "instant": false,
               "interval": "",
@@ -332,24 +362,40 @@ data:
               "refId": "A"
             },
             {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "PBFA97CFB590B2093"
+              },
               "expr": "(avg by (name) (nest_thermostat_target_temperature))",
               "interval": "",
               "legendFormat": "Thermostat ",
               "refId": "B"
             },
             {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "PBFA97CFB590B2093"
+              },
               "expr": "(avg by (name) (nest_thermostat_status))",
               "interval": "",
               "legendFormat": "Heating On",
               "refId": "C"
             },
             {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "PBFA97CFB590B2093"
+              },
               "expr": "(avg by (location) (openweather_temperature)) > 0",
               "interval": "",
               "legendFormat": "Outside",
               "refId": "D"
             },
             {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "PBFA97CFB590B2093"
+              },
               "expr": "(avg by (name) (hue_sensor_value{type=\"ZLLTemperature\"} / 100)) + 1.8",
               "interval": "",
               "legendFormat": "{{name}}",
@@ -357,9 +403,7 @@ data:
             }
           ],
           "thresholds": [],
-          "timeFrom": null,
           "timeRegions": [],
-          "timeShift": null,
           "title": "Temperature",
           "tooltip": {
             "shared": true,
@@ -368,25 +412,20 @@ data:
           },
           "type": "graph",
           "xaxis": {
-            "buckets": null,
             "mode": "time",
-            "name": null,
             "show": true,
             "values": []
           },
           "yaxes": [
             {
-              "$$hashKey": "object:214",
-              "decimals": null,
+              "$hashKey": "object:214",
               "format": "celsius",
               "label": "",
               "logBase": 1,
-              "max": null,
-              "min": null,
               "show": true
             },
             {
-              "$$hashKey": "object:215",
+              "$hashKey": "object:215",
               "decimals": 0,
               "format": "none",
               "label": "",
@@ -397,16 +436,17 @@ data:
             }
           ],
           "yaxis": {
-            "align": false,
-            "alignLevel": null
+            "align": false
           }
         },
         {
-          "datasource": "Prometheus",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
           "description": "",
           "fieldConfig": {
             "defaults": {
-              "custom": {},
               "decimals": 1,
               "mappings": [],
               "max": 40,
@@ -453,27 +493,32 @@ data:
             },
             "textMode": "auto"
           },
-          "pluginVersion": "7.2.0",
+          "pluginVersion": "9.3.6",
           "targets": [
             {
-              "expr": "openweather_temperature",
+              "datasource": {
+                "type": "prometheus",
+                "uid": "PBFA97CFB590B2093"
+              },
+              "editorMode": "code",
+              "expr": "nest_outside_actual_temperature",
               "instant": true,
               "interval": "",
               "legendFormat": "Outside",
               "refId": "A"
             }
           ],
-          "timeFrom": null,
-          "timeShift": null,
           "title": "Outside",
           "type": "stat"
         },
         {
-          "datasource": "Prometheus",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
           "description": "",
           "fieldConfig": {
             "defaults": {
-              "custom": {},
               "decimals": 1,
               "mappings": [],
               "max": 30,
@@ -520,9 +565,13 @@ data:
             },
             "textMode": "auto"
           },
-          "pluginVersion": "7.2.0",
+          "pluginVersion": "9.3.6",
           "targets": [
             {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "PBFA97CFB590B2093"
+              },
               "expr": "nest_thermostat_target_temperature",
               "instant": true,
               "interval": "",
@@ -530,17 +579,17 @@ data:
               "refId": "A"
             }
           ],
-          "timeFrom": null,
-          "timeShift": null,
           "title": "Thermostat",
           "type": "stat"
         },
         {
-          "datasource": "Prometheus",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
           "description": "",
           "fieldConfig": {
             "defaults": {
-              "custom": {},
               "decimals": 1,
               "mappings": [],
               "max": 40,
@@ -587,24 +636,30 @@ data:
             },
             "textMode": "auto"
           },
-          "pluginVersion": "7.2.0",
+          "pluginVersion": "9.3.6",
           "targets": [
             {
-              "expr": "openweather_feelslike",
+              "datasource": {
+                "type": "prometheus",
+                "uid": "PBFA97CFB590B2093"
+              },
+              "editorMode": "code",
+              "expr": "nest_outside_feels_like_temperature",
               "instant": true,
               "interval": "",
               "legendFormat": "Outside",
               "refId": "A"
             }
           ],
-          "timeFrom": null,
-          "timeShift": null,
           "title": "Feels like",
           "type": "stat"
         },
         {
           "collapsed": false,
-          "datasource": null,
+          "datasource": {
+            "type": "loki",
+            "uid": "P8E80F9AEF21F6940"
+          },
           "gridPos": {
             "h": 1,
             "w": 24,
@@ -613,15 +668,26 @@ data:
           },
           "id": 17,
           "panels": [],
+          "targets": [
+            {
+              "datasource": {
+                "type": "loki",
+                "uid": "P8E80F9AEF21F6940"
+              },
+              "refId": "A"
+            }
+          ],
           "title": "Humidity",
           "type": "row"
         },
         {
-          "datasource": "Prometheus",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
           "description": "",
           "fieldConfig": {
             "defaults": {
-              "custom": {},
               "decimals": 0,
               "mappings": [],
               "max": 100,
@@ -670,9 +736,13 @@ data:
             "showThresholdLabels": false,
             "showThresholdMarkers": true
           },
-          "pluginVersion": "7.2.0",
+          "pluginVersion": "9.3.6",
           "targets": [
             {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "PBFA97CFB590B2093"
+              },
               "expr": "nest_thermostat_humidity",
               "instant": true,
               "interval": "",
@@ -680,8 +750,6 @@ data:
               "refId": "A"
             }
           ],
-          "timeFrom": null,
-          "timeShift": null,
           "title": "Living room",
           "type": "gauge"
         },
@@ -696,15 +764,12 @@ data:
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "Prometheus",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
           "decimals": 1,
           "description": "",
-          "fieldConfig": {
-            "defaults": {
-              "custom": {}
-            },
-            "overrides": []
-          },
           "fill": 1,
           "fillGradient": 0,
           "gridPos": {
@@ -733,7 +798,7 @@ data:
             "alertThreshold": true
           },
           "percentage": false,
-          "pluginVersion": "7.2.0",
+          "pluginVersion": "9.3.6",
           "pointradius": 2,
           "points": false,
           "renderer": "flot",
@@ -748,12 +813,20 @@ data:
           "steppedLine": false,
           "targets": [
             {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "PBFA97CFB590B2093"
+              },
               "expr": "(avg by (name) (nest_thermostat_humidity))",
               "interval": "",
               "legendFormat": "{{name}}",
               "refId": "C"
             },
             {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "PBFA97CFB590B2093"
+              },
               "expr": "(avg by (location) (openweather_humidity)) > 0",
               "interval": "",
               "legendFormat": "Outside",
@@ -761,9 +834,7 @@ data:
             }
           ],
           "thresholds": [],
-          "timeFrom": null,
           "timeRegions": [],
-          "timeShift": null,
           "title": "Humidity",
           "tooltip": {
             "shared": true,
@@ -772,16 +843,13 @@ data:
           },
           "type": "graph",
           "xaxis": {
-            "buckets": null,
             "mode": "time",
-            "name": null,
             "show": true,
             "values": []
           },
           "yaxes": [
             {
-              "$$hashKey": "object:269",
-              "decimals": null,
+              "$hashKey": "object:269",
               "format": "percent",
               "label": "",
               "logBase": 1,
@@ -790,8 +858,7 @@ data:
               "show": true
             },
             {
-              "$$hashKey": "object:270",
-              "decimals": null,
+              "$hashKey": "object:270",
               "format": "percent",
               "label": "",
               "logBase": 1,
@@ -801,16 +868,17 @@ data:
             }
           ],
           "yaxis": {
-            "align": false,
-            "alignLevel": null
+            "align": false
           }
         },
         {
-          "datasource": "Prometheus",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
           "description": "",
           "fieldConfig": {
             "defaults": {
-              "custom": {},
               "decimals": 0,
               "mappings": [],
               "max": 100,
@@ -849,24 +917,30 @@ data:
             },
             "textMode": "auto"
           },
-          "pluginVersion": "7.2.0",
+          "pluginVersion": "9.3.6",
           "targets": [
             {
-              "expr": "openweather_humidity",
+              "datasource": {
+                "type": "prometheus",
+                "uid": "PBFA97CFB590B2093"
+              },
+              "editorMode": "code",
+              "expr": "nest_outside_humidity",
               "instant": true,
               "interval": "",
               "legendFormat": "Outside",
               "refId": "A"
             }
           ],
-          "timeFrom": null,
-          "timeShift": null,
           "title": "Outside",
           "type": "stat"
         },
         {
           "collapsed": false,
-          "datasource": null,
+          "datasource": {
+            "type": "loki",
+            "uid": "P8E80F9AEF21F6940"
+          },
           "gridPos": {
             "h": 1,
             "w": 24,
@@ -875,30 +949,44 @@ data:
           },
           "id": 19,
           "panels": [],
+          "targets": [
+            {
+              "datasource": {
+                "type": "loki",
+                "uid": "P8E80F9AEF21F6940"
+              },
+              "refId": "A"
+            }
+          ],
           "title": "Lights",
           "type": "row"
         },
         {
-          "datasource": "Prometheus",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
           "description": "",
           "fieldConfig": {
             "defaults": {
-              "custom": {},
               "mappings": [
                 {
-                  "from": "",
-                  "id": 0,
-                  "text": "OFF",
-                  "to": "",
-                  "type": 1,
-                  "value": "0"
+                  "options": {
+                    "0": {
+                      "text": "OFF"
+                    }
+                  },
+                  "type": "value"
                 },
                 {
-                  "from": "1",
-                  "id": 1,
-                  "text": "ON",
-                  "to": "5",
-                  "type": 2
+                  "options": {
+                    "from": 1,
+                    "result": {
+                      "text": "ON"
+                    },
+                    "to": 5
+                  },
+                  "type": "range"
                 }
               ],
               "thresholds": {
@@ -938,9 +1026,13 @@ data:
             },
             "textMode": "auto"
           },
-          "pluginVersion": "7.2.0",
+          "pluginVersion": "9.3.6",
           "targets": [
             {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "PBFA97CFB590B2093"
+              },
               "expr": "hue_group_on{name=\"Living room\"}",
               "instant": true,
               "interval": "",
@@ -948,32 +1040,35 @@ data:
               "refId": "A"
             }
           ],
-          "timeFrom": null,
-          "timeShift": null,
           "title": "Living Room",
           "type": "stat"
         },
         {
-          "datasource": "Prometheus",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
           "description": "",
           "fieldConfig": {
             "defaults": {
-              "custom": {},
               "mappings": [
                 {
-                  "from": "",
-                  "id": 0,
-                  "text": "OFF",
-                  "to": "",
-                  "type": 1,
-                  "value": "0"
+                  "options": {
+                    "0": {
+                      "text": "OFF"
+                    }
+                  },
+                  "type": "value"
                 },
                 {
-                  "from": "1",
-                  "id": 1,
-                  "text": "ON",
-                  "to": "5",
-                  "type": 2
+                  "options": {
+                    "from": 1,
+                    "result": {
+                      "text": "ON"
+                    },
+                    "to": 5
+                  },
+                  "type": "range"
                 }
               ],
               "thresholds": {
@@ -1013,9 +1108,13 @@ data:
             },
             "textMode": "auto"
           },
-          "pluginVersion": "7.2.0",
+          "pluginVersion": "9.3.6",
           "targets": [
             {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "PBFA97CFB590B2093"
+              },
               "expr": "(hue_light_on{name=\"Hall\"} * hue_light_reachable{name=\"Hall\"})",
               "instant": true,
               "interval": "",
@@ -1023,8 +1122,6 @@ data:
               "refId": "A"
             }
           ],
-          "timeFrom": null,
-          "timeShift": null,
           "title": "Hall",
           "type": "stat"
         },
@@ -1041,15 +1138,12 @@ data:
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "Prometheus",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
           "decimals": 1,
           "description": "",
-          "fieldConfig": {
-            "defaults": {
-              "custom": {}
-            },
-            "overrides": []
-          },
           "fill": 1,
           "fillGradient": 0,
           "gridPos": {
@@ -1078,27 +1172,27 @@ data:
             "alertThreshold": true
           },
           "percentage": false,
-          "pluginVersion": "7.2.0",
+          "pluginVersion": "9.3.6",
           "pointradius": 2,
           "points": false,
           "renderer": "flot",
           "seriesOverrides": [
             {
-              "$$hashKey": "object:264",
+              "$hashKey": "object:264",
               "alias": "Hue color lamp 1",
               "hiddenSeries": true,
               "hideTooltip": true,
               "legend": false
             },
             {
-              "$$hashKey": "object:281",
+              "$hashKey": "object:281",
               "alias": "Hue color lamp 2",
               "hiddenSeries": true,
               "hideTooltip": true,
               "legend": false
             },
             {
-              "$$hashKey": "object:448",
+              "$hashKey": "object:448",
               "alias": "Hue color lamp 3",
               "hiddenSeries": true,
               "hideTooltip": true,
@@ -1110,6 +1204,10 @@ data:
           "steppedLine": false,
           "targets": [
             {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "PBFA97CFB590B2093"
+              },
               "expr": "((hue_light_brightness / 254) * hue_light_on * hue_light_reachable) ",
               "instant": false,
               "interval": "",
@@ -1118,9 +1216,7 @@ data:
             }
           ],
           "thresholds": [],
-          "timeFrom": null,
           "timeRegions": [],
-          "timeShift": null,
           "title": "Lights",
           "tooltip": {
             "shared": true,
@@ -1129,15 +1225,13 @@ data:
           },
           "type": "graph",
           "xaxis": {
-            "buckets": null,
             "mode": "time",
-            "name": null,
             "show": true,
             "values": []
           },
           "yaxes": [
             {
-              "$$hashKey": "object:214",
+              "$hashKey": "object:214",
               "decimals": 0,
               "format": "percentunit",
               "label": "",
@@ -1147,7 +1241,7 @@ data:
               "show": true
             },
             {
-              "$$hashKey": "object:215",
+              "$hashKey": "object:215",
               "decimals": 0,
               "format": "none",
               "label": "",
@@ -1158,13 +1252,12 @@ data:
             }
           ],
           "yaxis": {
-            "align": false,
-            "alignLevel": null
+            "align": false
           }
         }
       ],
       "refresh": "1m",
-      "schemaVersion": 26,
+      "schemaVersion": 37,
       "style": "dark",
       "tags": [],
       "templating": {
@@ -1191,5 +1284,6 @@ data:
       "timezone": "",
       "title": "Home stats",
       "uid": "HKdv7xKMk",
-      "version": 1
+      "version": 1,
+      "weekStart": ""
     }
