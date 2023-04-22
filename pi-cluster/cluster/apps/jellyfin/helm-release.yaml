@@ -16,7 +16,8 @@ spec:
         namespace: flux-system
   values:
     image:
-      tag: "10.8.8"
+      repository: jellyfin/jellyfin
+      tag: "10.8.9"
     persistence:
       config:
         enabled: true
