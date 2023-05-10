@@ -54,6 +54,6 @@
           ],
           "groupName": "cert-manager"
         }
-    ]
+    ],
     "masterIssue": true
   }
