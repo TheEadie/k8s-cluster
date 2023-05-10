@@ -46,5 +46,14 @@
         "datasourceTemplate": "docker"
       }
     ],
+    "packageRules": [
+        {
+          "packageNames": [
+            "cert-manager",
+            "cert-manager-source"
+          ],
+          "groupName": "cert-manager"
+        }
+    ]
     "masterIssue": true
   }
