@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    cert-manager.io/cluster-issuer: "letsencrypt-production"
+  name: truenas
+  namespace: truenas
+spec:
+  rules:
+    - host: "truenas.${SECRET_DOMAIN}"
+      http:
+        paths:
+          - pathType: Prefix
+            path: /
+            backend:
+              service:
+                name: truenas
+                port:
+                  number: 80
+  tls:
+    - hosts:
+        - truenas.${SECRET_DOMAIN}
+      secretName: truenas-tls

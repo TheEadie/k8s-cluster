@@ -7,3 +7,4 @@ resources:
   - monitoring.yaml
   - nest-exporter.yaml
   - hue-exporter.yaml
+  - truenas.yaml
