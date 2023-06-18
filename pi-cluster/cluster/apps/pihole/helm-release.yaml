@@ -30,3 +30,6 @@ spec:
       annotations:
         metallb.universe.tf/allow-shared-ip: pihole-svc
       type: LoadBalancer
+
+    extraEnvVars:
+      CORS_HOSTS: ${SECRET_DOMAIN}
