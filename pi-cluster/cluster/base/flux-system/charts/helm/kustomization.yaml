@@ -4,7 +4,6 @@ resources:
   - metallb-charts.yaml
   - ingress-nginx.yaml
   - pihole.yaml
-  - k8s-at-home.yaml
   - prometheus-community-charts.yaml
   - grafana.yaml
   - jetstack.yaml
