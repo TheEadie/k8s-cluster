@@ -3,5 +3,10 @@ kind: Kustomization
 resources:
   - deployment.yaml
   - service.yaml
-  - config.yaml
   - ingress.yaml
+
+configMapGenerator:
+  - name: homer-config
+    namespace: homer
+    files:
+      - config.yml
