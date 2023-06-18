@@ -8,3 +8,4 @@ resources:
   - nest-exporter.yaml
   - hue-exporter.yaml
   - truenas.yaml
+  - homer.yaml

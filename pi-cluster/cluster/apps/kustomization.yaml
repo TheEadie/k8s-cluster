@@ -9,3 +9,4 @@ resources:
   - nest-exporter
   - pihole
   - truenas
+  - homer

@@ -1,0 +1,32 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: homer
+  namespace: homer
+  labels:
+    app: homer
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: homer
+  template:
+    metadata:
+      labels:
+        app: homer
+    spec:
+      containers:
+        - name: homer
+          image: b4bz/homer:v23.05.1
+          ports:
+            - name: http
+              containerPort: 8080
+          volumeMounts:
+            - name: config-volume
+              mountPath: /www/homer
+              subPath: config.yml
+      volumes:
+        - name: config-volume
+          configMap:
+            name: homer-config
