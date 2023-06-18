@@ -24,7 +24,7 @@ spec:
               containerPort: 8080
           volumeMounts:
             - name: config-volume
-              mountPath: /www/homer
+              mountPath: /www/assets/config.yml
               subPath: config.yml
       volumes:
         - name: config-volume
