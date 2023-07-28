@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
         - name: nest-exporter
-          image: theeadie/nest-exporter:2.0.39@sha256:7ec2e178377954bb4973a35c5b2145fe90109f63de267a43349230b2999d67f7
+          image: theeadie/nest-exporter:2.0.40@sha256:8f9b92358ded2139a6df59f9035cc14079ba5a870e74827c359471ee4c8a4f8a
           imagePullPolicy: Always
           ports:
             - name: http
