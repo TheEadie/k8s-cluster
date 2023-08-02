@@ -15,9 +15,15 @@ spec:
         name: pihole
         namespace: flux-system
   values:
+    maxSurge: 2
+
     dnsmasq:
       customDnsEntries:
         - address=/.${SECRET_DOMAIN}/${NGINX_IP}
+
+    whitelist:
+      - a1.api.bbc.co.uk
+      - mybbc-analytics.files.bbci.co.uk
 
     serviceDns:
       loadBalancerIP: ${DNS_IP}
