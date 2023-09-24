@@ -25,7 +25,7 @@ spec:
             claimName: jellyfin-media
       containers:
         - name: jellyfin
-          image: jellyfin/jellyfin:10.8.10
+          image: jellyfin/jellyfin:10.8.11
           imagePullPolicy: Always
           ports:
             - name: http
