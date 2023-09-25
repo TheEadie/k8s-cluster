@@ -53,6 +53,13 @@
             "cert-manager-source"
           ],
           "groupName": "cert-manager"
+        },
+        {
+          "packageNames": [
+            "metallb",
+            "metallb-system-source"
+          ],
+          "groupName": "metallb"
         }
     ],
     "masterIssue": true
