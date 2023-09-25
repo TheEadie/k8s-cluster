@@ -6,7 +6,6 @@ resources:
   - jellyfin
   - monitoring
   # - hue-exporter - Temp disable while hub is not connected
-  - nest-exporter
   - pihole
   - truenas
   - homer
