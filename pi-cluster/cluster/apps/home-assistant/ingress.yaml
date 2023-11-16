@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    cert-manager.io/cluster-issuer: "letsencrypt-production"
+  name: home-assistant
+  namespace: home-assistant
+spec:
+  rules:
+    - host: "assistant.${SECRET_DOMAIN}"
+      http:
+        paths:
+          - pathType: Prefix
+            path: /
+            backend:
+              service:
+                name: home-assistant
+                port:
+                  number: 8123
+  tls:
+    - hosts:
+        - assistant.${SECRET_DOMAIN}
+      secretName: home-assistant-tls

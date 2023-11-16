@@ -8,3 +8,4 @@ resources:
   - hue-exporter.yaml
   - truenas.yaml
   - homer.yaml
+  - home-assistant.yaml

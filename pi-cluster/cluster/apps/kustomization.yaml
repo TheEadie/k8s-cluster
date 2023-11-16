@@ -9,3 +9,4 @@ resources:
   - pihole
   - truenas
   - homer
+  - home-assistant
