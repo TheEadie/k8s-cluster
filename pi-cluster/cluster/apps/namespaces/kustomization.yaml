@@ -9,3 +9,4 @@ resources:
   - truenas.yaml
   - homer.yaml
   - home-assistant.yaml
+  - adguard.yaml
