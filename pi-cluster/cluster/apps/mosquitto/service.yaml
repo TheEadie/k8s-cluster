@@ -7,7 +7,7 @@ metadata:
   labels:
     app: mosquitto
 spec:
-  type: ClusterIP
+  type: LoadBalancer
   ports:
     - port: 1883
       targetPort: mqtt
