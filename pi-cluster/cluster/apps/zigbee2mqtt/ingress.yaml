@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    cert-manager.io/cluster-issuer: "letsencrypt-production"
+  name: zigbee2mqtt
+  namespace: zigbee2mqtt
+spec:
+  rules:
+    - host: "zigbee.${SECRET_DOMAIN}"
+      http:
+        paths:
+          - pathType: Prefix
+            path: /
+            backend:
+              service:
+                name: zigbee2mqtt
+                port:
+                  number: 8080
+  tls:
+    - hosts:
+        - zigbee.${SECRET_DOMAIN}
+      secretName: zigbee-tls
