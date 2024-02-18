@@ -56,3 +56,5 @@ spec:
         - name: zigbee2mqtt-config
           configMap:
             name: zigbee2mqtt-config
+      nodeSelector:
+        zigbee: "true"
