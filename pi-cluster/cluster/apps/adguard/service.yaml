@@ -21,3 +21,4 @@ spec:
       name: dns
   type: LoadBalancer
   externalTrafficPolicy: Local
+  loadBalancerIP: "${ADGUARD_IP}"

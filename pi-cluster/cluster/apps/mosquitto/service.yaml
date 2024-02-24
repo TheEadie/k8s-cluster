@@ -8,6 +8,7 @@ metadata:
     app: mosquitto
 spec:
   type: LoadBalancer
+  loadBalancerIP: "${MQTT_IP}"
   ports:
     - port: 1883
       targetPort: mqtt
