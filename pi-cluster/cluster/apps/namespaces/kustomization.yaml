@@ -10,5 +10,3 @@ resources:
   - homer.yaml
   - home-assistant.yaml
   - adguard.yaml
-  - mosquitto.yaml
-  - zigbee2mqtt.yaml

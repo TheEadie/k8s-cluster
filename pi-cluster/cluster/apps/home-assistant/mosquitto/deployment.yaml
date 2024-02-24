@@ -3,7 +3,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: mosquitto
-  namespace: mosquitto
+  namespace: home-assistant
   labels:
     app: mosquitto
 spec:

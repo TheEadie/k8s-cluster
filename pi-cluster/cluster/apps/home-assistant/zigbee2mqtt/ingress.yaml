@@ -5,7 +5,7 @@ metadata:
     kubernetes.io/ingress.class: nginx
     cert-manager.io/cluster-issuer: "letsencrypt-production"
   name: zigbee2mqtt
-  namespace: zigbee2mqtt
+  namespace: home-assistant
 spec:
   rules:
     - host: "zigbee.${SECRET_DOMAIN}"

@@ -11,5 +11,3 @@ resources:
   - homer
   - home-assistant
   - adguard
-  - mosquitto
-  - zigbee2mqtt
