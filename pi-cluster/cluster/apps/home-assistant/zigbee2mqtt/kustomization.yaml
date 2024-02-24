@@ -5,9 +5,3 @@ resources:
   - volumes.yaml
   - service.yaml
   - ingress.yaml
-
-configMapGenerator:
-  - name: zigbee2mqtt-config
-    namespace: home-assistant
-    files:
-      - configuration.yaml

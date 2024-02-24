@@ -36,9 +36,6 @@ spec:
           volumeMounts:
             - name: zigbee2mqtt-data
               mountPath: /data
-            - name: zigbee2mqtt-config
-              mountPath: /data/configuration.yaml
-              subPath: configuration.yaml
             - name: zigbee2mqtt-udev
               mountPath: /run/udev
             - name: ttyacm
@@ -53,8 +50,5 @@ spec:
         - name: ttyacm
           hostPath:
             path: /dev/ttyACM0
-        - name: zigbee2mqtt-config
-          configMap:
-            name: zigbee2mqtt-config
       nodeSelector:
         zigbee: "true"
