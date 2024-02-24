@@ -1,0 +1,16 @@
+permit_join: false
+homeassistant: true
+mqtt:
+  base_topic: zigbee2mqtt
+  server: "mqtt://${MQTT_IP}:1883"
+serial:
+  port: /dev/ttyACM0
+frontend:
+  port: 8080
+advanced:
+  log_level: debug
+  log_output:
+    - console
+
+devices: /data/devices.yaml
+groups: /data/groups.yaml

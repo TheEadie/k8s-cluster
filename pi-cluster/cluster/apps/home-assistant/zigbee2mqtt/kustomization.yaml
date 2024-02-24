@@ -3,6 +3,11 @@ kind: Kustomization
 resources:
   - deployment.yaml
   - volumes.yaml
-  - configmap.yaml
   - service.yaml
   - ingress.yaml
+
+configMapGenerator:
+  - name: zigbee2mqtt-config
+    namespace: home-assistant
+    files:
+      - configuration.yaml
