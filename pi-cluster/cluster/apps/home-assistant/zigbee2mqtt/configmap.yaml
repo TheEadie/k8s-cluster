@@ -10,7 +10,7 @@ data:
   configuration.yaml: |-
 
     # Let new devices join our zigbee network
-    permit_join: true
+    permit_join: false
     # Home Assistant integration (MQTT discovery)
     homeassistant: true
     # Docker-Compose makes the MQTT-Server available using "mqtt" hostname
