@@ -20,3 +20,5 @@ spec:
       enabled: true
       service:
         loadBalancerIP: "${NGINX_IP}"
+      admissionWebhooks:
+        enabled: false
