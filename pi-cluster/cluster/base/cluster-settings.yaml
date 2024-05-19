@@ -13,6 +13,8 @@ data:
   MQTT_IP: "192.168.50.233"
   ROUTER_IP: "192.168.50.1"
 
-  # NFS Share
+  # NFS Shares
   NFS_SERVER_IP: "192.168.50.10"
   NFS_BASE_PATH: "/mnt"
+  PI_NFS_SERVER_IP: "192.168.50.11"
+  PI_NFS_BASE_PATH: "/Kubernetes"
