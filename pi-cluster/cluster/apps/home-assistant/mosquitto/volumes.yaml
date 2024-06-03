@@ -10,10 +10,10 @@ spec:
   accessModes:
     - ReadWriteMany
   nfs:
-    server: ${NFS_SERVER_IP}
-    path: "${NFS_BASE_PATH}/Kubernetes/Kubernetes/config/mosquitto"
+    server: ${PI_NFS_SERVER_IP}
+    path: "/export/Kubernetes/config/mosquitto"
   mountOptions:
-    - nfsvers=4.2
+    - nfsvers=3
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
