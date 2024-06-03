@@ -48,14 +48,14 @@
     ],
     "packageRules": [
         {
-          "packageNames": [
+          "matchDepNames": [
             "cert-manager",
             "cert-manager-source"
           ],
           "groupName": "cert-manager"
         },
         {
-          "packageNames": [
+          "matchDepNames": [
             "metallb",
             "metallb-system-source"
           ],
