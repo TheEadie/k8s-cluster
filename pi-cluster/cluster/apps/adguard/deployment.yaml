@@ -32,7 +32,6 @@ spec:
             - name: adguard-data
               mountPath: /opt/adguardhome/conf
               subPath: conf
-          hostNetwork: true
       volumes:
         - name: adguard-data
           persistentVolumeClaim:
