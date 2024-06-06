@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: adguard-home
-          image: adguard/adguardhome:v0.107.50
+          image: adguard/adguardhome:v0.107.51
           ports:
             - containerPort: 53 #dns
               name: dns
