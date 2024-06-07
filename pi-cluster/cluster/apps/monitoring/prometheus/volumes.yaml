@@ -10,7 +10,7 @@ spec:
   accessModes:
     - ReadWriteMany
   nfs:
-    server: ${NFS_SERVER_IP}
-    path: "/mnt/Kubernetes/Kubernetes/config/prometheus"
+    server: ${PI_NFS_SERVER_IP}
+    path: "/export/Kubernetes/config/prometheus"
   mountOptions:
-    - nfsvers=4.2
+    - nfsvers=3
