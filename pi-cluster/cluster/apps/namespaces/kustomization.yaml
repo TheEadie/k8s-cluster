@@ -10,3 +10,4 @@ resources:
   - homer.yaml
   - home-assistant.yaml
   - adguard.yaml
+  - open-media-vault.yaml
