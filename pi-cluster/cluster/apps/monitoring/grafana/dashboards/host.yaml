@@ -213,7 +213,7 @@ data:
                 "uid": "PBFA97CFB590B2093"
               },
               "exemplar": true,
-              "expr": "(sum by (kubernetes_node, mountpoint) (1 - node_filesystem_avail_bytes{mountpoint=~\"/|/mnt/usb\"} / node_filesystem_size_bytes{mountpoint=~\"/|/mnt/usb\"}))",
+              "expr": "(sum by (kubernetes_node, mountpoint) (1 - node_filesystem_avail_bytes{mountpoint=~\"/|/export/Kubernetes\"} / node_filesystem_size_bytes{mountpoint=~\"/|/export/Kubernetes\"}))",
               "interval": "",
               "legendFormat": "{{kubernetes_node}} - {{mountpoint}}",
               "refId": "A"
@@ -732,7 +732,7 @@ data:
           "type": "timeseries"
         }
       ],
-      "refresh": "",
+      "refresh": "5s",
       "schemaVersion": 35,
       "style": "dark",
       "tags": [],
