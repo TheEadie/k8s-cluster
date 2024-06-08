@@ -11,3 +11,4 @@ resources:
   - home-assistant.yaml
   - adguard.yaml
   - open-media-vault.yaml
+  - minecraft.yaml
