@@ -16,3 +16,6 @@ spec:
   endpoints:
     - port: node-exporter
       path: /metrics
+      relabelings:
+        - targetLabel: kubernetes_node
+          replacement: pi1
