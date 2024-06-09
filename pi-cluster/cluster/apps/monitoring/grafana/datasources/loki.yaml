@@ -4,7 +4,7 @@ metadata:
   name: loki-grafana-datasource
   namespace: monitoring
   labels:
-    grafana_datasource: '1'
+    grafana_datasource: "1"
 data:
   loki-datasource.yaml: |-
     apiVersion: 1
@@ -13,4 +13,4 @@ data:
       type: loki
       access: proxy
       orgId: 1
-      url: http://loki-stack.monitoring.svc.cluster.local:3100
+      url: http://loki-gateway.monitoring.svc.cluster.local
