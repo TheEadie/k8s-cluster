@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    cert-manager.io/cluster-issuer: "letsencrypt-production"
+  name: victoria-metrics
+  namespace: monitoring
+spec:
+  rules:
+    - host: "victoria-metrics.${SECRET_DOMAIN}"
+      http:
+        paths:
+          - pathType: Prefix
+            path: /
+            backend:
+              service:
+                name: victoria-metrics-victoria-metrics-single-server
+                port:
+                  number: 8428
+  tls:
+    - hosts:
+        - victoria-metrics.${SECRET_DOMAIN}
+      secretName: victoria-metrics-tls

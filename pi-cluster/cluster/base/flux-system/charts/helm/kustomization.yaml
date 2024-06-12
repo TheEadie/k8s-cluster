@@ -7,3 +7,4 @@ resources:
   - prometheus-community-charts.yaml
   - grafana.yaml
   - jetstack.yaml
+  - victoria-metrics.yaml
