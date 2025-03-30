@@ -6,8 +6,6 @@ resources:
   - jellyfin
   - monitoring
   - hue-exporter
-  - pihole
-  - truenas
   - homer
   - home-assistant
   - adguard
