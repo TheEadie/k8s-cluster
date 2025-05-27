@@ -1,0 +1,42 @@
+---
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: GitRepository
+metadata:
+  name: tailscale-source
+  namespace: flux-system
+spec:
+  interval: 12h
+  url: https://github.com/tailscale/tailscale.git
+  ref:
+    # renovate: registryUrl=https://pkgs.tailscale.com/helmcharts chart=tailscale-operator
+    tag: v1.84.0
+  ignore: |
+    # exclude all
+    /*
+    # include manifests file
+    !/cmd/k8s-operator/deploy/manifests/operator.yaml
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: tailscale
+  namespace: flux-system
+spec:
+  interval: 30m
+  prune: false
+  wait: true
+  sourceRef:
+    kind: GitRepository
+    name: tailscale-source
+  # Add the auth secrets
+  patches:
+  - target:
+      kind: Secret
+      name: operator-oauth
+    patch: |-
+      - op: replace
+        path: /stringData/client_id
+        value: ${TAILSCALE_CLIENT_ID}
+      - op: replace
+        path: /stringData/client_secret
+        value: ${TAILSCALE_CLIENT_SECRET}
