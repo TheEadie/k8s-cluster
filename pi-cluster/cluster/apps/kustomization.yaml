@@ -10,4 +10,4 @@ resources:
   - home-assistant
   - adguard
   - open-media-vault
-  - minecraft
+  #- minecraft #No one is using it
