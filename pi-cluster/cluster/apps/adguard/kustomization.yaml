@@ -3,5 +3,6 @@ kind: Kustomization
 resources:
   - deployment.yaml
   - service.yaml
+  - tailscale-service.yaml
   - ingress.yaml
   - volumes.yaml
