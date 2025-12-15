@@ -1,66 +1,81 @@
 {
-    "extends": ["config:base"],
-    "ignoreDeps": [
-      "ghcr.io/fluxcd/helm-controller",
-      "ghcr.io/fluxcd/image-automation-controller",
-      "ghcr.io/fluxcd/image-reflector-controller",
-      "ghcr.io/fluxcd/kustomize-controller",
-      "ghcr.io/fluxcd/notification-controller",
-      "ghcr.io/fluxcd/source-controller"
-    ],
-    "flux": {
-      "fileMatch": ["\\.ya?ml$"]
+  "extends": [
+    "config:recommended"
+  ],
+  "ignoreDeps": [
+    "ghcr.io/fluxcd/helm-controller",
+    "ghcr.io/fluxcd/image-automation-controller",
+    "ghcr.io/fluxcd/image-reflector-controller",
+    "ghcr.io/fluxcd/kustomize-controller",
+    "ghcr.io/fluxcd/notification-controller",
+    "ghcr.io/fluxcd/source-controller"
+  ],
+  "flux": {
+    "managerFilePatterns": [
+      "/\\.ya?ml$/"
+    ]
+  },
+  "helm-values": {
+    "managerFilePatterns": [
+      "/\\.ya?ml$/"
+    ]
+  },
+  "kubernetes": {
+    "managerFilePatterns": [
+      "/\\.ya?ml$/"
+    ]
+  },
+  "customManagers": [
+    {
+      "customType": "regex",
+      "description": "Process various dependencies",
+      "managerFilePatterns": [
+        "/\\.ya?ml$/"
+      ],
+      "matchStrings": [
+        "datasource=(?<datasource>\\S+) depName=(?<depName>\\S+)( versioning=(?<versioning>\\S+))?\n.*?\"(?<currentValue>.*)\"\n"
+      ],
+      "datasourceTemplate": "{{#if datasource}}{{{datasource}}}{{else}}github-releases{{/if}}",
+      "versioningTemplate": "{{#if versioning}}{{{versioning}}}{{else}}semver{{/if}}"
     },
-    "helm-values": {
-      "fileMatch": ["\\.ya?ml$"]
+    {
+      "customType": "regex",
+      "description": "Process GitRepository CRD dependencies - Chart and Github Release are the same version",
+      "managerFilePatterns": [
+        "/pi-cluster/cluster/crds/.+\\.ya?ml$/"
+      ],
+      "matchStrings": [
+        "registryUrl=(?<registryUrl>\\S+) chart=(?<depName>\\S+)\n.*?(?<currentValue>[^-\\s]*)\n"
+      ],
+      "datasourceTemplate": "helm"
     },
-    "kubernetes": {
-      "fileMatch": ["\\.ya?ml$"]
+    {
+      "customType": "regex",
+      "description": "Process Kustomization CRD dependencies - Image and Github Release are the same version",
+      "managerFilePatterns": [
+        "/pi-cluster/cluster/crds/.+\\.ya?ml$/"
+      ],
+      "matchStrings": [
+        "datasource=(?<datasource>\\S+) image=(?<depName>\\S+)\n.*?-\\s(.*?)/(?<currentValue>[^/]+)/[^/]+\n"
+      ],
+      "datasourceTemplate": "docker"
+    }
+  ],
+  "packageRules": [
+    {
+      "matchDepNames": [
+        "cert-manager",
+        "cert-manager-source"
+      ],
+      "groupName": "cert-manager"
     },
-    "regexManagers": [
-      {
-        "description": "Process various dependencies",
-        "fileMatch": [
-          "\\.ya?ml$"
-        ],
-        "matchStrings": [
-          "datasource=(?<datasource>\\S+) depName=(?<depName>\\S+)( versioning=(?<versioning>\\S+))?\n.*?\"(?<currentValue>.*)\"\n"
-        ],
-        "datasourceTemplate": "{{#if datasource}}{{{datasource}}}{{else}}github-releases{{/if}}",
-        "versioningTemplate": "{{#if versioning}}{{{versioning}}}{{else}}semver{{/if}}"
-      },
-      {
-        "description": "Process GitRepository CRD dependencies - Chart and Github Release are the same version",
-        "fileMatch": ["pi-cluster/cluster/crds/.+\\.ya?ml$"],
-        "matchStrings": [
-          "registryUrl=(?<registryUrl>\\S+) chart=(?<depName>\\S+)\n.*?(?<currentValue>[^-\\s]*)\n"
-        ],
-        "datasourceTemplate": "helm"
-      },
-      {
-        "description": "Process Kustomization CRD dependencies - Image and Github Release are the same version",
-        "fileMatch": ["pi-cluster/cluster/crds/.+\\.ya?ml$"],
-        "matchStrings": [
-          "datasource=(?<datasource>\\S+) image=(?<depName>\\S+)\n.*?-\\s(.*?)\/(?<currentValue>[^/]+)\/[^/]+\n"
-        ],
-        "datasourceTemplate": "docker"
-      }
-    ],
-    "packageRules": [
-        {
-          "matchDepNames": [
-            "cert-manager",
-            "cert-manager-source"
-          ],
-          "groupName": "cert-manager"
-        },
-        {
-          "matchDepNames": [
-            "metallb",
-            "metallb-system-source"
-          ],
-          "groupName": "metallb"
-        }
-    ],
-    "masterIssue": true
-  }
+    {
+      "matchDepNames": [
+        "metallb",
+        "metallb-system-source"
+      ],
+      "groupName": "metallb"
+    }
+  ],
+  "dependencyDashboard": true
+}
