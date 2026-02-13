@@ -9,7 +9,7 @@ spec:
   url: https://github.com/tailscale/tailscale.git
   ref:
     # renovate: registryUrl=https://pkgs.tailscale.com/helmcharts chart=tailscale-operator
-    tag: v1.94.1
+    tag: v1.94.2
   ignore: |
     # exclude all
     /*
