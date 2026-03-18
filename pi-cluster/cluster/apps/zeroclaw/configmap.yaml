@@ -10,4 +10,4 @@ data:
 
     [channels_config.discord]
     bot_token = "${ZEROCLAW_DISCORD_BOT_TOKEN}"
-    allowed_users = ["*"]
+    allowed_users = ["${ZEROCLAW_DISCORD_USER_ID}"]
