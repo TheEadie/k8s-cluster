@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: zeroclaw
+  namespace: zeroclaw
+  labels:
+    app: zeroclaw
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: zeroclaw
+  template:
+    metadata:
+      labels:
+        app: zeroclaw
+    spec:
+      volumes:
+        - name: zeroclaw-data
+          persistentVolumeClaim:
+            claimName: zeroclaw-data
+        - name: zeroclaw-config
+          configMap:
+            name: zeroclaw-config
+      containers:
+        - name: zeroclaw
+          image: ghcr.io/zeroclaw-labs/zeroclaw:v0.5.0
+          volumeMounts:
+            - name: zeroclaw-data
+              mountPath: /zeroclaw-data
+            - name: zeroclaw-config
+              mountPath: /home/zeroclaw/.zeroclaw/config.toml
+              subPath: config.toml
+          resources:
+            requests:
+              cpu: 200m
+              memory: 64Mi
+            limits:
+              cpu: "2"
+              memory: 512Mi

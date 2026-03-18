@@ -10,3 +10,4 @@ resources:
   - adguard.yaml
   - open-media-vault.yaml
   - minecraft.yaml
+  - zeroclaw.yaml
