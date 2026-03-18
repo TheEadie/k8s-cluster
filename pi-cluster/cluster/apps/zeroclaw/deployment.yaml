@@ -22,14 +22,23 @@ spec:
         - name: zeroclaw-config
           configMap:
             name: zeroclaw-config
+      securityContext:
+        runAsUser: 0
+        runAsGroup: 0
       containers:
         - name: zeroclaw
           image: ghcr.io/zeroclaw-labs/zeroclaw:v0.5.0
+          args: ["daemon"]
+          env:
+            - name: ZEROCLAW_CONFIG_DIR
+              value: /config
+            - name: ZEROCLAW_WORKSPACE
+              value: /zeroclaw-data/workspace
           volumeMounts:
             - name: zeroclaw-data
               mountPath: /zeroclaw-data
             - name: zeroclaw-config
-              mountPath: /home/zeroclaw/.zeroclaw/config.toml
+              mountPath: /config/config.toml
               subPath: config.toml
           resources:
             requests:

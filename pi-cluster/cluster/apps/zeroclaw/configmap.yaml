@@ -5,9 +5,10 @@ metadata:
   namespace: zeroclaw
 data:
   config.toml: |
-    api_key = "${ZEROCLAW_OPENROUTER_API_KEY}"
-    default_provider = "openrouter"
+    api_key = "${ZEROCLAW_GEMINI_API_KEY}"
+    default_provider = "gemini"
+    default_model = "gemini-3.1-flash-lite-preview"
 
     [channels_config.discord]
     bot_token = "${ZEROCLAW_DISCORD_BOT_TOKEN}"
-    allowed_users = ["*"]
+    allowed_users = ["${ZEROCLAW_DISCORD_USER_ID}"]
