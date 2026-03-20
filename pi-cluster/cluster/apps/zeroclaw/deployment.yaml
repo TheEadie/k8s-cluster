@@ -39,7 +39,7 @@ spec:
               mountPath: /git-bin
       containers:
         - name: zeroclaw
-          image: ghcr.io/zeroclaw-labs/zeroclaw:v0.5.2
+          image: ghcr.io/zeroclaw-labs/zeroclaw:v0.5.4
           args: ["daemon"]
           env:
             - name: ZEROCLAW_CONFIG_DIR
