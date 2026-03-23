@@ -1,0 +1,59 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: claude-data
+spec:
+  storageClassName: ""
+  capacity:
+    storage: 5Gi
+  accessModes:
+    - ReadWriteMany
+  nfs:
+    server: ${PI_NFS_SERVER_IP}
+    path: "/export/Kubernetes/config/claude"
+  mountOptions:
+    - nfsvers=3
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: claude-data
+  namespace: claude
+spec:
+  storageClassName: ""
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 5Gi
+  volumeName: claude-data
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: claude-workspace
+spec:
+  storageClassName: ""
+  capacity:
+    storage: 10Gi
+  accessModes:
+    - ReadWriteMany
+  nfs:
+    server: ${PI_NFS_SERVER_IP}
+    path: "/export/Kubernetes/workspace/claude"
+  mountOptions:
+    - nfsvers=3
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: claude-workspace
+  namespace: claude
+spec:
+  storageClassName: ""
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 10Gi
+  volumeName: claude-workspace

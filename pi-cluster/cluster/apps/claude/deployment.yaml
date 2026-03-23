@@ -1,0 +1,87 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: claude
+  namespace: claude
+  labels:
+    app: claude
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: claude
+  template:
+    metadata:
+      labels:
+        app: claude
+    spec:
+      volumes:
+        - name: claude-data
+          persistentVolumeClaim:
+            claimName: claude-data
+        - name: claude-workspace
+          persistentVolumeClaim:
+            claimName: claude-workspace
+        - name: claude-config
+          configMap:
+            name: claude-config
+            defaultMode: 0755
+        - name: git-bin
+          emptyDir: {}
+      initContainers:
+        - name: install-git
+          image: node:22-slim
+          command:
+            - bash
+            - -c
+            - |
+              apt-get update -qq && apt-get install -y -qq git ca-certificates
+              cp $(which git) /git-bin/
+              cp -a /usr/lib/git-core /git-bin/git-core 2>/dev/null || true
+              for bin in $(which git) $(find /usr/lib/git-core -type f -executable 2>/dev/null); do
+                ldd "$bin" 2>/dev/null | grep "=> /" | awk '{print $3}' | sort -u | xargs -I{} cp -n {} /git-bin/ 2>/dev/null || true
+              done
+              cp /etc/ssl/certs/ca-certificates.crt /git-bin/
+          volumeMounts:
+            - name: git-bin
+              mountPath: /git-bin
+      containers:
+        - name: claude
+          image: node:22-slim
+          tty: true
+          stdin: true
+          securityContext:
+            runAsUser: 1000
+            runAsGroup: 1000
+          command: ["/bin/bash", "/config/entrypoint.sh"]
+          workingDir: /workspace
+          env:
+            - name: HOME
+              value: /claude-data
+            - name: GITHUB_TOKEN
+              value: "${CLAUDE_GITHUB_TOKEN}"
+            - name: DISCORD_BOT_TOKEN
+              value: "${CLAUDE_DISCORD_BOT_TOKEN}"
+            - name: NPM_CONFIG_PREFIX
+              value: /claude-data/.npm-global
+            - name: GIT_EXEC_PATH
+              value: /git-bin/git-core
+            - name: LD_LIBRARY_PATH
+              value: /git-bin
+            - name: GIT_SSL_CAINFO
+              value: /git-bin/ca-certificates.crt
+            - name: PATH
+              value: /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/git-bin:/claude-data/.npm-global/bin
+          volumeMounts:
+            - name: claude-data
+              mountPath: /claude-data
+            - name: claude-workspace
+              mountPath: /workspace
+            - name: claude-config
+              mountPath: /config/entrypoint.sh
+              subPath: entrypoint.sh
+            - name: claude-config
+              mountPath: /claude-data/.gitconfig
+              subPath: gitconfig
+            - name: git-bin
+              mountPath: /git-bin

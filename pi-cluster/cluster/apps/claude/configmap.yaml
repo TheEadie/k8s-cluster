@@ -1,0 +1,30 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: claude-config
+  namespace: claude
+data:
+  entrypoint.sh: |
+    #!/bin/bash
+    set -e
+
+    # Install/update Bun (required for official channel plugins)
+    npm install -g bun
+
+    # Install/update Claude Code
+    npm install -g @anthropic-ai/claude-code
+
+    # Skip onboarding prompt and reset marketplace auto-install so Claude re-attempts with working git
+    echo '{"hasCompletedOnboarding": true, "theme": "dark", "bypassPermissionsModeAccepted": true, "projects": {"/workspace": {"hasTrustedProjectFolder": true, "hasTrustDialogAccepted": true}}, "officialMarketplaceAutoInstallAttempted": false}' > "$HOME/.claude.json"
+
+    # Install Discord plugin non-interactively
+    claude plugin marketplace add anthropics/claude-plugins-official || true
+    claude plugin install discord@claude-plugins-official --scope user || true
+
+    # Start Claude Code with Discord channel
+    exec claude \
+      --channels plugin:discord@claude-plugins-official \
+      --dangerously-skip-permissions
+  gitconfig: |
+    [credential "https://github.com"]
+      helper = "!f() { echo username=x-access-token; echo password=$GITHUB_TOKEN; }; f"
