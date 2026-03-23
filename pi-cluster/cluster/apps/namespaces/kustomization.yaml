@@ -11,3 +11,4 @@ resources:
   - open-media-vault.yaml
   - minecraft.yaml
   - zeroclaw.yaml
+  - claude.yaml

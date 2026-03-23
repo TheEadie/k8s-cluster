@@ -1,0 +1,68 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: claude
+  namespace: claude
+  labels:
+    app: claude
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: claude
+  template:
+    metadata:
+      labels:
+        app: claude
+    spec:
+      volumes:
+        - name: claude-data
+          persistentVolumeClaim:
+            claimName: claude-data
+        - name: claude-workspace
+          persistentVolumeClaim:
+            claimName: claude-workspace
+        - name: claude-config
+          configMap:
+            name: claude-config
+            defaultMode: 0755
+        - name: git-bin
+          emptyDir: {}
+      securityContext:
+        runAsUser: 0
+        runAsGroup: 0
+      initContainers:
+        - name: install-git
+          image: alpine:3.23
+          command:
+            - sh
+            - -c
+            - apk add --no-cache git && cp -a /usr/bin/git /git-bin/ && cp -a /usr/libexec/git-core /git-bin/ && cp -a /usr/lib/libpcre2* /git-bin/ 2>/dev/null; true
+          volumeMounts:
+            - name: git-bin
+              mountPath: /git-bin
+      containers:
+        - name: claude
+          image: node:22-slim
+          command: ["/bin/bash", "/config/entrypoint.sh"]
+          workingDir: /workspace
+          env:
+            - name: HOME
+              value: /claude-data
+            - name: GITHUB_TOKEN
+              value: "${CLAUDE_GITHUB_TOKEN}"
+            - name: PATH
+              value: /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/git-bin
+          volumeMounts:
+            - name: claude-data
+              mountPath: /claude-data
+            - name: claude-workspace
+              mountPath: /workspace
+            - name: claude-config
+              mountPath: /config/entrypoint.sh
+              subPath: entrypoint.sh
+            - name: claude-config
+              mountPath: /claude-data/.gitconfig
+              subPath: gitconfig
+            - name: git-bin
+              mountPath: /git-bin

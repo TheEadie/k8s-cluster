@@ -1,0 +1,29 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: claude-config
+  namespace: claude
+data:
+  entrypoint.sh: |
+    #!/bin/bash
+    set -e
+
+    # Install Claude Code globally
+    if ! command -v claude &> /dev/null; then
+      echo "Installing Claude Code..."
+      npm install -g @anthropic-ai/claude
+    fi
+
+    # Install the Discord plugin if not already installed
+    if [ ! -d "$HOME/.claude/plugins/discord@claude-plugins-official" ]; then
+      echo "Installing Discord plugin..."
+      claude /plugin install discord@claude-plugins-official || true
+    fi
+
+    # Start Claude Code with Discord channel
+    exec claude \
+      --channels plugin:discord@claude-plugins-official \
+      --dangerouslySkipPermissions
+  gitconfig: |
+    [credential "https://github.com"]
+      helper = "!f() { echo username=x-access-token; echo password=$GITHUB_TOKEN; }; f"
