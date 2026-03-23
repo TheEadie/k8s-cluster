@@ -11,7 +11,7 @@ data:
     # Install Claude Code globally
     if ! command -v claude &> /dev/null; then
       echo "Installing Claude Code..."
-      npm install -g @anthropic-ai/claude
+      npm install -g @anthropic-ai/claude-code
     fi
 
     # Install the Discord plugin if not already installed
