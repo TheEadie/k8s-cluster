@@ -8,22 +8,21 @@ data:
     #!/bin/bash
     set -e
 
-    # Install/update Bun (required for official channel plugins)
-    npm install -g bun
+    # Install .NET SDK if not already present (persisted on NFS volume)
+    if [ ! -f "$HOME/.dotnet/dotnet" ]; then
+      curl -fsSL https://dot.net/v1/dotnet-install.sh | bash -s -- --channel 10.0 --install-dir "$HOME/.dotnet"
+    fi
 
     # Install/update Claude Code
     npm install -g @anthropic-ai/claude-code
 
-    # Skip onboarding prompt and reset marketplace auto-install so Claude re-attempts with working git
-    echo '{"hasCompletedOnboarding": true, "theme": "dark", "bypassPermissionsModeAccepted": true, "projects": {"/workspace": {"hasTrustedProjectFolder": true, "hasTrustDialogAccepted": true}}, "officialMarketplaceAutoInstallAttempted": false}' > "$HOME/.claude.json"
+    # Skip onboarding prompt
+    echo '{"hasCompletedOnboarding": true, "theme": "dark", "bypassPermissionsModeAccepted": true, "projects": {"/workspace": {"hasTrustedProjectFolder": true, "hasTrustDialogAccepted": true}}}' > "$HOME/.claude.json"
 
-    # Install Discord plugin non-interactively
-    claude plugin marketplace add anthropics/claude-plugins-official || true
-    claude plugin install discord@claude-plugins-official --scope user || true
-
-    # Start Claude Code with Discord channel
+    # Start Claude Code with remote control
     exec claude \
-      --channels plugin:discord@claude-plugins-official \
+      --remote-control \
+      --name "k8s-cluster" \
       --dangerously-skip-permissions
   gitconfig: |
     [credential "https://github.com"]

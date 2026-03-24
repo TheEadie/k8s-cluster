@@ -35,13 +35,14 @@ spec:
             - bash
             - -c
             - |
-              apt-get update -qq && apt-get install -y -qq git ca-certificates
+              apt-get update -qq && apt-get install -y -qq git ca-certificates curl
               cp $(which git) /git-bin/
               cp -a /usr/lib/git-core /git-bin/git-core 2>/dev/null || true
               for bin in $(which git) $(find /usr/lib/git-core -type f -executable 2>/dev/null); do
                 ldd "$bin" 2>/dev/null | grep "=> /" | awk '{print $3}' | sort -u | xargs -I{} cp -n {} /git-bin/ 2>/dev/null || true
               done
               cp /etc/ssl/certs/ca-certificates.crt /git-bin/
+              curl -fsSL https://github.com/cli/cli/releases/latest/download/gh_$(curl -s https://api.github.com/repos/cli/cli/releases/latest | grep '"tag_name"' | sed 's/.*"v\([^"]*\)".*/\1/')_linux_$(dpkg --print-architecture).tar.gz | tar -xz --wildcards --strip-components=2 -C /git-bin '*/bin/gh'
           volumeMounts:
             - name: git-bin
               mountPath: /git-bin
@@ -60,8 +61,10 @@ spec:
               value: /claude-data
             - name: GITHUB_TOKEN
               value: "${CLAUDE_GITHUB_TOKEN}"
-            - name: DISCORD_BOT_TOKEN
-              value: "${CLAUDE_DISCORD_BOT_TOKEN}"
+            - name: GH_TOKEN
+              value: "${CLAUDE_GITHUB_TOKEN}"
+            - name: DOTNET_ROOT
+              value: /claude-data/.dotnet
             - name: NPM_CONFIG_PREFIX
               value: /claude-data/.npm-global
             - name: GIT_EXEC_PATH
@@ -71,7 +74,7 @@ spec:
             - name: GIT_SSL_CAINFO
               value: /git-bin/ca-certificates.crt
             - name: PATH
-              value: /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/git-bin:/claude-data/.npm-global/bin
+              value: /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/git-bin:/claude-data/.npm-global/bin:/claude-data/.dotnet
           volumeMounts:
             - name: claude-data
               mountPath: /claude-data
