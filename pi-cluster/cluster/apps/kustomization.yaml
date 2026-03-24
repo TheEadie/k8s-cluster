@@ -11,5 +11,4 @@ resources:
   - adguard
   - open-media-vault
   #- minecraft #No one is using it
-  - zeroclaw
   - claude
