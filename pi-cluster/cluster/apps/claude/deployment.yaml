@@ -30,7 +30,7 @@ spec:
           emptyDir: {}
       initContainers:
         - name: install-git
-          image: node:22-slim
+          image: node:24-slim
           command:
             - bash
             - -c
@@ -48,7 +48,7 @@ spec:
               mountPath: /git-bin
       containers:
         - name: claude
-          image: node:22-slim
+          image: node:24-slim
           tty: true
           stdin: true
           securityContext:
