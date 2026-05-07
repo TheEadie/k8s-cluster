@@ -75,6 +75,13 @@
         "metallb-system-source"
       ],
       "groupName": "metallb"
+    },
+    {
+      "matchDepNames": [
+        "traefik",
+        "traefik-source"
+      ],
+      "groupName": "traefik"
     }
   ],
   "dependencyDashboard": true

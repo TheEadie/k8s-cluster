@@ -2,11 +2,11 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   annotations:
-    kubernetes.io/ingress.class: nginx
     cert-manager.io/cluster-issuer: "letsencrypt-production"
   name: open-media-vault
   namespace: open-media-vault
 spec:
+  ingressClassName: traefik
   rules:
     - host: "storage.${SECRET_DOMAIN}"
       http:

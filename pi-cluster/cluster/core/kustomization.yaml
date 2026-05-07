@@ -3,6 +3,6 @@ kind: Kustomization
 resources:
   - namespaces
   - metallb-system
-  - ingress-nginx
+  - traefik
   - cert-manager
   - tailscale
