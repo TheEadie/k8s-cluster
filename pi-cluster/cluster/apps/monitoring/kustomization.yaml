@@ -4,5 +4,5 @@ resources:
   - prometheus
   - grafana
   - loki
-  - promtail
+  - alloy
   - victoria-metrics
