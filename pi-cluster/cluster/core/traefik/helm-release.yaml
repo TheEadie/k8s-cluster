@@ -17,8 +17,8 @@ spec:
   releaseName: traefik
   values:
     service:
-      spec:
-        loadBalancerIP: "${NGINX_IP}"
+      annotations:
+        metallb.universe.tf/loadBalancerIPs: "${NGINX_IP}"
     ingressClass:
       enabled: true
       isDefaultClass: true
