@@ -26,6 +26,11 @@ spec:
           discovery.relabel "pods" {
             targets = discovery.kubernetes.pods.targets
             rule {
+              source_labels = ["__meta_kubernetes_pod_phase"]
+              regex         = "Pending|Succeeded|Failed|Completed"
+              action        = "drop"
+            }
+            rule {
               source_labels = ["__meta_kubernetes_namespace"]
               target_label  = "namespace"
             }
@@ -41,9 +46,15 @@ spec:
               source_labels = ["__meta_kubernetes_pod_node_name"]
               target_label  = "node"
             }
+            rule {
+              source_labels = ["__meta_kubernetes_pod_uid", "__meta_kubernetes_pod_container_name"]
+              separator     = "/"
+              target_label  = "__path__"
+              replacement   = "/var/log/pods/*$1/$2/*.log"
+            }
           }
 
-          loki.source.kubernetes "pods" {
+          loki.source.file "pods" {
             targets    = discovery.relabel.pods.output
             forward_to = [loki.write.default.receiver]
           }
@@ -55,3 +66,13 @@ spec:
           }
     controller:
       type: daemonset
+      volumes:
+        extra:
+          - name: pods-logs
+            hostPath:
+              path: /var/log/pods
+      volumeMounts:
+        extra:
+          - name: pods-logs
+            mountPath: /var/log/pods
+            readOnly: true
