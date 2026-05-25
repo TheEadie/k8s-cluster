@@ -18,6 +18,34 @@ spec:
       labels:
         app: home-assistant
     spec:
+      initContainers:
+        - name: install-hacs
+          image: "alpine:3.20"
+          env:
+            # renovate: datasource=github-releases depName=hacs/integration
+            - name: HACS_VERSION
+              value: "2.0.5"
+          command:
+            - /bin/sh
+            - -c
+            - |
+              set -eu
+              if [ -f /config/custom_components/hacs/hacs.json ]; then
+                echo "HACS already installed; skipping."
+                exit 0
+              fi
+              echo "Installing HACS ${HACS_VERSION}..."
+              apk add --no-cache curl unzip >/dev/null
+              mkdir -p /config/custom_components/hacs
+              tmp=$(mktemp -d)
+              curl -fsSL -o "${tmp}/hacs.zip" \
+                "https://github.com/hacs/integration/releases/download/${HACS_VERSION}/hacs.zip"
+              unzip -q -o "${tmp}/hacs.zip" -d /config/custom_components/hacs
+              rm -rf "${tmp}"
+              echo "HACS ${HACS_VERSION} installed."
+          volumeMounts:
+            - name: ha-config-root
+              mountPath: /config
       containers:
         - name: home-assistant-app
           image: "ghcr.io/home-assistant/home-assistant:2026.5.2"
