@@ -22,8 +22,8 @@ spec:
         - name: install-hacs
           image: "alpine:3.20"
           env:
-            # renovate: datasource=github-releases depName=hacs/integration
             - name: HACS_VERSION
+              # renovate: datasource=github-releases depName=hacs/integration
               value: "2.0.5"
           command:
             - /bin/sh
