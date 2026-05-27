@@ -32,18 +32,18 @@ spec:
               set -eu
               installed=$(awk -F'"' '/"version"/{print $4; exit}' /config/custom_components/hacs/manifest.json 2>/dev/null || echo "")
               if [ "$installed" = "$HACS_VERSION" ]; then
-                echo "HACS ${HACS_VERSION} already installed; skipping."
+                echo "HACS $${HACS_VERSION} already installed; skipping."
                 exit 0
               fi
-              echo "Installing HACS ${HACS_VERSION}..."
+              echo "Installing HACS $${HACS_VERSION}..."
               apk add --no-cache curl unzip >/dev/null
               mkdir -p /config/custom_components/hacs
               tmp=$(mktemp -d)
-              curl -fsSL --max-time 60 -o "${tmp}/hacs.zip" \
-                "https://github.com/hacs/integration/releases/download/${HACS_VERSION}/hacs.zip"
-              unzip -q -o "${tmp}/hacs.zip" -d /config/custom_components/hacs
-              rm -rf "${tmp}"
-              echo "HACS ${HACS_VERSION} installed."
+              curl -fsSL --max-time 60 -o "$${tmp}/hacs.zip" \
+                "https://github.com/hacs/integration/releases/download/$${HACS_VERSION}/hacs.zip"
+              unzip -q -o "$${tmp}/hacs.zip" -d /config/custom_components/hacs
+              rm -rf "$${tmp}"
+              echo "HACS $${HACS_VERSION} installed."
           volumeMounts:
             - name: ha-config-root
               mountPath: /config
