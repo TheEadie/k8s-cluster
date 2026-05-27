@@ -30,8 +30,9 @@ spec:
             - -c
             - |
               set -eu
-              if [ -f /config/custom_components/hacs/hacs.json ]; then
-                echo "HACS already installed; skipping."
+              installed=$(awk -F'"' '/"version"/{print $4; exit}' /config/custom_components/hacs/manifest.json 2>/dev/null || echo "")
+              if [ "$installed" = "$HACS_VERSION" ]; then
+                echo "HACS ${HACS_VERSION} already installed; skipping."
                 exit 0
               fi
               echo "Installing HACS ${HACS_VERSION}..."
