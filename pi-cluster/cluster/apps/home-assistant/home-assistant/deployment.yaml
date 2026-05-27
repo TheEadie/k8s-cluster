@@ -39,7 +39,7 @@ spec:
               apk add --no-cache curl unzip >/dev/null
               mkdir -p /config/custom_components/hacs
               tmp=$(mktemp -d)
-              curl -fsSL -o "${tmp}/hacs.zip" \
+              curl -fsSL --max-time 60 -o "${tmp}/hacs.zip" \
                 "https://github.com/hacs/integration/releases/download/${HACS_VERSION}/hacs.zip"
               unzip -q -o "${tmp}/hacs.zip" -d /config/custom_components/hacs
               rm -rf "${tmp}"
