@@ -4,3 +4,4 @@ resources:
   - helm-release.yaml
   - volumes.yaml
   - ingress.yaml
+  - slack-webhook-secret.yaml
