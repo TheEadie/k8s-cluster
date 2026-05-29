@@ -16,6 +16,19 @@ data:
     # Install/update Claude Code
     npm install -g @anthropic-ai/claude-code
 
+    # Sync skills from dotfiles (sparse checkout of claude/ directory)
+    DOTFILES_DIR=$HOME/.dotfiles-sparse
+    if [ -d "$DOTFILES_DIR/.git" ]; then
+      git -C "$DOTFILES_DIR" pull --ff-only
+    else
+      git clone --filter=blob:none --sparse --depth=1 "https://github.com/theeadie/.dotfiles" "$DOTFILES_DIR"
+      git -C "$DOTFILES_DIR" sparse-checkout set claude
+    fi
+    mkdir -p "$HOME/.claude"
+    for d in "$DOTFILES_DIR/claude/*/"; do
+      ln -sfn "$d" "$HOME/.claude/$(basename $d)"
+    done
+
     # Skip onboarding prompt
     echo '{"hasCompletedOnboarding": true, "theme": "dark", "bypassPermissionsModeAccepted": true, "projects": {"/workspace": {"hasTrustedProjectFolder": true, "hasTrustDialogAccepted": true}}}' > "$HOME/.claude.json"
 
