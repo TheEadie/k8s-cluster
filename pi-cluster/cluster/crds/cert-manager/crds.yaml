@@ -37,13 +37,13 @@ spec:
         version: v1
         kind: CustomResourceDefinition
       patch: |-
-        - op: replace
+        - op: add
           path: /metadata/labels/app
           value: cert-manager
-        - op: replace
+        - op: add
           path: /metadata/labels/app.kubernetes.io~1name
           value: cert-manager
-        - op: replace
+        - op: add
           path: /metadata/labels/app.kubernetes.io~1instance
           value: cert-manager
         - op: add
