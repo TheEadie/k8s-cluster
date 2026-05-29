@@ -31,9 +31,6 @@ spec:
       initContainers:
         - name: install-git
           image: node:24-slim
-          env:
-            - name: GITHUB_TOKEN
-              value: "${CLAUDE_GITHUB_TOKEN}"
           command:
             - bash
             - -c
@@ -45,11 +42,11 @@ spec:
                 ldd "$bin" 2>/dev/null | grep "=> /" | awk '{print $3}' | sort -u | xargs -I{} cp -n {} /git-bin/ 2>/dev/null || true
               done
               cp /etc/ssl/certs/ca-certificates.crt /git-bin/
-              GH_API_RESPONSE=$(curl -sSL --max-time 30 -H "Authorization: Bearer ${GITHUB_TOKEN}" "https://api.github.com/repos/cli/cli/releases/latest")
-              echo "GitHub API HTTP status check: $(echo "$GH_API_RESPONSE" | grep -c '"tag_name"') tag_name field(s) found"
-              GH_VERSION=$(echo "$GH_API_RESPONSE" | grep '"tag_name"' | sed 's/.*"v\([^"]*\)".*/\1/')
+              GH_REDIRECT=$(curl -s --max-time 30 -o /dev/null -w "%{redirect_url}" "https://github.com/cli/cli/releases/latest")
+              echo "GitHub redirect URL: ${GH_REDIRECT}"
+              GH_VERSION=$(echo "$GH_REDIRECT" | sed 's|.*/tag/v||' | tr -d '\r\n ')
               echo "Resolved gh version: ${GH_VERSION}"
-              [ -n "$GH_VERSION" ] || { echo "ERROR: failed to resolve gh version. API response: $GH_API_RESPONSE" >&2; exit 1; }
+              [ -n "$GH_VERSION" ] || { echo "ERROR: failed to resolve gh version from redirect URL: ${GH_REDIRECT}" >&2; exit 1; }
               curl -fsSL --max-time 120 "https://github.com/cli/cli/releases/download/v${GH_VERSION}/gh_${GH_VERSION}_linux_$(dpkg --print-architecture).tar.gz" | tar -xz --wildcards --strip-components=2 -C /git-bin '*/bin/gh'
           volumeMounts:
             - name: git-bin
