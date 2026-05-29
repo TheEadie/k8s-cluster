@@ -27,6 +27,38 @@ spec:
           enabled: false
     alertmanager:
       enabled: true
+      alertmanagerSpec:
+        secrets:
+          - alertmanager-slack-webhook
+      config:
+        route:
+          group_by: ["alertname", "namespace"]
+          group_wait: 30s
+          group_interval: 5m
+          repeat_interval: 4h
+          receiver: "null"
+          routes:
+            - receiver: "null"
+              matchers:
+                - alertname = "Watchdog"
+            - receiver: "slack-pi-alerts"
+              matchers:
+                - severity =~ "warning|critical"
+        inhibit_rules:
+          - source_matchers:
+              - severity = critical
+            target_matchers:
+              - severity =~ warning|info
+            equal:
+              - namespace
+              - alertname
+        receivers:
+          - name: "null"
+          - name: "slack-pi-alerts"
+            slack_configs:
+              - api_url_file: /etc/alertmanager/secrets/alertmanager-slack-webhook/url
+                channel: "#pi-alerts"
+                send_resolved: true
     nodeExporter:
       enabled: true
     prometheus-node-exporter:
