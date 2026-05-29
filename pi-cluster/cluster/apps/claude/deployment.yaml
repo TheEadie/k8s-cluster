@@ -42,14 +42,12 @@ spec:
                 ldd "$bin" 2>/dev/null | grep "=> /" | awk '{print $3}' | sort -u | xargs -I{} cp -n {} /git-bin/ 2>/dev/null || true
               done
               cp /etc/ssl/certs/ca-certificates.crt /git-bin/
-              GH_PROBE=$(curl -s --max-time 30 -o /dev/null -w "http=%{http_code} url=%{redirect_url}" "https://github.com/cli/cli/releases/latest")
-              echo "gh-probe exit=$? result='${GH_PROBE}'"
-              GH_REDIRECT=$(echo "$GH_PROBE" | grep -oP 'url=\K.*')
-              echo "gh-redirect='${GH_REDIRECT}'"
-              GH_VERSION=$(echo "$GH_REDIRECT" | sed 's|.*/tag/v||' | tr -d '\r\n ')
-              echo "Resolved gh version: '${GH_VERSION}'"
-              [ -n "$GH_VERSION" ] || { echo "ERROR: failed to resolve gh version. probe was: '${GH_PROBE}'" >&2; exit 1; }
-              curl -fsSL --max-time 120 "https://github.com/cli/cli/releases/download/v${GH_VERSION}/gh_${GH_VERSION}_linux_$(dpkg --print-architecture).tar.gz" | tar -xz --wildcards --strip-components=2 -C /git-bin '*/bin/gh'
+              GH_REDIRECT=$(curl -s --max-time 30 -o /dev/null -w "%{redirect_url}" "https://github.com/cli/cli/releases/latest")
+              GH_VERSION=$(echo "$GH_REDIRECT" | sed 's|.*/tag/v||' | tr -d '\r\n')
+              echo "Resolved gh version: $GH_VERSION"
+              [ -n "$GH_VERSION" ] || { echo "ERROR: empty gh version, redirect was: $GH_REDIRECT" >&2; exit 1; }
+              GH_ARCH=$(dpkg --print-architecture)
+              curl -fsSL --max-time 120 "https://github.com/cli/cli/releases/download/v$GH_VERSION/gh_$GH_VERSION""_linux_$GH_ARCH.tar.gz" | tar -xz --wildcards --strip-components=2 -C /git-bin '*/bin/gh'
           volumeMounts:
             - name: git-bin
               mountPath: /git-bin
