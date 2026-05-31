@@ -31,6 +31,14 @@ spec:
   # Add the auth secrets
   patches:
   - target:
+      kind: Deployment
+      name: operator
+    patch: |-
+      - op: replace
+        path: /spec/template/spec/containers/0/image
+        # renovate: datasource=docker depName=tailscale/k8s-operator
+        value: tailscale/k8s-operator:v1.98.5
+  - target:
       kind: Secret
       name: operator-oauth
     patch: |-

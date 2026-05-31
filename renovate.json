@@ -59,6 +59,17 @@
         "datasource=(?<datasource>\\S+) image=(?<depName>\\S+)\n.*?-\\s(.*?)/(?<currentValue>[^/]+)/[^/]+\n"
       ],
       "datasourceTemplate": "docker"
+    },
+    {
+      "customType": "regex",
+      "description": "Docker image version pinned in JSON patch value fields",
+      "managerFilePatterns": [
+        "/\\.ya?ml$/"
+      ],
+      "matchStrings": [
+        "# renovate: datasource=(?<datasource>\\S+) depName=(?<depName>\\S+)\\n\\s+value: [^:]+:(?<currentValue>v[\\d.]+)"
+      ],
+      "datasourceTemplate": "{{#if datasource}}{{{datasource}}}{{else}}docker{{/if}}"
     }
   ],
   "packageRules": [
@@ -82,6 +93,13 @@
         "traefik-source"
       ],
       "groupName": "traefik"
+    },
+    {
+      "matchDepNames": [
+        "tailscale-source",
+        "tailscale/k8s-operator"
+      ],
+      "groupName": "tailscale"
     }
   ],
   "dependencyDashboard": true
