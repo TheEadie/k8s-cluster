@@ -75,6 +75,12 @@
   "packageRules": [
     {
       "matchDepNames": [
+        "metallb-system-source"
+      ],
+      "versionCompatibility": "^(?<compatibility>v)?(?<version>.+)$"
+    },
+    {
+      "matchDepNames": [
         "cert-manager",
         "cert-manager-source"
       ],
