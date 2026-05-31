@@ -70,6 +70,17 @@
         "# renovate: datasource=(?<datasource>\\S+) depName=(?<depName>\\S+)\\n\\s+value: [^:]+:(?<currentValue>v[\\d.]+)"
       ],
       "datasourceTemplate": "{{#if datasource}}{{{datasource}}}{{else}}docker{{/if}}"
+    },
+    {
+      "customType": "regex",
+      "description": "Docker image version pinned in GitRepository tag fields",
+      "managerFilePatterns": [
+        "/\\.ya?ml$/"
+      ],
+      "matchStrings": [
+        "# renovate: datasource=(?<datasource>\\S+) depName=(?<depName>\\S+)\\n\\s+tag: (?<currentValue>v[\\d.]+)"
+      ],
+      "datasourceTemplate": "{{#if datasource}}{{{datasource}}}{{else}}docker{{/if}}"
     }
   ],
   "packageRules": [
@@ -101,11 +112,13 @@
       "groupName": "traefik"
     },
     {
-      "matchDepNames": [
-        "tailscale-source",
-        "tailscale/k8s-operator"
+      "matchFileNames": [
+        "pi-cluster/cluster/core/tailscale/manifests.yaml"
       ],
-      "groupName": "tailscale"
+      "matchManagers": [
+        "flux"
+      ],
+      "enabled": false
     }
   ],
   "dependencyDashboard": true

@@ -8,8 +8,8 @@ spec:
   interval: 12h
   url: https://github.com/tailscale/tailscale.git
   ref:
-    # renovate: registryUrl=https://pkgs.tailscale.com/helmcharts chart=tailscale-operator
-    tag: v1.98.5
+    # renovate: datasource=docker depName=tailscale/k8s-operator
+    tag: v1.98.4
   ignore: |
     # exclude all
     /*
@@ -37,7 +37,7 @@ spec:
       - op: replace
         path: /spec/template/spec/containers/0/image
         # renovate: datasource=docker depName=tailscale/k8s-operator
-        value: tailscale/k8s-operator:v1.98.5
+        value: tailscale/k8s-operator:v1.98.4
   - target:
       kind: Secret
       name: operator-oauth
