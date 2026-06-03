@@ -1,0 +1,6 @@
+# Cluster-level settings for a 3-node stacked HA control plane.
+#
+# allowSchedulingOnControlPlanes lets ordinary workloads (and Longhorn) run on
+# the control-plane nodes — required here because all 3 nodes ARE the workers.
+cluster:
+  allowSchedulingOnControlPlanes: true

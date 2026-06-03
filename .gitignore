@@ -1,2 +1,6 @@
 # Environment variables
 **/*.env
+
+# Talos bootstrap secrets / generated configs (octo-cluster)
+octo-cluster/init/_out/
+octo-cluster/init/kubeconfig

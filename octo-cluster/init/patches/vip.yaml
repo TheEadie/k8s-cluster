@@ -1,0 +1,23 @@
+# Shared virtual IP (VIP) for the control plane endpoint.
+#
+# With 3 stacked control-plane nodes, a VIP gives the Kubernetes API a single
+# highly-available address that floats between the healthy nodes. The cluster
+# endpoint passed to `talosctl gen config` should be https://<VIP>:6443.
+#
+# Replace before use:
+#   <VIP>            an unused IP on the node subnet, NOT in any DHCP range and
+#                    NOT one of the node IPs — e.g. 192.168.x.x
+#   <INTERFACE>      optional; if deviceSelector below doesn't match, hardcode
+#                    the NIC name instead (e.g. eth0). Find it with:
+#                    talosctl -n <NODE_IP> get links --insecure
+#
+# This patch is applied to all control-plane nodes; Talos elects one holder of
+# the VIP and fails it over automatically.
+machine:
+  network:
+    interfaces:
+      - deviceSelector:
+          physical: true
+        dhcp: true
+        vip:
+          ip: 192.168.50.240

@@ -1,0 +1,25 @@
+# Talos Image Factory schematic.
+#
+# This declares the system extensions that must be baked into the Talos
+# *installer* image so Longhorn works:
+#
+#   - siderolabs/iscsi-tools      provides iscsid + iscsiadm (Longhorn volume attach)
+#   - siderolabs/util-linux-tools provides fstrim (Longhorn volume trimming)
+#
+# Generate the schematic ID (deterministic sha256 of this file) by POSTing it
+# to the factory. The returned id is used in the installer image URL:
+#
+#   curl -sX POST --data-binary @schematic.yaml https://factory.talos.dev/schematics
+#   => {"id":"<SCHEMATIC_ID>"}
+#
+# The installer image is then:
+#   factory.talos.dev/installer/<SCHEMATIC_ID>:<TALOS_VERSION>
+#
+# Because we set this as machine.install.image (see patches/install.yaml), the
+# extensions are pulled at install time — it does NOT matter whether the USB
+# boot media already contains them.
+customization:
+  systemExtensions:
+    officialExtensions:
+      - siderolabs/iscsi-tools
+      - siderolabs/util-linux-tools

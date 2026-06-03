@@ -1,0 +1,14 @@
+# Longhorn runs privileged Pods (host paths, iSCSI, kernel mounts). Talos
+# enforces the Pod Security "baseline" profile by default, which would reject
+# them — so the longhorn-system namespace is labelled "privileged".
+#
+# Apply this BEFORE installing Longhorn so the namespace already carries the
+# labels when Longhorn's privileged Pods are admitted.
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: longhorn-system
+  labels:
+    pod-security.kubernetes.io/enforce: privileged
+    pod-security.kubernetes.io/audit: privileged
+    pod-security.kubernetes.io/warn: privileged

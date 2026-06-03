@@ -1,0 +1,23 @@
+# Longhorn host requirements on Talos.
+#
+# kubelet extraMounts: Longhorn's manager runs in the kubelet's mount namespace
+# and needs /var/lib/longhorn bind-mounted with `rshared` propagation. Without
+# rshared, Longhorn mounts the volume but the kubelet cannot propagate it into
+# the workload Pod, producing "MountPropagation" errors.
+#
+# On a single shared disk, /var/lib/longhorn lives on the Talos EPHEMERAL
+# partition. It persists across reboots and across upgrades (use `talosctl
+# upgrade --preserve`); it is wiped only by `talosctl reset`.
+#
+# If you later add a dedicated disk, switch to a Talos UserVolumeConfig mounted
+# at /var/mnt/longhorn and point Longhorn's default data path there instead.
+machine:
+  kubelet:
+    extraMounts:
+      - destination: /var/lib/longhorn
+        type: bind
+        source: /var/lib/longhorn
+        options:
+          - bind
+          - rshared
+          - rw

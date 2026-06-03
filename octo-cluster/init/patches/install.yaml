@@ -1,0 +1,19 @@
+# Install settings: which disk Talos installs to, and the installer image that
+# carries the Longhorn system extensions (iscsi-tools, util-linux-tools).
+#
+# Replace the two placeholders before use:
+#   <INSTALL_DISK>   e.g. /dev/sda or /dev/nvme0n1
+#                    Find it with:  talosctl -n <NODE_IP> get disks --insecure
+#   <SCHEMATIC_ID>   from the factory (see ../schematic.yaml)
+#   <TALOS_VERSION>  e.g. v1.12.0 — keep in sync with the talosctl version
+#
+# Single shared disk: Talos OS + Longhorn live on the same disk. Longhorn data
+# sits on the EPHEMERAL partition under /var/lib/longhorn (see longhorn.yaml).
+machine:
+  install:
+    disk: /dev/nvme0n1
+    image: factory.talos.dev/installer/613e1592b2da41ae5e265e8789429f22e121aab91cb4deb6bc3c0b6262961245:v1.13.3
+    # wipe: true erases ALL partitions first. Required when repurposing a disk
+    # that previously held Windows/another OS — otherwise Talos leaves the old
+    # EFI/boot partition and the firmware keeps booting Windows Boot Manager.
+    wipe: true
