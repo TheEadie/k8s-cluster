@@ -2,8 +2,9 @@
 # enforces the Pod Security "baseline" profile by default, which would reject
 # them — so the longhorn-system namespace is labelled "privileged".
 #
-# Apply this BEFORE installing Longhorn so the namespace already carries the
-# labels when Longhorn's privileged Pods are admitted.
+# Apply this AFTER kubectl apply -f longhorn.yaml. Longhorn's manifest includes
+# its own bare Namespace with no labels — applying ours first and then Longhorn's
+# manifest will strip these labels via kubectl apply's 3-way merge.
 apiVersion: v1
 kind: Namespace
 metadata:

@@ -129,13 +129,18 @@ If the extensions are missing, step 2/4 didn't use the factory image — check
 
 ## 7. Install Longhorn
 
-Create the privileged namespace first, then install:
+Install Longhorn, then apply the privileged namespace labels. The order matters:
+Longhorn's manifest includes its own bare `Namespace` with no labels — applying it
+first and our `namespace.yaml` second means `kubectl apply`'s 3-way merge strips
+the privileged labels (they were in the previous `last-applied-configuration` but
+absent from Longhorn's manifest).
 
 ```sh
-kubectl apply -f longhorn/namespace.yaml
-
 # Pin LONGHORN_VERSION to a release (e.g. v1.10.0). Check https://github.com/longhorn/longhorn/releases
 kubectl apply -f https://raw.githubusercontent.com/longhorn/longhorn/<LONGHORN_VERSION>/deploy/longhorn.yaml
+
+# Apply AFTER longhorn.yaml so the privileged labels aren't stripped by the 3-way merge
+kubectl apply -f longhorn/namespace.yaml
 ```
 
 Watch it come up:
