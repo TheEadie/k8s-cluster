@@ -28,8 +28,21 @@ spec:
   sourceRef:
     kind: GitRepository
     name: tailscale-source
-  # Add the auth secrets
   patches:
+  - target:
+      kind: Namespace
+      name: tailscale
+    patch: |-
+      - op: add
+        path: /metadata/labels/pod-security.kubernetes.io~1enforce
+        value: privileged
+      - op: add
+        path: /metadata/labels/pod-security.kubernetes.io~1audit
+        value: privileged
+      - op: add
+        path: /metadata/labels/pod-security.kubernetes.io~1warn
+        value: privileged
+  # Add the auth secrets
   - target:
       kind: Deployment
       name: operator
