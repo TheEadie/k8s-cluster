@@ -1,0 +1,14 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  namespace: flux-system
+  name: cluster-settings
+data:
+  # IPs
+  METALLB_ARP_RANGE: "192.168.50.241-192.168.50.254"
+  NGINX_IP: "192.168.50.241"
+  ADGUARD_IP: "192.168.50.242"
+  MQTT_IP: "192.168.50.243"
+  MINECRAFT_IP: "192.168.50.244"
+  ROUTER_IP: "192.168.50.1"
