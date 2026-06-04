@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    cert-manager.io/cluster-issuer: "letsencrypt-production"
+  name: test-site
+  namespace: test-site
+spec:
+  ingressClassName: traefik
+  rules:
+    - host: "test.${SECRET_DOMAIN}"
+      http:
+        paths:
+          - pathType: Prefix
+            path: /
+            backend:
+              service:
+                name: test-site
+                port:
+                  number: 80
+  tls:
+    - hosts:
+        - test.${SECRET_DOMAIN}
+      secretName: test-site-tls
