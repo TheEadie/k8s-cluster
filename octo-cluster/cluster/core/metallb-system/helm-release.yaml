@@ -27,3 +27,5 @@ spec:
       validationFailurePolicy: Ignore
     frrk8s:
       enabled: false
+    speaker:
+      ignoreExcludeLB: true
