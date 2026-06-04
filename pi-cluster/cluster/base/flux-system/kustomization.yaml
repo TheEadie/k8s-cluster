@@ -6,5 +6,5 @@ resources:
   - notifications.yaml
   - slack-url.yaml
   - charts
-patchesStrategicMerge:
-  - ./gotk-patches.yaml
+patches:
+  - path: ./gotk-patches.yaml
