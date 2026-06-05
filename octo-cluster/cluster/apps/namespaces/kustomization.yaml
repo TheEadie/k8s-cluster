@@ -3,3 +3,4 @@ kind: Kustomization
 resources:
   - test-site.yaml
   - monitoring.yaml
+  - adguard.yaml
