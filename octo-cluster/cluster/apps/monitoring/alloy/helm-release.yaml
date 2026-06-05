@@ -1,0 +1,78 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: alloy
+  namespace: monitoring
+spec:
+  interval: 5m
+  chart:
+    spec:
+      chart: alloy
+      version: 1.8.2
+      sourceRef:
+        kind: HelmRepository
+        name: grafana
+        namespace: flux-system
+      interval: 5m
+  values:
+    alloy:
+      configMap:
+        content: |
+          discovery.kubernetes "pods" {
+            role = "pod"
+          }
+
+          discovery.relabel "pods" {
+            targets = discovery.kubernetes.pods.targets
+            rule {
+              source_labels = ["__meta_kubernetes_pod_phase"]
+              regex         = "Pending|Succeeded|Failed|Completed"
+              action        = "drop"
+            }
+            rule {
+              source_labels = ["__meta_kubernetes_namespace"]
+              target_label  = "namespace"
+            }
+            rule {
+              source_labels = ["__meta_kubernetes_pod_name"]
+              target_label  = "pod"
+            }
+            rule {
+              source_labels = ["__meta_kubernetes_pod_container_name"]
+              target_label  = "container"
+            }
+            rule {
+              source_labels = ["__meta_kubernetes_pod_node_name"]
+              target_label  = "node"
+            }
+            rule {
+              source_labels = ["__meta_kubernetes_pod_uid", "__meta_kubernetes_pod_container_name"]
+              separator     = "/"
+              target_label  = "__path__"
+              replacement   = "/var/log/pods/*$1/$2/*.log"
+            }
+          }
+
+          loki.source.file "pods" {
+            targets    = discovery.relabel.pods.output
+            forward_to = [loki.write.default.receiver]
+          }
+
+          loki.write "default" {
+            endpoint {
+              url = "http://loki-gateway.monitoring.svc.cluster.local/loki/api/v1/push"
+            }
+          }
+    controller:
+      type: daemonset
+      volumes:
+        extra:
+          - name: pods-logs
+            hostPath:
+              path: /var/log/pods
+      volumeMounts:
+        extra:
+          - name: pods-logs
+            mountPath: /var/log/pods
+            readOnly: true

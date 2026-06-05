@@ -1,6 +1,7 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
-  - namespaces
-  - test-site
-  - monitoring
+  - volumes.yaml
+  - helm-release.yaml
+  - ingress.yaml
+  

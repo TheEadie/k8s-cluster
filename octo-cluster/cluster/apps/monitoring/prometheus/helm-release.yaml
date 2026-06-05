@@ -1,0 +1,110 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: prometheus
+  namespace: monitoring
+spec:
+  interval: 5m
+  chart:
+    spec:
+      chart: kube-prometheus-stack
+      version: 86.1.0
+      sourceRef:
+        kind: HelmRepository
+        name: prometheus-community-charts
+        namespace: flux-system
+      interval: 5m
+  timeout: 40m
+  values:
+    prometheusOperator:
+      createCustomResource: false
+      tls:
+        enabled: false
+      admissionWebhooks:
+        enabled: false
+        patch:
+          enabled: false
+    alertmanager:
+      enabled: true
+      alertmanagerSpec:
+        secrets:
+          - alertmanager-slack-webhook
+      config:
+        route:
+          group_by: ["alertname", "namespace"]
+          group_wait: 30s
+          group_interval: 5m
+          repeat_interval: 4h
+          receiver: "null"
+          routes:
+            - receiver: "null"
+              matchers:
+                - alertname = "Watchdog"
+            - receiver: "slack-pi-alerts"
+              matchers:
+                - severity =~ "warning|critical"
+        inhibit_rules:
+          - source_matchers:
+              - severity = critical
+            target_matchers:
+              - severity =~ warning|info
+            equal:
+              - namespace
+              - alertname
+        receivers:
+          - name: "null"
+          - name: "slack-pi-alerts"
+            slack_configs:
+              - api_url_file: /etc/alertmanager/secrets/alertmanager-slack-webhook/url
+                channel: "#pi-alerts"
+                send_resolved: true
+    nodeExporter:
+      enabled: true
+    prometheus-node-exporter:
+      prometheus:
+        monitor:
+          relabelings:
+            - action: replace
+              regex: (.*)
+              replacement: $1
+              sourceLabels:
+                - __meta_kubernetes_pod_node_name
+              targetLabel: kubernetes_node
+    grafana:
+      enabled: false
+    kubelet:
+      enabled: true
+    kubeApiServer:
+      enabled: true
+    kubeControllerManager:
+      enabled: false
+    kubeScheduler:
+      enabled: false
+    kubeProxy:
+      enabled: false
+    kubeEtcd:
+      enabled: false
+    prometheus:
+      prometheusSpec:
+        ruleSelectorNilUsesHelmValues: false
+        serviceMonitorSelectorNilUsesHelmValues: false
+        podMonitorSelectorNilUsesHelmValues: false
+        probeSelectorNilUsesHelmValues: false
+        retention: 30d
+        resources:
+          requests:
+            memory: 1000Mi
+          limits:
+            memory: 2000Mi
+        storageSpec:
+          volumeClaimTemplate:
+            spec:
+              accessModes:
+                - "ReadWriteOnce"
+              storageClassName: "longhorn"
+              resources:
+                requests:
+                  storage: 10Gi
+        remoteWrite:
+          - url: http://victoria-metrics-victoria-metrics-single-server.monitoring.svc.cluster.local:8428/api/v1/write

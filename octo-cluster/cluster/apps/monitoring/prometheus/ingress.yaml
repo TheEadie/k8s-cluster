@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    cert-manager.io/cluster-issuer: "letsencrypt-production"
+  name: prometheus
+  namespace: monitoring
+spec:
+  ingressClassName: traefik
+  rules:
+    - host: "prometheus.${SECRET_DOMAIN}"
+      http:
+        paths:
+          - pathType: Prefix
+            path: /
+            backend:
+              service:
+                name: prometheus-kube-prometheus-prometheus
+                port:
+                  number: 9090
+  tls:
+    - hosts:
+        - prometheus.${SECRET_DOMAIN}
+      secretName: prometheus-tls
