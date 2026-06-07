@@ -46,15 +46,9 @@ spec:
               source_labels = ["__meta_kubernetes_pod_node_name"]
               target_label  = "node"
             }
-            rule {
-              source_labels = ["__meta_kubernetes_pod_uid", "__meta_kubernetes_pod_container_name"]
-              separator     = "/"
-              target_label  = "__path__"
-              replacement   = "/var/log/pods/*$1/$2/*.log"
-            }
           }
 
-          loki.source.file "pods" {
+          loki.source.kubernetes "pods" {
             targets    = discovery.relabel.pods.output
             forward_to = [loki.write.default.receiver]
           }
@@ -65,14 +59,5 @@ spec:
             }
           }
     controller:
-      type: daemonset
-      volumes:
-        extra:
-          - name: pods-logs
-            hostPath:
-              path: /var/log/pods
-      volumeMounts:
-        extra:
-          - name: pods-logs
-            mountPath: /var/log/pods
-            readOnly: true
+      type: deployment
+      replicas: 1
