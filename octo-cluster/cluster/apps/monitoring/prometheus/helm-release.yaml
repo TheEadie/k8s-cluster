@@ -91,7 +91,7 @@ spec:
         serviceMonitorSelectorNilUsesHelmValues: false
         podMonitorSelectorNilUsesHelmValues: false
         probeSelectorNilUsesHelmValues: false
-        retention: 30d
+        retention: 7d
         resources:
           requests:
             memory: 1000Mi

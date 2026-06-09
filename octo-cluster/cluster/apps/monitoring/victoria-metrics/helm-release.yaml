@@ -17,5 +17,6 @@ spec:
       interval: 5m
   values:
     server:
+      retentionPeriod: 3
       persistentVolume:
         existingClaim: victoria-metrics-data
