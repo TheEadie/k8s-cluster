@@ -4,3 +4,4 @@ resources:
   - test-site.yaml
   - monitoring.yaml
   - adguard.yaml
+  - home-assistant.yaml
