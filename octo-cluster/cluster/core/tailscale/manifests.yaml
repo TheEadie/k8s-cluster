@@ -9,7 +9,7 @@ spec:
   url: https://github.com/tailscale/tailscale.git
   ref:
     # renovate: datasource=docker depName=tailscale/k8s-operator
-    tag: v1.98.4
+    tag: v1.100.0
   ignore: |
     # exclude all
     /*
