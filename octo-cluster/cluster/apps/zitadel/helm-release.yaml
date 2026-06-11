@@ -6,6 +6,9 @@ metadata:
   namespace: zitadel
 spec:
   interval: 5m
+  install:
+    remediation:
+      retries: -1
   chart:
     spec:
       chart: zitadel
