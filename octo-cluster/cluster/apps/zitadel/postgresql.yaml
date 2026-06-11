@@ -1,5 +1,15 @@
 ---
 apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: zitadel-postgresql-init
+  namespace: zitadel
+data:
+  init.sql: |
+    CREATE USER zitadel WITH PASSWORD '${ZITADEL_DB_PASSWORD}';
+    CREATE DATABASE zitadel OWNER zitadel;
+---
+apiVersion: v1
 kind: Service
 metadata:
   name: zitadel-postgresql
@@ -36,21 +46,23 @@ spec:
             - name: PGDATA
               value: /var/lib/postgresql/data/pgdata
             - name: POSTGRES_USER
-              value: zitadel
+              value: postgres
             - name: POSTGRES_PASSWORD
-              value: "${ZITADEL_DB_PASSWORD}"
-            - name: POSTGRES_DB
-              value: zitadel
-            - name: POSTGRES_POSTGRES_PASSWORD
               value: "${ZITADEL_DB_ADMIN_PASSWORD}"
           volumeMounts:
             - name: data
               mountPath: /var/lib/postgresql/data
+            - name: init
+              mountPath: /docker-entrypoint-initdb.d
           readinessProbe:
             exec:
-              command: ["pg_isready", "-U", "zitadel"]
+              command: ["pg_isready", "-U", "postgres"]
             initialDelaySeconds: 5
             periodSeconds: 5
+      volumes:
+        - name: init
+          configMap:
+            name: zitadel-postgresql-init
   volumeClaimTemplates:
     - metadata:
         name: data
