@@ -6,3 +6,4 @@ resources:
   - adguard.yaml
   - home-assistant.yaml
   - homer.yaml
+  - zitadel.yaml

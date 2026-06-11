@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    cert-manager.io/cluster-issuer: "letsencrypt-production"
+  name: zitadel
+  namespace: zitadel
+spec:
+  ingressClassName: traefik
+  rules:
+    - host: "identity.${SECRET_DOMAIN}"
+      http:
+        paths:
+          - pathType: Prefix
+            path: /
+            backend:
+              service:
+                name: zitadel
+                port:
+                  number: 8080
+  tls:
+    - hosts:
+        - identity.${SECRET_DOMAIN}
+      secretName: zitadel-tls
