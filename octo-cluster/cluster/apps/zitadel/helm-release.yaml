@@ -6,9 +6,6 @@ metadata:
   namespace: zitadel
 spec:
   interval: 5m
-  dependsOn:
-    - name: zitadel-postgresql
-      namespace: zitadel
   chart:
     spec:
       chart: zitadel

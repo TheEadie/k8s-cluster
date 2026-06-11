@@ -1,0 +1,60 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: zitadel-postgresql
+  namespace: zitadel
+spec:
+  selector:
+    app: zitadel-postgresql
+  ports:
+    - port: 5432
+      targetPort: 5432
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: zitadel-postgresql
+  namespace: zitadel
+spec:
+  serviceName: zitadel-postgresql
+  replicas: 1
+  selector:
+    matchLabels:
+      app: zitadel-postgresql
+  template:
+    metadata:
+      labels:
+        app: zitadel-postgresql
+    spec:
+      containers:
+        - name: postgresql
+          image: postgres:17
+          ports:
+            - containerPort: 5432
+          env:
+            - name: POSTGRES_USER
+              value: zitadel
+            - name: POSTGRES_PASSWORD
+              value: "${ZITADEL_DB_PASSWORD}"
+            - name: POSTGRES_DB
+              value: zitadel
+            - name: POSTGRES_POSTGRES_PASSWORD
+              value: "${ZITADEL_DB_ADMIN_PASSWORD}"
+          volumeMounts:
+            - name: data
+              mountPath: /var/lib/postgresql/data
+          readinessProbe:
+            exec:
+              command: ["pg_isready", "-U", "zitadel"]
+            initialDelaySeconds: 5
+            periodSeconds: 5
+  volumeClaimTemplates:
+    - metadata:
+        name: data
+      spec:
+        accessModes: ["ReadWriteOnce"]
+        storageClassName: longhorn
+        resources:
+          requests:
+            storage: 8Gi
