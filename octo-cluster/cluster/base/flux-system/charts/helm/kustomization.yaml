@@ -10,3 +10,4 @@ resources:
   - victoria-metrics.yaml
   - longhorn.yaml
   - zitadel.yaml
+  - bitnami.yaml

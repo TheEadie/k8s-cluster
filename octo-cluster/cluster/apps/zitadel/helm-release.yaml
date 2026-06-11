@@ -6,6 +6,9 @@ metadata:
   namespace: zitadel
 spec:
   interval: 5m
+  dependsOn:
+    - name: zitadel-postgresql
+      namespace: zitadel
   chart:
     spec:
       chart: zitadel
@@ -25,24 +28,25 @@ spec:
         ExternalPort: 443
         TLS:
           Enabled: false
+        Database:
+          Postgres:
+            Host: zitadel-postgresql
+            Port: 5432
+            Database: zitadel
+            User:
+              Username: zitadel
+              SSL:
+                Mode: disable
+            Admin:
+              Username: postgres
+              SSL:
+                Mode: disable
+      secretConfig:
+        Database:
+          Postgres:
+            User:
+              Password: "${ZITADEL_DB_PASSWORD}"
+            Admin:
+              Password: "${ZITADEL_DB_ADMIN_PASSWORD}"
     postgresql:
-      enabled: true
-      image:
-        registry: docker.io
-        repository: bitnamilegacy/postgresql
-        tag: 17.6.0
-      auth:
-        database: zitadel
-        username: zitadel
-        password: "${ZITADEL_DB_PASSWORD}"
-        postgresPassword: "${ZITADEL_DB_ADMIN_PASSWORD}"
-      primary:
-        persistence:
-          enabled: true
-          storageClass: "longhorn"
-          size: 8Gi
-      volumePermissions:
-        image:
-          registry: docker.io
-          repository: bitnamilegacy/os-shell
-          tag: "12-debian-12"
+      enabled: false
