@@ -5,3 +5,4 @@ resources:
   - monitoring.yaml
   - adguard.yaml
   - home-assistant.yaml
+  - homer.yaml
