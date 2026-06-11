@@ -2,7 +2,7 @@
 
 ## Flux variable substitution in manifests
 
-All manifests under `pi-cluster/` are processed by the `apps` Flux Kustomization, which has `postBuild.substituteFrom` pointing at the `cluster-settings` ConfigMap and `cluster-secrets` Secret.
+All manifests under `octo-cluster/` are processed by the `apps` Flux Kustomization, which has `postBuild.substituteFrom` pointing at the `cluster-settings` ConfigMap and `cluster-secrets` Secret.
 
 **Flux replaces every `${VAR}` pattern in the entire manifest** — not just known Flux variables. Any undefined variable is silently replaced with an empty string before the resource reaches Kubernetes.
 

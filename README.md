@@ -2,4 +2,4 @@
 
 Mono repo for all the K8s Clusters I'm currently running
 
-- [Raspberry Pi Cluster](pi-cluster/README.md)
+- [Octoplex Cluster](octo-cluster/README.md)

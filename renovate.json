@@ -42,7 +42,7 @@
       "customType": "regex",
       "description": "Process GitRepository CRD dependencies - Chart and Github Release are the same version",
       "managerFilePatterns": [
-        "/pi-cluster/cluster/crds/.+\\.ya?ml$/"
+        "/octo-cluster/cluster/crds/.+\\.ya?ml$/"
       ],
       "matchStrings": [
         "registryUrl=(?<registryUrl>\\S+) chart=(?<depName>\\S+)\n.*?(?<currentValue>[^-\\s]*)\n"
@@ -53,7 +53,7 @@
       "customType": "regex",
       "description": "Process Kustomization CRD dependencies - Image and Github Release are the same version",
       "managerFilePatterns": [
-        "/pi-cluster/cluster/crds/.+\\.ya?ml$/"
+        "/octo-cluster/cluster/crds/.+\\.ya?ml$/"
       ],
       "matchStrings": [
         "datasource=(?<datasource>\\S+) image=(?<depName>\\S+)\n.*?-\\s(.*?)/(?<currentValue>[^/]+)/[^/]+\n"
@@ -113,7 +113,7 @@
     },
     {
       "matchFileNames": [
-        "pi-cluster/cluster/core/tailscale/manifests.yaml"
+        "octo-cluster/cluster/core/tailscale/manifests.yaml"
       ],
       "matchManagers": [
         "flux"

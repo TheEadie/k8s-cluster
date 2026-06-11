@@ -55,6 +55,6 @@ Note: this all based on the guide here: https://fluxcd.io/docs/guides/mozilla-so
 To encrypt new secrets run:
 
 ```
-gpg --import ./pi-cluster/.sops.pub.asc
+gpg --import ./octo-cluster/.sops.pub.asc
 sops --encrypt --in-place <filename>.yaml
 ```

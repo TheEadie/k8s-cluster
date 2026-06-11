@@ -175,9 +175,3 @@ working.
 - **Upgrades:** `talosctl upgrade -n <NODE_IP> --image factory.talos.dev/installer/<SCHEMATIC_ID>:<NEW_VERSION> --preserve`.
   `--preserve` keeps the EPHEMERAL partition (where `/var/lib/longhorn` lives).
   Drain Longhorn / one node at a time.
-- **Adding a dedicated Longhorn disk later:** define a Talos `UserVolumeConfig`
-  mounted at `/var/mnt/longhorn`, change the `extraMounts` destination/source in
-  `patches/longhorn.yaml` to match, and set Longhorn's default data path to
-  `/var/mnt/longhorn`.
-- **GitOps:** this runbook bootstraps the cluster by hand. Wiring Longhorn (and
-  the rest) into Flux — mirroring `pi-cluster/` — is the natural next step.
