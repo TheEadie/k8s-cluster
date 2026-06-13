@@ -1,0 +1,74 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: zitadel-postgresql-init
+  namespace: zitadel
+data:
+  init.sql: |
+    CREATE USER zitadel WITH PASSWORD '${ZITADEL_DB_PASSWORD}';
+    CREATE DATABASE zitadel OWNER zitadel;
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: zitadel-postgresql
+  namespace: zitadel
+spec:
+  selector:
+    app: zitadel-postgresql
+  ports:
+    - port: 5432
+      targetPort: 5432
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: zitadel-postgresql
+  namespace: zitadel
+spec:
+  serviceName: zitadel-postgresql
+  replicas: 1
+  selector:
+    matchLabels:
+      app: zitadel-postgresql
+  template:
+    metadata:
+      labels:
+        app: zitadel-postgresql
+    spec:
+      containers:
+        - name: postgresql
+          image: postgres:17
+          ports:
+            - containerPort: 5432
+          env:
+            - name: PGDATA
+              value: /var/lib/postgresql/data/pgdata
+            - name: POSTGRES_USER
+              value: postgres
+            - name: POSTGRES_PASSWORD
+              value: "${ZITADEL_DB_ADMIN_PASSWORD}"
+          volumeMounts:
+            - name: data
+              mountPath: /var/lib/postgresql/data
+            - name: init
+              mountPath: /docker-entrypoint-initdb.d
+          readinessProbe:
+            exec:
+              command: ["pg_isready", "-U", "postgres"]
+            initialDelaySeconds: 5
+            periodSeconds: 5
+      volumes:
+        - name: init
+          configMap:
+            name: zitadel-postgresql-init
+  volumeClaimTemplates:
+    - metadata:
+        name: data
+      spec:
+        accessModes: ["ReadWriteOnce"]
+        storageClassName: longhorn
+        resources:
+          requests:
+            storage: 8Gi

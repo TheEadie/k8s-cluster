@@ -9,3 +9,5 @@ resources:
   - jetstack.yaml
   - victoria-metrics.yaml
   - longhorn.yaml
+  - zitadel.yaml
+  - bitnami.yaml
