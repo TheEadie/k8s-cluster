@@ -76,7 +76,7 @@ spec:
               mountPath: /config
       containers:
         - name: home-assistant-app
-          image: "ghcr.io/home-assistant/home-assistant:2026.5.4"
+          image: "ghcr.io/home-assistant/home-assistant:2026.6.3"
           imagePullPolicy: IfNotPresent
           securityContext:
             privileged: null
