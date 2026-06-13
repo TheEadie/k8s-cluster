@@ -28,6 +28,18 @@ spec:
         ExternalPort: 443
         TLS:
           Enabled: false
+        FirstInstance:
+          Org:
+            Name: "Home"
+            Human:
+              UserName: "david"
+              FirstName: "David"
+              LastName: "Eadie"
+              Email:
+                Address: "david.a.eadie@gmail.com"
+                Verified: true
+              Password: "${ZITADEL_ADMIN_PASSWORD}"
+              PasswordChangeRequired: false
         Database:
           Postgres:
             Host: zitadel-postgresql
