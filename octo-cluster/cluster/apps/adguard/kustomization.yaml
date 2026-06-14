@@ -6,3 +6,5 @@ resources:
   - tailscale-service.yaml
   - ingress.yaml
   - volumes.yaml
+  - oauth2-proxy.yaml
+  - oauth2-proxy-secret.sops.yaml

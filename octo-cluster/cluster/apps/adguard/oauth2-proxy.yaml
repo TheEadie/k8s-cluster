@@ -1,0 +1,65 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: oauth2-proxy
+  namespace: adguard
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: oauth2-proxy
+  template:
+    metadata:
+      labels:
+        app: oauth2-proxy
+    spec:
+      containers:
+        - name: oauth2-proxy
+          image: quay.io/oauth2-proxy/oauth2-proxy:v7.15.3
+          args:
+            - --provider=oidc
+            - --oidc-issuer-url=https://identity.${SECRET_DOMAIN}
+            - --redirect-url=https://adguard.${SECRET_DOMAIN}/oauth2/callback
+            - --upstream=http://adguard.adguard.svc.cluster.local:80
+            - --http-address=0.0.0.0:4180
+            - --email-domain=*
+            - --cookie-secure=true
+            - --reverse-proxy=true
+            - --skip-provider-button=true
+            - --scope=openid profile email urn:zitadel:iam:org:project:roles
+            - --allowed-group=adguard:admin
+            - --oidc-groups-claim=groups
+          env:
+            - name: OAUTH2_PROXY_CLIENT_ID
+              valueFrom:
+                secretKeyRef:
+                  name: oauth2-proxy
+                  key: client-id
+            - name: OAUTH2_PROXY_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: oauth2-proxy
+                  key: client-secret
+            - name: OAUTH2_PROXY_COOKIE_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: oauth2-proxy
+                  key: cookie-secret
+          ports:
+            - containerPort: 4180
+              name: http
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: oauth2-proxy
+  namespace: adguard
+spec:
+  selector:
+    app: oauth2-proxy
+  ports:
+    - protocol: TCP
+      port: 4180
+      targetPort: 4180
+      name: http
