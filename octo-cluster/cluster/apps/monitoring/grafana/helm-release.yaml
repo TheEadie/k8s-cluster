@@ -23,7 +23,20 @@ spec:
       dashboards:
         enabled: true
         label: grafana_dashboard
-    assertNoLeakedSecrets: false
+    # OAuth credentials are sourced from the grafana-oauth Secret via env vars
+    # rather than grafana.ini. Flux postBuild substitution does a text round-trip
+    # that coerces the bare 18-digit ${GRAFANA_OAUTH_CLIENT_ID} into a float64,
+    # losing precision. A secretKeyRef is a structured reference, so it is never
+    # scalar-coerced. client_secret lives alongside it to keep both in one place.
+    envValueFrom:
+      GF_AUTH_GENERIC_OAUTH_CLIENT_ID:
+        secretKeyRef:
+          name: grafana-oauth
+          key: client_id
+      GF_AUTH_GENERIC_OAUTH_CLIENT_SECRET:
+        secretKeyRef:
+          name: grafana-oauth
+          key: client_secret
     grafana.ini:
       server:
         root_url: "https://grafana.${SECRET_DOMAIN}"
@@ -32,8 +45,6 @@ spec:
       auth.generic_oauth:
         enabled: true
         name: Zitadel
-        client_id: "${GRAFANA_OAUTH_CLIENT_ID}"
-        client_secret: "${GRAFANA_OAUTH_CLIENT_SECRET}"
         scopes: "openid profile email urn:zitadel:iam:org:project:roles"
         auth_url: "https://identity.${SECRET_DOMAIN}/oauth/v2/authorize"
         token_url: "https://identity.${SECRET_DOMAIN}/oauth/v2/token"
