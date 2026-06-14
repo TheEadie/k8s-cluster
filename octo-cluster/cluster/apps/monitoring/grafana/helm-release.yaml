@@ -16,7 +16,6 @@ spec:
         namespace: flux-system
       interval: 5m
   values:
-    adminPassword: "${GRAFANA_PASSWORD}"
     sidecar:
       datasources:
         enabled: true
@@ -24,3 +23,26 @@ spec:
       dashboards:
         enabled: true
         label: grafana_dashboard
+    assertNoLeakedSecrets: false
+    grafana.ini:
+      server:
+        root_url: "https://grafana.${SECRET_DOMAIN}"
+      auth:
+        disable_login_form: true
+      auth.generic_oauth:
+        enabled: true
+        name: Zitadel
+        client_id: "${GRAFANA_OAUTH_CLIENT_ID}"
+        client_secret: "${GRAFANA_OAUTH_CLIENT_SECRET}"
+        scopes: "openid profile email urn:zitadel:iam:org:project:roles"
+        auth_url: "https://identity.${SECRET_DOMAIN}/oauth/v2/authorize"
+        token_url: "https://identity.${SECRET_DOMAIN}/oauth/v2/token"
+        api_url: "https://identity.${SECRET_DOMAIN}/oidc/v1/userinfo"
+        use_pkce: true
+        auto_login: false
+        allow_sign_up: true
+        role_attribute_strict: true
+        role_attribute_path: >-
+          contains(keys("urn:zitadel:iam:org:project:roles"), 'grafana:admin') && 'Admin' ||
+          contains(keys("urn:zitadel:iam:org:project:roles"), 'grafana:editor') && 'Editor' ||
+          contains(keys("urn:zitadel:iam:org:project:roles"), 'grafana:viewer') && 'Viewer'
