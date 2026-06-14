@@ -15,9 +15,9 @@ spec:
             path: /
             backend:
               service:
-                name: adguard
+                name: oauth2-proxy
                 port:
-                  number: 80
+                  number: 4180
   tls:
     - hosts:
         - adguard.${SECRET_DOMAIN}
