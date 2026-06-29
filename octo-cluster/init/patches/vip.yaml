@@ -15,6 +15,9 @@
 # the VIP and fails it over automatically.
 machine:
   network:
+    nameservers:
+      - 192.168.50.242   # AdGuard (in-cluster); falls through to 8.8.8.8 if cluster is down
+      - 8.8.8.8
     interfaces:
       - deviceSelector:
           physical: true
